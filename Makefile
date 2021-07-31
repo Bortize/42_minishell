@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/07/31 19:02:17 by bgomez-r         ###   ########.fr        #
+#    Updated: 2021/07/31 20:38:35 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ vpath %.c srcs
 NAME=minishell
 
 SRCS:=
+SRCS+= del_token_all.c
+SRCS+= add_token.c
 SRCS+= minishell.c
 
 CC=clang

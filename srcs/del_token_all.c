@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   del_token_all.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/07/31 20:08:09 by vicmarti         ###   ########.fr       */
+/*   Created: 2021/07/31 20:19:41 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/07/31 20:37:54 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline/readline.h"
-#include "readline/history.h"
-#include <stdio.h>
+#include "minishell.h"
 #include <stdlib.h>
 
-int	main(void)
+void	del_token_all(t_token **token_list)
 {
-	char	*line;
+	t_token	*freeme;
+	t_token	*iterator;
 
-	while (1)
+	iterator = *token_list;
+	while (iterator)
 	{
-		line = readline("hola > ");
-		printf("%s\n", line);
-		free(line);
+		freeme = iterator;
+		iterator = iterator->next;
+		free(freeme->text);
+		free(freeme);
 	}
-	return (0);
 }
