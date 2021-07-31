@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 19:45:27 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/07/31 19:46:48 by bgomez-r         ###   ########.fr       */
+/*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/07/31 20:42:50 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef
-# define	MINISHELL_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 typedef enum e_behavior
 {
-	default,
+	plain,
 	redir_in,
 	redir_out,
 	redir_in_append,
