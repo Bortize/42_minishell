@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   read_variable.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/03 17:20:33 by vicmarti         ###   ########.fr       */
+/*   Created: 2021/08/03 16:49:43 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/08/03 17:21:23 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/libft.h"
+#include "minishell.h"
 
-typedef enum e_behavior
+size_t	read_variable(char *text)
 {
-	plain,
-	redir_in,
-	redir_out,
-	redir_in_append,
-	here_doc,
-	dollar_var,
-	pipe
-}			t_behavior;
+	size_t	i;
 
-typedef struct s_token
-{
-	struct s_token	*next;
-	char			*text;
-	t_behavior		behavior;
-}			t_token;
-
-#endif
+	i = 0;
+	if (ft_isdigit(text[i]))
+		return (0);
+	while (ft_isalnum(text[i]) || text[i] == '_')
+		i++;
+	return (i);
+}

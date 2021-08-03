@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 20:09:01 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/07/31 20:26:39 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:15:55 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_token	*add_token(t_token **token_list, char *text, t_behavior behavior)
 	if (!new_token)
 		return (NULL);
 	new_token->next = NULL;
-	new_token->behaviour = behavior;
+	new_token->behavior = behavior;
 	new_token->text = text;
 	iterator = *token_list;
 	if (!iterator)

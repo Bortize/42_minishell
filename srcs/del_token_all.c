@@ -6,12 +6,11 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 20:19:41 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/07/31 20:37:54 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:08:40 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdlib.h>
 
 void	del_token_all(t_token **token_list)
 {
