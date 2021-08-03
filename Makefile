@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/08/03 17:29:04 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/08/03 21:16:57 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,12 +30,12 @@ LDLIBS=-lreadline -lft
 
 .PHONY: all clean fclean re
 
-all : $(NAME) libft.a
+all : $(NAME)
 
-libft.a :
+libft/libft.a :
 	make -C libft
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) libft/libft.a
 
 clean :
 	@rm -rf $(OBJS)
