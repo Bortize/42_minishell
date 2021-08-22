@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   count_spaces.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/08/22 20:14:42 by vicmarti         ###   ########.fr       */
+/*   Created: 2021/08/22 16:09:26 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/08/22 19:44:09 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline/readline.h"
-#include "readline/history.h"
 #include "minishell.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-int	main(void)
+size_t	count_spaces(char *line)
 {
-	char	*line;
+	char	*aux;
+	char	c;
 
-	while (1)
+	aux = line;
+	c = *aux;
+	while (c != 0 && is_space(c))
 	{
-		line = readline("hola > ");
-		//printf("Line: %s\n", line);
-		add_history(line);
-		split_in_cmds(line);
-		free(line);
+		aux++;
+		c = *aux;
 	}
-	return (0);
+	return (aux - line);
 }

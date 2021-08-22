@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/03 18:29:53 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/22 19:18:04 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 # define MINISHELL_H
 # include "libft/libft.h"
 # include <stdlib.h>
+# include <unistd.h> //TODO Vicest: I want to just use write, then delete.
 
 typedef enum e_behavior
 {
-	plain,
-	redir_in,
 	redir_out,
-	redir_in_append,
+	redir_out_append,
+	redir_in,
 	here_doc,
-	dollar_var,
-	pipe
+	plain
 }			t_behavior;
 
-typedef struct s_token
+typedef struct s_cmdlst
 {
-	struct s_token	*next;
+	struct t_cmdlst	*next;
 	char			*text;
-	t_behavior		behavior;
-}			t_token;
+}			t_cmdlst;
 
-size_t	read_variable(char *text);
+int	is_delimiter(char c);
+int	is_space(char c);
+size_t	count_spaces(char *line);
 
+void	split_in_cmds(char *line);
+void	tokenize_cmd(char *cmd_txt);
 #endif
