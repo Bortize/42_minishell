@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/08/22 20:14:42 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/23 22:13:08 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	main(void)
 	while (1)
 	{
 		line = readline("hola > ");
-		//printf("Line: %s\n", line);
 		add_history(line);
 		split_in_cmds(line);
 		free(line);

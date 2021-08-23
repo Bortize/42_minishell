@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/22 23:38:14 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/23 22:05:56 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,51 +38,38 @@ static int	read_token_behavior(char *line, t_behavior *type)
 	return (0);
 }
 
-void	tokenize_cmd(char *cmd_txt)
+//TODO Just for debug purposes.
+static void	print_token(char *cmd_txt, size_t i, size_t token_start)
 {
-	char		read_mode;
-	t_behavior	token_behavior;
-	size_t		token_start;
-	size_t		i;
-
-	read_mode = 0;
-	token_behavior = plain;
-	i = 0;
-	token_start = i;
-	//TODO The count_spaces/read_token logic to go through syntax/spaces
-	//Already moves i to the next element of the string, hence I explicitly
-	//increment it on the * todo-s only, plx rethink logic and structure when
-	//fitting it to norm standards. It-s a --CRAPPY-- FIX. I've not gotten the
-	//logic right yet.
-	while (cmd_txt[i])
-	{
-		if (read_mode == 0)
-		{
-			if (cmd_txt[i] == '\'' || cmd_txt[i] == '\"')
-				read_mode = cmd_txt[i++];//TODO *
-			else if (is_delimiter(cmd_txt[i]))
-			{
-				if (i != token_start)
-				{
-					write(1, cmd_txt + token_start, i - token_start);
-					write(1, "\n", 1);
-				}
-				i += count_spaces(cmd_txt + i);
-				i += read_token_behavior(cmd_txt + i, &token_behavior);
-				i += count_spaces(cmd_txt + i);
-				token_start = i;
-			}
-			else
-				i++; //TODO *
-		}
-		else if (cmd_txt[i++] == read_mode) //TODO *
-			read_mode = 0;
-		else
-			i++; //TODO *
-	}
 	if (i != token_start)
 	{
 		write(1, cmd_txt + token_start, i - token_start);
 		write(1, "\n", 1);
 	}
+}
+
+void	tokenize_cmd(char *cmd_txt)
+{
+	t_behavior	token_behavior;
+	size_t		token_start;
+	size_t		i;
+
+	i = 0;
+	token_start = i;
+	while (cmd_txt[i])
+	{
+		if (cmd_txt[i] == '\'' || cmd_txt[i] == '\"')
+			i += count_until_repeat(cmd_txt + i);
+		else if (is_delimiter(cmd_txt[i]))
+		{
+			print_token(cmd_txt, i, token_start);
+			i += count_spaces(cmd_txt + i);
+			i += read_token_behavior(cmd_txt + i, &token_behavior);
+			i += count_spaces(cmd_txt + i);
+			token_start = i;
+		}
+		else
+			i++;
+	}
+	print_token(cmd_txt, i, token_start);
 }

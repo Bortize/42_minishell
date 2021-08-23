@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/08/22 19:42:42 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/08/23 22:01:31 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS+= tokenize_cmd.c
 SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
+SRCS+= count_until_repeat.c
 #SRCS+= del_token_all.c
 #SRCS+= add_token.c
 #SRCS+= read_variable.c
