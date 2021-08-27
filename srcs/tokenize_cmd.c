@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/23 22:05:56 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/27 21:25:58 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,5 @@ void	tokenize_cmd(char *cmd_txt)
 			i++;
 	}
 	print_token(cmd_txt, i, token_start);
+	free(cmd_txt);
 }

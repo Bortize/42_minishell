@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/08/23 22:01:31 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/08/27 21:19:58 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME=minishell
 
 SRCS:=
 SRCS+= minishell.c
-SRCS+= split_commands.c
+SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
 SRCS+= is_delimiter.c
 SRCS+= is_space.c

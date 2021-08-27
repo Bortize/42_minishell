@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/08/23 22:13:08 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/27 21:24:49 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 		line = readline("hola > ");
 		add_history(line);
 		split_in_cmds(line);
+		system("leaks -q minishell");
 		free(line);
 	}
 	return (0);
