@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/08/27 21:24:49 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 03:24:56 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,16 @@
 int	main(void)
 {
 	char	*line;
+	t_list	*cmd_lst;
 
 	while (1)
 	{
-		line = readline("hola > ");
+		line = readline("minishell> ");
 		add_history(line);
-		split_in_cmds(line);
+		cmd_lst = split_in_cmds(line);
 		system("leaks -q minishell");
+		print_cmds(cmd_lst);
+		ft_lstclear(&cmd_lst, &free_cmd);
 		free(line);
 	}
 	return (0);

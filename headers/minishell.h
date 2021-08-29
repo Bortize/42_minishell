@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/23 22:02:04 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 03:08:14 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MINISHELL_H
 # include "libft/libft.h"
 # include <stdlib.h>
-# include <unistd.h> //TODO Vicest: I want to just use write, then delete.
 
 typedef enum e_behavior
 {
@@ -25,22 +24,28 @@ typedef enum e_behavior
 	plain
 }			t_behavior;
 
-//TODO Should we keep all redirections in one place? Mix them?
-typedef struct s_cmdlst
+typedef struct s_redirect
 {
-	struct t_cmdlst	*next;
+	char		*text;
+	t_behavior	type;
+}				t_redirect;
+
+typedef struct s_cmd
+{
 	char			*cmd;
 	char			*arg;
-	t_list			*lst_redirs;
-	//t_list			*lst_redir_in;
-	//t_list			*lst_redir_out;
-}			t_cmdlst;
+	t_list			*lst_redir_in;
+	t_list			*lst_redir_out;
+}			t_cmd;
 
 int	is_delimiter(char c);
 int	is_space(char c);
 size_t	count_spaces(char *line);
 size_t	count_until_repeat(char *line);
 
-void	split_in_cmds(char *line);
-void	tokenize_cmd(char *cmd_txt);
+t_list	*split_in_cmds(char *line);
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node);
+void	free_cmd(void *elem);
+void	free_redirect(void *elem);
+void	print_cmds(t_list *cmd_lst);
 #endif
