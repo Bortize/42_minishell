@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/08/29 03:13:03 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/08/29 05:06:29 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCS:=
 SRCS+= minishell.c
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
-SRCS+= print_cmds.c
+SRCS+= print_cmd.c
+SRCS+= print_redir.c
 SRCS+= free_cmd.c
 SRCS+= free_redirect.c
 SRCS+= is_delimiter.c

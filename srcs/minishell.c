@@ -6,14 +6,13 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/08/29 03:24:56 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 21:39:21 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline/readline.h"
 #include "readline/history.h"
 #include "minishell.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 int	main(void)
@@ -25,9 +24,10 @@ int	main(void)
 	{
 		line = readline("minishell> ");
 		add_history(line);
-		cmd_lst = split_in_cmds(line);
+		cmd_lst = NULL;
+		split_in_cmds(line, &cmd_lst);
 		system("leaks -q minishell");
-		print_cmds(cmd_lst);
+		ft_lstiter(cmd_lst, print_cmd);
 		ft_lstclear(&cmd_lst, &free_cmd);
 		free(line);
 	}

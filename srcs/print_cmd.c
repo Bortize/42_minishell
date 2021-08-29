@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_cmds.c                                       :+:      :+:    :+:   */
+/*   print_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 03:05:17 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 03:43:36 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 05:08:20 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,18 @@
 
 //This is meant to be be a logging/debug function.
 //TODO Probably better and simpler with lst_map_i.
+//TODO Throw it to stderr and help us debug cleaner.
+//TODO Just use putstr or something along those lines.
 
-void	print_cmds(t_list *cmd_lst)
+void	print_cmd(void *elem)
 {
-	while (cmd_lst)
-	{
-		printf("Command: %s\nArgument: %s\n", ((t_cmd *)cmd_lst->content)->cmd,
-			((t_cmd *)cmd_lst->content)->arg);
-		cmd_lst = cmd_lst->next;
-	}
+	t_cmd	*cmd;
+
+	cmd = (t_cmd *)elem;
+	printf("Command: %s\n", cmd->cmd);
+	printf("Argument: %s\n", cmd->arg);
+	printf("In redirections:\n");
+	ft_lstiter(cmd->lst_redir_in, print_redir);
+	printf("Out redirections:\n");
+	ft_lstiter(cmd->lst_redir_in, print_redir);
 }
