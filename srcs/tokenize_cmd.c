@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 03:54:31 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 04:32:27 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,34 +81,33 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 	}
 }
 
+//TODO Vicest: This function seems like it could be better structured if within
+//the loop the token_behavior is identified first and the text read later.
+//I-m a bit too tired to be brave enough to redo it without breaking something.
+
 void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 {
-	char		*tmp; //TODO unnecessary
 	t_behavior	token_behavior;
-	size_t		token_start;
-	size_t		i;
+	size_t		token_len;
 
-	i = 0;
-	i += count_spaces(cmd_txt + i);
-	i += read_token_behavior(cmd_txt + i, &token_behavior);
-	i += count_spaces(cmd_txt + i);
-	token_start = i;
-	while (cmd_txt[i])
+	cmd_txt += count_spaces(cmd_txt);
+	cmd_txt += read_token_behavior(cmd_txt, &token_behavior);
+	cmd_txt += count_spaces(cmd_txt);
+	token_len = 0;
+	while (cmd_txt[token_len])
 	{
-		if (cmd_txt[i] == '\'' || cmd_txt[i] == '\"')
-			i += count_until_repeat(cmd_txt + i);
-		else if (is_delimiter(cmd_txt[i]))
+		if (cmd_txt[token_len] == '\'' || cmd_txt[token_len] == '\"')
+			token_len += count_until_repeat(cmd_txt + token_len);
+		else if (is_delimiter(cmd_txt[token_len]) || cmd_txt[token_len + 1] == '\0')
 		{
-			tmp = ft_strndup(cmd_txt + token_start, i - token_start);
-			save_token(cmd_node, tmp, token_behavior);
-			i += count_spaces(cmd_txt + i);
-			i += read_token_behavior(cmd_txt + i, &token_behavior);
-			i += count_spaces(cmd_txt + i);
-			token_start = i;
+			save_token(cmd_node, ft_strndup(cmd_txt, token_len), token_behavior);
+			cmd_txt += token_len;
+			token_len = 0;
+			cmd_txt += count_spaces(cmd_txt);
+			cmd_len += read_token_behavior(cmd_txt, &token_behavior);
+			cmd_len += count_spaces(cmd_txt);
 		}
 		else
-			i++;
+			token_len++;
 	}
-	tmp = ft_strndup(cmd_txt + token_start, i - token_start);
-	save_token(cmd_node, tmp, token_behavior);
 }

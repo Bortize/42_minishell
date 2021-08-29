@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 18:28:09 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 03:36:48 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 04:15:34 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,31 +28,25 @@ t_list	*split_in_cmds(char *line)
 {
 	t_list	*cmd_lst;
 	char	*tmp;
-	size_t	cmd_start;
-	size_t	i;
+	size_t	cmd_len;
 
 	cmd_lst = NULL;
-	cmd_start = 0;
-	i = 0;
-	while (line[i])
+	cmd_len = 0;
+	while (line[cmd_len])
 	{
-		if (line[i] == '\'' || line[i] == '\"')
-			i += count_until_repeat(line + i);
-		else if (line[i] == '|')
-		{// TODO Back to this being a function by itself
+		if (line[cmd_len] == '\'' || line[cmd_len] == '\"')
+			cmd_len += count_until_repeat(line + cmd_len);
+		else if (line[cmd_len] == '|' || line[cmd_len + 1] == '\0')
+		{
 			allocate_new_cmd_in_lst(&cmd_lst);
-			tmp = ft_strndup(line + cmd_start, i - cmd_start);
+			tmp = ft_strndup(line, cmd_len);
 			tokenize_cmd(tmp, ft_lstlast(cmd_lst)->content);
 			free(tmp);
-			i++;
-			cmd_start = i;
+			line += cmd_len;
+			cmd_len = 0;
 		}
 		else
-			i++;
+			cmd_len++;
 	}
-	allocate_new_cmd_in_lst(&cmd_lst);
-	tmp = ft_strndup(line + cmd_start, i - cmd_start);
-	tokenize_cmd(tmp, ft_lstlast(cmd_lst)->content);
-	free(tmp);
 	return (cmd_lst);
 }
