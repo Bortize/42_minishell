@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 04:32:27 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 04:49:34 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 		if (token_type == redir_in || token_type == here_doc)
 			ft_lstadd_front(&cmd_node->lst_redir_in, aux);
 		else
-			ft_lstadd_front(&cmd_node->lst_redir_in, aux);
+			ft_lstadd_front(&cmd_node->lst_redir_out, aux);
 	}
 }
 
