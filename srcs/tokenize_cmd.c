@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 03:33:45 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 03:54:31 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 	{
 		if (cmd_node->cmd == NULL)
 			cmd_node->cmd = token;
-		//TODO JOIN args with spaces
 		else if (cmd_node->arg == NULL)
 			cmd_node->arg = token;
 		else
 		{
-			aux = cmd_node->arg;
+			aux = ft_strjoin(cmd_node->arg, " ");
+			free(cmd_node->arg);
 			cmd_node->arg = ft_strjoin(aux, token);
 			free(aux);
 			free(token);
