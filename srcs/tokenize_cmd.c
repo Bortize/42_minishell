@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 04:49:34 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/29 19:37:35 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 
 	if (token_type == plain)
 	{
-		if (cmd_node->cmd == NULL)
-			cmd_node->cmd = token;
-		else if (cmd_node->arg == NULL)
+		if (cmd_node->arg == NULL)
 			cmd_node->arg = token;
 		else
 		{
@@ -85,6 +83,8 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 //the loop the token_behavior is identified first and the text read later.
 //I-m a bit too tired to be brave enough to redo it without breaking something.
 
+
+//TODO POTENTIAL FOR RECURSION _____EXPLOIT IT______
 void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 {
 	t_behavior	token_behavior;
@@ -98,14 +98,14 @@ void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 	{
 		if (cmd_txt[token_len] == '\'' || cmd_txt[token_len] == '\"')
 			token_len += count_until_repeat(cmd_txt + token_len);
-		else if (is_delimiter(cmd_txt[token_len]) || cmd_txt[token_len + 1] == '\0')
+		else if (is_delimiter(cmd_txt[token_len]) || cmd_txt[token_len] == '\0')
 		{
 			save_token(cmd_node, ft_strndup(cmd_txt, token_len), token_behavior);
-			cmd_txt += token_len;
+			cmd_txt += token_len + 1;
 			token_len = 0;
 			cmd_txt += count_spaces(cmd_txt);
-			cmd_len += read_token_behavior(cmd_txt, &token_behavior);
-			cmd_len += count_spaces(cmd_txt);
+			cmd_txt += read_token_behavior(cmd_txt, &token_behavior);
+			cmd_txt += count_spaces(cmd_txt);
 		}
 		else
 			token_len++;
