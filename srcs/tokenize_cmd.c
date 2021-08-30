@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 19:37:35 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/30 16:43:48 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,29 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 	}
 }
 
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
+{
+	t_behavior	token_behavior;
+	size_t		token_len;
+
+	cmd_txt += count_spaces(cmd_txt);
+	if (*cmd_txt == 0)
+		return ;
+	cmd_txt += read_token_behavior(cmd_txt, &token_behavior);
+	cmd_txt += count_spaces(cmd_txt);
+	token_len = 0;
+	while (cmd_txt[token_len] && !is_delimiter(cmd_txt[token_len]))
+	{
+		if (cmd_txt[token_len] == '\'' || cmd_txt[token_len] == '\"')
+			token_len += count_until_repeat(cmd_txt + token_len);
+		else
+			token_len++;
+	}
+	save_token(cmd_node, ft_strndup(cmd_txt, token_len), token_behavior);
+	return (tokenize_cmd(cmd_txt + token_len, cmd_node));
+}
+
+/*
 //TODO Vicest: This function seems like it could be better structured if within
 //the loop the token_behavior is identified first and the text read later.
 //I-m a bit too tired to be brave enough to redo it without breaking something.
@@ -110,4 +133,4 @@ void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 		else
 			token_len++;
 	}
-}
+}*/

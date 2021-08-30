@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/08/29 05:06:29 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/08/30 19:51:41 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,6 @@ SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
-#SRCS+= del_token_all.c
-#SRCS+= add_token.c
 #SRCS+= read_variable.c
 
 CC=clang
@@ -49,6 +47,9 @@ $(NAME) : $(OBJS) libft/libft.a
 
 clean :
 	@rm -rf $(OBJS)
+
+relibs :
+	make re -C libft
 
 fclean : clean
 	@rm -rf $(NAME)

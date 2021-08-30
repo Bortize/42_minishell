@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 03:05:17 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 05:08:20 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/30 17:41:02 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void	print_cmd(void *elem)
 	printf("In redirections:\n");
 	ft_lstiter(cmd->lst_redir_in, print_redir);
 	printf("Out redirections:\n");
-	ft_lstiter(cmd->lst_redir_in, print_redir);
+	ft_lstiter(cmd->lst_redir_out, print_redir);
 }

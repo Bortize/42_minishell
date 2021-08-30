@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 21:36:21 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/08/30 17:27:14 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_H
 # include "libft/libft.h"
 # include <stdlib.h>
-#include <stdio.h> //TODO
+# include <stdio.h>
 
 typedef enum e_behavior
 {
@@ -39,8 +39,8 @@ typedef struct s_cmd
 	t_list			*lst_redir_out;
 }			t_cmd;
 
-int	is_delimiter(char c);
-int	is_space(char c);
+int		is_delimiter(char c);
+int		is_space(char c);
 size_t	count_spaces(char *line);
 size_t	count_until_repeat(char *line);
 
