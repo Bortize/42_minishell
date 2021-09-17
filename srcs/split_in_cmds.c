@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_in_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 18:28:09 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/30 20:19:19 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/09/17 18:58:58 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	split_in_cmds(char *line, t_list **last_cmd)
 	while (line[cmd_len] && line[cmd_len] != '|')
 	{
 		if (line[cmd_len] == '\'' || line[cmd_len] == '\"')
-			cmd_len += count_until_repeat(line + cmd_len);
+			cmd_len += count_until_repeat(line + cmd_len); 
 		else
 			cmd_len++;
 	}

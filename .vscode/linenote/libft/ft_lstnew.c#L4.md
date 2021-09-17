@@ -1,0 +1,1 @@
+Crea una nueva lista utilizando como argumento el valor que recibió `cmd` en calloc, que es lo que ocuparía una estructura del tipo `t_cmd`
