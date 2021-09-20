@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   string_validator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/20 19:02:41 by bgomez-r         ###   ########.fr       */
+/*   Created: 2021/09/20 18:43:25 by bgomez-r          #+#    #+#             */
+/*   Updated: 2021/09/20 19:05:12 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline/readline.h"
-#include "readline/history.h"
 #include "minishell.h"
-#include <stdlib.h>
 
-int	main(void)
+int	string_validator(char *line)
 {
-	char	*line;
-	t_list	*cmd_lst;
-
-	while (1)
-	{
-		line = readline("minishell> ");
-		add_history(line);
-		cmd_lst = NULL;
-		split_in_cmds(line, &cmd_lst);
-		system("leaks -q minishell");
-		ft_lstiter(cmd_lst, print_cmd);
-		ft_lstclear(&cmd_lst, &free_cmd);
-		free(line);
-	}
-	return (0);
+	string_validator_pipes();
+	string_validator_spaces();
+	string_validator_etc();
 }

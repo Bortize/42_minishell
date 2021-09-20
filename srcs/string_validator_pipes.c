@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   string_validator_pipes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/20 19:02:41 by bgomez-r         ###   ########.fr       */
+/*   Created: 2021/09/20 19:05:41 by bgomez-r          #+#    #+#             */
+/*   Updated: 2021/09/20 19:27:42 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline/readline.h"
-#include "readline/history.h"
 #include "minishell.h"
-#include <stdlib.h>
 
-int	main(void)
+int	string_validator_pipes(char *line)
 {
-	char	*line;
-	t_list	*cmd_lst;
+	int i;
 
-	while (1)
+	i = 0;
+	while (line[i] && line[i] != '|')
 	{
-		line = readline("minishell> ");
-		add_history(line);
-		cmd_lst = NULL;
-		split_in_cmds(line, &cmd_lst);
-		system("leaks -q minishell");
-		ft_lstiter(cmd_lst, print_cmd);
-		ft_lstclear(&cmd_lst, &free_cmd);
-		free(line);
+		if (line[i] == '|')
+			cmd_len += count_until_repeat(line + cmd_len);
+		else
+			line[i++];
 	}
-	return (0);
 }
+
+
+if (line[i] && line[i] == " ")
+	i++;
