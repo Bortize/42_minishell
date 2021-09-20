@@ -1,11 +1,14 @@
 
-
+```c
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
+```
+Esta funcion recibe como primer parámetro el trozo de línea leido del prompt hasta que llega al final o encuentra un pipe y como segundo parámetro un puntero a un nodo el cual se reservo memoría.
 
 
 ```c
 t_behavior	token_behavior;
 ```
-
+Declara una estructura de variables enum
 <br><br>
 
 
@@ -21,7 +24,7 @@ size_t		token_len;
 ```c
 cmd_txt += count_spaces(cmd_txt);
 ```
-
+Recibe por parámetro el trozo de línea leído.
 <br><br>
 
 

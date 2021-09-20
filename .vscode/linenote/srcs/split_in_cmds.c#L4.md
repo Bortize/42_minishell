@@ -73,7 +73,8 @@ Si la asignación de memoria fallo para `cmd` o para `cmd_node` entonces sale
 ```c
 tokenize_cmd(tmp, cmd);
 ```
-Lo tokeniza
+Esta función recibe `tmp` que es el trozo de linea que ha recogido hasta que encuentra un pipe o llega al final de la línea leída.
+Como segundo parámetro recibe `cmd` que es un puntero a un nodo vacio el cuál se reservo memoría anteriormente.
 <br><br>
 
 ```c
