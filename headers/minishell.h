@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/30 17:27:14 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/09/20 12:37:24 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct s_cmd
 	t_list			*lst_redir_out;
 }			t_cmd;
 
+typedef struct s_env_var
+{
+	char	*key;
+	char	*value;
+}			t_env_var;
+
 int		is_delimiter(char c);
 int		is_space(char c);
 size_t	count_spaces(char *line);
@@ -50,4 +56,9 @@ void	free_cmd(void *elem);
 void	free_redirect(void *elem);
 void	print_cmd(void *elem);
 void	print_redir(void *elem);
+
+//Environment
+void	*env_var_new(char *key_str, char *value_str);
+void	env_var_new_value(t_env_var *node, char *new_val);
+void	env_var_delete(t_env_var *var);
 #endif

@@ -6,11 +6,12 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/08/30 19:51:41 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/09/20 12:36:46 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 vpath %.c srcs
+vpath %.c srcs/environment
 
 NAME=minishell
 
@@ -26,10 +27,14 @@ SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
+SRCS+= env_var_new.c
+SRCS+= env_var_new_value.c
+SRCS+= env_var_delete.c
 #SRCS+= read_variable.c
 
 CC=clang
-CFLAGS=-Wall -Werror -Wextra -I. -I./headers -g
+#-O2 or greater uses tail-call optimizations that should make recursion safe
+CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers -g
 
 OBJS=$(SRCS:.c=.o)
 
