@@ -1,5 +1,8 @@
 El proposito de esta funcion es seccionar la linea que recibe del usuairo por terminal para ir recogiendo valores y guardarlos en una lista para poder trabajar luego con ella.
 
+La idea es avanzar hasta cada pipe y eso como identifica que es un comnad, lo parte
+
+**** Recorre toda la linea que nos pasa el usuario para tokenizarla ***
 -----------------------------------------------------------------------------------------
 
 
@@ -25,3 +28,6 @@ En este while queremos recorrer la linea que ha introducido el usuario por la te
 `tmp = ft_strndup(line, cmd_len);` -> Hace una copia de la línea que ha leído y se la asigna a `tmp`
 
 `cmd = ft_calloc(1, sizeof(t_cmd));` -> Reserva memoria del tamaño de una estructura de tipo `t_cmd` y la inicializa a 0 que es lo que hace calloc. calloc devuelve un puntero del resultado de esta asignacio y se lo asigna a `cmd`
+
+tokenize_cmd(tmp, cmd);-> Lo tokeniza
+

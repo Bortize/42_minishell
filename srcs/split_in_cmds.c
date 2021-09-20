@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 18:28:09 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/09/17 18:58:58 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/09/20 10:58:32 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,4 @@ void	split_in_cmds(char *line, t_list **last_cmd)
 	free(tmp);
 	if (line[cmd_len])
 		return (split_in_cmds(line + cmd_len + 1, &(*last_cmd)->next));
-	return ;
 }
