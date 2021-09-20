@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/08/30 19:51:41 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/09/20 20:25:19 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
+#SRCS+= string_validator.c
 #SRCS+= read_variable.c
 
 CC=clang

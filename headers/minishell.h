@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/30 17:27:14 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:25:46 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ typedef struct s_redirect
 	t_behavior	type;
 }				t_redirect;
 
-typedef struct s_cmd
+typedef struct	s_cmd
 {
 	char			*cmd;
 	char			*arg;
 	t_list			*lst_redir_in;
 	t_list			*lst_redir_out;
-}			t_cmd;
+}				t_cmd;
 
 int		is_delimiter(char c);
 int		is_space(char c);
@@ -50,4 +50,6 @@ void	free_cmd(void *elem);
 void	free_redirect(void *elem);
 void	print_cmd(void *elem);
 void	print_redir(void *elem);
+//int		string_validator(char *line)
+
 #endif
