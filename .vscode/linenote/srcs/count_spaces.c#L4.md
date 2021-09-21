@@ -1,27 +1,27 @@
 ```c
 size_t	count_spaces(char *line)
 ```
-Recible el trozo de línea leído por parámetro
+Recible el trozo de línea leído
 <br><br>
 
 ```c
 char	*end;
 ```
-
+Crea un puntero
 <br><br>
 
 
 ```c
 char	aux;
 ```
-
+Crea una variable
 <br><br>
 
 
 ```c
 aux = *line;
 ```
-Le asigna la dirección del primero contenido de la línea a `aux`
+aux va a contener el primer valor de la dirección a la que apunta *line
 <br><br>
 
 

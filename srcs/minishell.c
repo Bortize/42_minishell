@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/20 20:28:17 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/09/21 11:56:09 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 		line = readline("minishell> ");
 		add_history(line);
 		cmd_lst = NULL;
+		string_validator(line);
 		split_in_cmds(line, &cmd_lst);
 		system("leaks -q minishell");
 		ft_lstiter(cmd_lst, print_cmd);
