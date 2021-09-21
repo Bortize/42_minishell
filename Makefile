@@ -6,11 +6,13 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/08/30 19:51:41 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/09/21 12:59:17 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 vpath %.c srcs
+vpath %.h headers
+vpath %.o objects
 
 NAME=minishell
 
@@ -32,11 +34,12 @@ CC=clang
 CFLAGS=-Wall -Werror -Wextra -I. -I./headers -g
 
 OBJS=$(SRCS:.c=.o)
+ODIR=objects
 
-LDFLAGS=-Llibft
+LDFLAGS=-L./libft
 LDLIBS=-lreadline -lft
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re objects
 
 all : $(NAME)
 
@@ -44,6 +47,11 @@ libft/libft.a :
 	make -C libft
 
 $(NAME) : $(OBJS) libft/libft.a
+	$(CC) $(LDFLAGS) $(LDLIBS) $(addprefix $(ODIR)/,$(OBJS)) -o $@
+
+%.o : %.c minishell.h objects
+	mkdir -p $(ODIR)
+	$(CC) $(CFLAGS) $< -c -o $(ODIR)/$@
 
 clean :
 	@rm -rf $(OBJS)
