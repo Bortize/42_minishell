@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/09/20 12:37:24 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/09/21 12:12:01 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,5 @@ void	print_redir(void *elem);
 void	*env_var_new(char *key_str, char *value_str);
 void	env_var_new_value(t_env_var *node, char *new_val);
 void	env_var_delete(t_env_var *var);
+int		env_var_cmp(void *elem1, void *elem2);
 #endif

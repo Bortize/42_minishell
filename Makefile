@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/09/20 12:36:46 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/09/21 12:12:43 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS+= count_until_repeat.c
 SRCS+= env_var_new.c
 SRCS+= env_var_new_value.c
 SRCS+= env_var_delete.c
+SRCS+= env_var_cmp.c
 #SRCS+= read_variable.c
 
 CC=clang
