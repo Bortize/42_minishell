@@ -2,7 +2,7 @@
 ```c
 void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 ```
-Esta funcion recibe como primer parámetro el trozo de línea leido del prompt hasta que llega al final o encuentra un pipe y como segundo parámetro un puntero a un nodo el cual se reservo memoría.
+Esta función recibe como primer parámetro el trozo de línea leído del prompt hasta que llega al final o encuentra un pipe y como segundo parámetro un puntero a un nodo (con la idea entiendo, de crear una lista) el cual se reservo memoría.
 
 
 ```c
@@ -16,7 +16,7 @@ Declara una estructura de variables enum
 ```c
 size_t		token_len;
 ```
-
+Una variable que por su descripción, parece que es para medir la longitud de los tokens.
 <br><br>
 
 
