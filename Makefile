@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/09/20 20:25:19 by bgomez-r         ###   ########.fr        #
+#    Updated: 2021/09/21 15:56:05 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,12 @@ CFLAGS=-Wall -Werror -Wextra -I. -I./headers -g
 
 OBJS=$(SRCS:.c=.o)
 
+TEST=$(filter minishell, $(OBJS))
+
 LDFLAGS=-Llibft
 LDLIBS=-lreadline -lft
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 
 all : $(NAME)
 
@@ -45,6 +47,9 @@ libft/libft.a :
 	make -C libft
 
 $(NAME) : $(OBJS) libft/libft.a
+
+test : $(TEST) syntax_tester.o libft/libft.a
+	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(TEST) syntax_tester.o -o test
 
 clean :
 	@rm -rf $(OBJS)
