@@ -8,5 +8,5 @@ int	is_space(char c)
 ```c
 return (ft_strchr(" \t", c) != NULL);
 ```
-Intenta localizar el caracter c, en la cadena que se le pasa como primer argumento
+Intenta localizar el caracter c que recibe por parametro es igual a un espacio o una tabulación.
 <br><br>
