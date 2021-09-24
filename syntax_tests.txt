@@ -1,0 +1,25 @@
+ ;OK
+      ;OK
+echo hello world;OK
+  echo   hello    world  ;OK
+cmd number one|cmd number two;OK
+a|b|c|d|e|f|g;OK
+a|aa|aaa|aaaa|aaaaa|aaaaaa;OK
+cat file | wc;OK
+cat file| wc;OK
+cat file |wc;OK
+ls        |ls;OK
+bs   |   ls;OK
+bs|     ls;OK
+|;KO
+ls|;KO
+|ls;KO
+ls ||wc;KO
+cat| meow    |;KO
+cat|    say  |meow;OK
+|cat|    say  |meow;KO
+       |cat|    say  |meow;KO
+cat|    say  |meow|;KO
+cat|    say  |meow|     ;KO
+cat|   |say;KO
+

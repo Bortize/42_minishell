@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   count_spaces.c                                     :+:      :+:    :+:   */
+/*   string_validator.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/22 16:09:26 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/09/21 08:05:34 by bgomez-r         ###   ########.fr       */
+/*   Created: 2021/09/20 18:43:25 by bgomez-r          #+#    #+#             */
+/*   Updated: 2021/09/24 17:59:51 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t	count_spaces(char *line)
+int string_validator(char *line)
 {
-	char	*end;
-	char	aux;
-
-	aux = *line;
-	end = line;
-	while (aux && is_space(aux))
-	{
-		end++;
-		aux = *end;
-	}
-	return (end - line);
+	if (!string_validator_pipes(line))
+		return (0);
+	return (1);
+///	string_validator_spaces();
+//	string_validator_etc();
 }

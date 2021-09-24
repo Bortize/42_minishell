@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/09/21 12:59:17 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/09/24 20:04:30 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ NAME=minishell
 
 SRCS:=
 SRCS+= minishell.c
+SRCS+= error.c
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
 SRCS+= print_cmd.c
@@ -28,6 +29,8 @@ SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
+SRCS+= string_validator.c
+SRCS+= string_validator_pipes.c
 #SRCS+= read_variable.c
 
 CC=clang
@@ -36,10 +39,12 @@ CFLAGS=-Wall -Werror -Wextra -I. -I./headers -g
 OBJS=$(SRCS:.c=.o)
 ODIR=objects
 
-LDFLAGS=-L./libft
+TEST=$(filter minishell, $(OBJS))
+
+LDFLAGS=-Llibft
 LDLIBS=-lreadline -lft
 
-.PHONY: all clean fclean re objects
+.PHONY: all clean fclean re test
 
 all : $(NAME)
 
@@ -52,6 +57,9 @@ $(NAME) : $(OBJS) libft/libft.a
 %.o : %.c minishell.h objects
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $< -c -o $(ODIR)/$@
+
+test : $(TEST) syntax_tester.o libft/libft.a
+	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(TEST) syntax_tester.o -o test
 
 clean :
 	@rm -rf $(OBJS)
