@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 12:35:05 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/24 12:39:56 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/09/24 14:13:16 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,4 @@
 void	print_error(char *str)
 {
 	printf("Error\n %s", str);
-	exit(1);
 }

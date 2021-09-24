@@ -6,12 +6,12 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 13:25:15 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/09/21 15:45:45 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/09/24 14:23:45 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline/readline.h"
-#include "minishell.h"
+#include "headers/minishell.h"
 #include <stdlib.h>
 
 #define FUNCTION string_validator
