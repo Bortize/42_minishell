@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/09/24 14:15:32 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/09/24 20:08:13 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct	s_cmd
 	t_list			*lst_redir_out;
 }				t_cmd;
 
+typedef struct s_env_var
+{
+	char	*key;
+	char	*value;
+}			t_env_var;
+
 int		is_delimiter(char c);
 int		is_space(char c);
 size_t	count_spaces(char *line);
@@ -54,4 +60,9 @@ int		string_validator(char *line);
 int		string_validator_pipes(char *line);
 void	print_error(char *str);
 
+//Environment
+void	*env_var_new(char *key_str, char *value_str);
+void	env_var_new_value(t_env_var *node, char *new_val);
+void	env_var_delete(t_env_var *var);
+int		env_var_cmp(void *elem1, void *elem2);
 #endif
