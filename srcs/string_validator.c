@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 18:43:25 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/24 14:19:37 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/09/24 17:59:51 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,4 @@ int string_validator(char *line)
 	return (1);
 ///	string_validator_spaces();
 //	string_validator_etc();
-} 
+}
