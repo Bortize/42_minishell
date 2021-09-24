@@ -10,12 +10,12 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/minishell",
-//			"args": ["tester/valid_maps/valid_map_area_003.cub", "--save"],
+//			"args": ["path/path/path", "argument],
 			"args": ["new-tester/valid_maps/invalid_RGB_000.cub"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
-			"externalConsole": false,
+			"externalConsole": true,
 			"MIMode": "lldb"
 		}
 	]

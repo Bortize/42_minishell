@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/09/21 15:56:05 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/09/24 12:35:44 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ NAME=minishell
 
 SRCS:=
 SRCS+= minishell.c
+SRCS+= error.c
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
 SRCS+= print_cmd.c
@@ -26,7 +27,8 @@ SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
-#SRCS+= string_validator.c
+SRCS+= string_validator.c
+SRCS+= string_validator_pipes.c
 #SRCS+= read_variable.c
 
 CC=clang

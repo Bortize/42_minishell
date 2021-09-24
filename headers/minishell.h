@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/09/20 20:25:46 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/09/24 12:36:01 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	free_cmd(void *elem);
 void	free_redirect(void *elem);
 void	print_cmd(void *elem);
 void	print_redir(void *elem);
-//int		string_validator(char *line)
+void	string_validator(char *line);
+int		string_validator_pipes(char *line);
+void	print_error(char *str);
 
 #endif

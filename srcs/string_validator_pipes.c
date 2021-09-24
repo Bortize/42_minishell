@@ -20,14 +20,17 @@ int	string_validator_pipes(char *line)
 
 	text = 0;
 	pipe = 0;
+	i = 0;
 	while (line[i])
 	{
-		if (line[i] != " ")
+		if (line[i] != ' ')
 			text++;
-		else if (line[i] == '|')
+		else if (line[i] == '|' && pipe == 0)
 			pipe++;
 		i++;
 	}
+	
 	if (pipe > 0 && text == 0)
-		return (0); // TODO error because not have text in pipe
+		print_error("parse error near `|'"); // TODO error because not have text in pipe
+	return (0);
 }

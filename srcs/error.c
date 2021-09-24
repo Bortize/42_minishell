@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_validator.c                                 :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/20 18:43:25 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/24 12:30:02 by bgomez-r         ###   ########.fr       */
+/*   Created: 2021/09/24 12:35:05 by bgomez-r          #+#    #+#             */
+/*   Updated: 2021/09/24 12:39:56 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void string_validator(char *line)
+void	print_error(char *str)
 {
-	string_validator_pipes(line);
-//	string_validator_spaces();
-//	string_validator_etc();
+	printf("Error\n %s", str);
+	exit(1);
 }
