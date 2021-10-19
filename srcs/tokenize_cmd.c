@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/19 14:42:36 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:47:11 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,12 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 {
 	void	*aux;
 
-	if (token_type == plain) //THIS is a char* list  or something colse to that.
+	if (token_type == plain)
 	{
-		if (cmd_node->arg == NULL)
-			cmd_node->arg = token;
-		else
-		{
-			aux = ft_strjoin(cmd_node->arg, " ");
-			free(cmd_node->arg);
-			cmd_node->arg = ft_strjoin(aux, token);
-			free(aux);
-			free(token);
-		}
+		aux = ft_lstnew(token);
+		if (!aux)
+			exit (1); //TODO we need to have a proper 'error handler'
+		ft_lstadd_back(&cmd_node->arg, aux);
 	}
 	else
 	{
