@@ -6,14 +6,16 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/10/16 21:24:29 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/10/19 13:13:20 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ODIR=objects
 
 vpath %.c srcs
 vpath %.c srcs/environment
 vpath %.h headers
-vpath %.o objects
+vpath %.o $(ODIR)
 
 NAME=minishell
 
@@ -32,7 +34,6 @@ SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
 SRCS+= string_validator.c
 SRCS+= string_validator_pipes.c
-SRCS+= execute_cmdlst.c
 SRCS+= env_var_new.c
 SRCS+= env_var_new_value.c
 SRCS+= env_var_delete.c
@@ -44,14 +45,13 @@ CC=clang
 CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers -g
 
 OBJS=$(SRCS:.c=.o)
-ODIR=objects
 
 TEST=$(filter minishell, $(OBJS))
 
 LDFLAGS=-Llibft
 LDLIBS=-lreadline -lft
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test relibs
 
 all : $(NAME)
 
@@ -61,7 +61,7 @@ libft/libft.a :
 $(NAME) : $(OBJS) libft/libft.a
 	$(CC) $(LDFLAGS) $(LDLIBS) $(addprefix $(ODIR)/,$(OBJS)) -o $@
 
-%.o : %.c minishell.h objects
+%.o : %.c minishell.h
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $< -c -o $(ODIR)/$@
 
@@ -69,7 +69,7 @@ test : $(TEST) syntax_tester.o libft/libft.a
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(TEST) syntax_tester.o -o test
 
 clean :
-	@rm -rf $(OBJS)
+	@rm -rf $(ODIR)
 
 relibs :
 	make re -C libft
