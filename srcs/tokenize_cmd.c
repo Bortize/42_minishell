@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/09/21 08:18:34 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:42:36 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 {
 	void	*aux;
 
-	if (token_type == plain)
+	if (token_type == plain) //THIS is a char* list  or something colse to that.
 	{
 		if (cmd_node->arg == NULL)
 			cmd_node->arg = token;
@@ -87,6 +87,7 @@ void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 	cmd_txt += count_spaces(cmd_txt);
 	if (*cmd_txt == 0)
 		return ;
+	token_behavior = plain;
 	cmd_txt += read_token_behavior(cmd_txt, &token_behavior);
 	cmd_txt += count_spaces(cmd_txt);
 	token_len = 0;

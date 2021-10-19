@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 03:05:17 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/30 17:41:02 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:48:12 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	print_cmd(void *elem)
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *)elem;
-	printf("Command: %s\n", cmd->cmd);
 	printf("Argument: %s\n", cmd->arg);
 	printf("In redirections:\n");
 	ft_lstiter(cmd->lst_redir_in, print_redir);

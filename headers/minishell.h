@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/09/24 20:08:13 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:47:53 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ typedef struct s_redirect
 
 typedef struct	s_cmd
 {
-	char			*cmd;
 	char			*arg;
 	t_list			*lst_redir_in;
 	t_list			*lst_redir_out;

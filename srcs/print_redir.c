@@ -6,23 +6,24 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 04:37:46 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/29 05:09:30 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/19 13:52:55 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <stdio.h>
 
-static void	print_type(t_behavior type)
+static char	*stringify_type(t_behavior type)
 {
 	if (type == redir_out)
-		printf("Output redirect\n");
+		return (">");
 	else if (type == redir_out_append)
-		printf("Append redirect\n");
+		return (">>");
 	else if (type == redir_in)
-		printf("Input redirect\n");
+		return ("<");
 	else if (type == here_doc)
-		printf("Here-doc\n");
+		return ("<<");
+	return (NULL);
 }
 
 void	print_redir(void *elem)
@@ -30,6 +31,5 @@ void	print_redir(void *elem)
 	t_redirect	*redir;
 
 	redir = (t_redirect *)elem;
-	printf("%s as ->", redir->text);
-	print_type(redir->type);
+	printf("%s | %s\n", stringify_type(redir->type), redir->text);
 }
