@@ -6,15 +6,17 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/10/21 14:00:12 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/10/21 14:21:18 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+ODIR=objects
 
 vpath %.c srcs
 vpath %.c srcs/environment
 vpath %.c srcs/executor
 vpath %.h headers
-vpath %.o objects
+vpath %.o $(ODIR)
 
 NAME=minishell
 
@@ -47,14 +49,13 @@ CC=clang
 CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers -g
 
 OBJS=$(SRCS:.c=.o)
-ODIR=objects
 
 TEST=$(filter minishell, $(OBJS))
 
 LDFLAGS=-Llibft
 LDLIBS=-lreadline -lft
 
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re test relibs
 
 all : $(NAME)
 
@@ -64,7 +65,7 @@ libft/libft.a :
 $(NAME) : $(OBJS) libft/libft.a
 	$(CC) $(LDFLAGS) $(LDLIBS) $(addprefix $(ODIR)/,$(OBJS)) -o $@
 
-%.o : %.c minishell.h objects
+%.o : %.c minishell.h
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $< -c -o $(ODIR)/$@
 
@@ -72,7 +73,7 @@ test : $(TEST) syntax_tester.o libft/libft.a
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(TEST) syntax_tester.o -o test
 
 clean :
-	@rm -rf $(OBJS)
+	@rm -rf $(ODIR)
 
 relibs :
 	make re -C libft
