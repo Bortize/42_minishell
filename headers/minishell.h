@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/18 15:27:30 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:02:32 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@ int		string_validator_pipes(char *line);
 void	print_error(char *str);
 
 int		exec_cmd_pipe(t_list *cmd_lst, size_t cmdn);
+
+//Utils  (?)
+char	**build_str_arr(t_list *str_lst);
 
 //Environment
 void	*env_var_new(char *key_str, char *value_str);
