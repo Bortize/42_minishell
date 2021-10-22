@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/18 15:41:17 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:56:25 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 	int		(*pipev)[2];
 	pid_t	*pidv;
 	size_t	i;
+	char	**aux; //Doesn't belong here. Also, it leaks badly.
+	int	dbg_i; //TODO DEL
 
 	//--Setup TODO FTCALLOC
 	pipev = calloc(sizeof(int *), cmdn - 1);
@@ -48,6 +50,14 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 	i = 0; //Create n children
 	while (i < cmdn)
 	{
+		t_cmd *cmd = cmd_lst->content;
+		aux = build_str_arr(cmd->arg);
+		dbg_i = 0;
+		while (aux[dbg_i])
+		{
+			printf("Arg %i: %s\n", dbg_i, aux[i]);
+			dbg_i++;
+		}
 		pidv[i] = fork();
 		if (pidv[i] == -1)
 		{
@@ -61,10 +71,11 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 			//This is child
 			//TODO redirections plx
 			//TODO execve
-			printf("Child n:%zu\n", i);
-			//execve(cmd_lst->content->arg[0], cmd_lst->content->arg, NULL);
+			printf("Child n:%zu Arg0 %s\n", i, aux[0]);
+			execve(aux[0], aux, NULL);
 			//TODO Something went wrong here
 			//Do whatever bash does here
+			perror("Execve>");
 			exit(-1);
 		}
 		else
