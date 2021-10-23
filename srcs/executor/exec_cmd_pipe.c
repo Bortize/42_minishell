@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/23 06:44:34 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/23 19:24:07 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	clean_pipes(int (*pipev)[2], int pos, int size)
 	{
 		if (i != pos)
 			close(pipev[i][WRITE_END]);
-		else if (i != pos - 1)
+		if (i != pos - 1)
 			close(pipev[i][READ_END]);
 		i++;
 	}
@@ -112,7 +112,7 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 				if (i != 0)
 					dup2(pipev[i - 1][READ_END], 0);
 			}
-			clean_pipes(pipev, i, cmdn);
+			clean_pipes(pipev, i, cmdn - 1);
 			//TODO redirections plx
 			/*
 			if (cmd_lst->lst_redir_out)
@@ -137,7 +137,7 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 		}
 	}
 	//Wait all
-	clean_pipes(pipev, -1, cmdn);
+	clean_pipes(pipev, -1, cmdn - 1);
 		//TODO Do we need to do extra work here?
 		//TODO How do we get the exit status of the last pid
 	i = 0;
@@ -146,7 +146,6 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 		waitpid(pidv[i], NULL, 0);
 		i++;
 	}
-
 	free(pipev);
 	free(pidv);
 	return (0);
