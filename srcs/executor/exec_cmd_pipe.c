@@ -6,47 +6,48 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/23 19:24:07 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/24 23:02:14 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <stdlib.h>
+#include <stdio.h> //perror
 
 #define READ_END 0
 #define WRITE_END 1
 
-#include <stdio.h> //TODO just placeholder printf
-/*
-static int	get_oflag()
-{//HOW TO HANDLE HERE-DOC? Write on a tmpfile, somehow have a program cat-int out into stdin that ofc, got redirected?
-	if (redir_out)
-		O_WRONLY | O_CREAT | O_TRUNC;
-	else if (redir_out_append)
-		O_WRONLY | O_CREAT | O_APPEND;
-	else if (redir_in)
-		O_RDONLY;
-}
-
-static int	open_files(t_list *redir_lst)
+static int	redirect_input(t_list *in_lst)
 {
-	int	fd;
-	int	o_flag;
+	int			fd;
+	char		*file_path;
+	t_redirect	*redir_data;
 
-	o_flag =
-	fd = open();
-	redir_lst = redir_lst->next;
-	while (redir_lst && fd != -1)
+	fd = STDIN_FILENO;
+	while (in_lst)
 	{
 		close(fd);
-		fd = open();
-		redir_lst = redir_lst->next;
+//TODO we need get_path to use relative addresses.
+	//file_path = get_path(in_lst->content);
+		redir_data = in_lst->content;
+		file_path = redir_data->text;
+		fd = open(file_path, O_RDONLY);
+		if (fd == -1)
+			break ;
+		fd = dup2(fd, STDIN_FILENO);
+		if (fd == -1)
+			break ;
+	//free(file_path);
+		in_lst = in_lst->next;
 	}
+	if (fd == -1)
+		perror(redir_data->text);
 	return (fd);
-}*/
+}
 
-void	clean_pipes(int (*pipev)[2], int pos, int size)
+static void	clean_pipes(int (*pipev)[2], int pos, int size)
 {
 	int	i;
 
@@ -92,7 +93,11 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 	while (i < cmdn)
 	{
 		t_cmd *cmd = cmd_lst->content;
-		cmd->argv = build_str_arr(cmd->arg); //TODO do this before executor, also check errors
+		//TODO build string array before executor (parser?), also check errors
+		cmd->argv = build_str_arr(cmd->arg);
+		if (!cmd->arg)
+			return (-1);//No memory
+		//--This before executor [END]
 		pidv[i] = fork();
 		if (pidv[i] == -1)
 		{
@@ -103,8 +108,8 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 		}
 		else if (pidv[i] == 0)
 		{
-			//This is child
 			//Plumbing
+			//TODO configure_pipes(); to hold this part of code
 			if (cmdn > 1)
 			{
 				if (i != cmdn - 1)
@@ -113,7 +118,10 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 					dup2(pipev[i - 1][READ_END], 0);
 			}
 			clean_pipes(pipev, i, cmdn - 1);
-			//TODO redirections plx
+			//TODO Inputs include here-doc and shouldn't
+			if (redirect_input(cmd->lst_redir_in) == -1)
+				exit(-1); //TODO couldn't open file error
+			//TODO output redirections
 			/*
 			if (cmd_lst->lst_redir_out)
 			{
