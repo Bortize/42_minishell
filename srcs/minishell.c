@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/24 18:03:45 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/25 12:40:58 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "minishell.h"
 #include <stdlib.h>
 
-int	main(void)
+int	main(int argc, char **argv, char **env)
 {
 	char	*line;
 	char	*trimmed;

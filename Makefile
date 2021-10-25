@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/10/19 13:13:20 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/10/25 19:16:01 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,10 @@ SRCS+= env_var_new.c
 SRCS+= env_var_new_value.c
 SRCS+= env_var_delete.c
 SRCS+= env_var_cmp.c
+#SRCS+= builtins.c
+#SRCS+= builtins_echo.c
+#SRCS+= builtins_pwd.c
+#SRCS+= builtins_env.c
 #SRCS+= read_variable.c
 
 CC=clang
