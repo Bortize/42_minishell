@@ -2,7 +2,7 @@
 ```c
 void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 ```
-Esta función recibe como primer parámetro el trozo de línea leído del prompt hasta que llega al final o encuentra un pipe y como segundo parámetro un puntero a un nodo (con la idea entiendo, de crear una lista) el cual se reservo memoría.
+Esta función recibe como primer parámetro el trozo de línea leído del prompt hasta que llega al final o encuentra un pipe y como segundo parámetro un puntero a estructura.
 
 
 ```c

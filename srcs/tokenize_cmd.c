@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/19 15:47:11 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:44:34 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 	}
 }
 
-void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)// linea leida | estructura cmd
 {
 	t_behavior	token_behavior;
 	size_t		token_len;
