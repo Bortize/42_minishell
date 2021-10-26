@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/25 15:36:17 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:07:25 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void	exec_child(t_cmd *cmd, size_t cmdn, int (*pipev)[2], size_t cmd_index)
 	if (configure_pipeline(cmd_index, cmdn, pipev) == -1)
 		exit (-1); //TODO error with pipes
 	//TODO Inputs include here-doc and shouldn't
-	if (redirect_input(cmd->lst_redir_in) == -1)
+	if (redirect_input(cmd->lst_redir_in) == -1
+			|| redirect_output(cmd->lst_redir_out) == -1)
 		exit(-1); //TODO couldn't open file error
 	//TODO output redirections
 	execve(cmd->argv[0], cmd->argv, NULL);

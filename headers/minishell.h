@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/25 15:37:22 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:07:55 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	print_error(char *str);
 //Executor
 int		exec_cmd_pipe(t_list *cmd_lst, size_t cmdn);
 int		redirect_input(t_list *in_lst);
+int		redirect_output(t_list *out_lst);
 
 //Utils  (?)
 char	**build_str_arr(t_list *str_lst);
