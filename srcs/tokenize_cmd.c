@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/19 15:47:11 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/27 14:32:30 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 	{
 		aux = create_redirect_node(token, token_type);
 		if (token_type == redir_in || token_type == here_doc)
-			ft_lstadd_front(&cmd_node->lst_redir_in, aux);
+			ft_lstadd_back(&cmd_node->lst_redir_in, aux);
 		else
-			ft_lstadd_front(&cmd_node->lst_redir_out, aux);
+			ft_lstadd_back(&cmd_node->lst_redir_out, aux);
 	}
 }
 
