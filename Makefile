@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/10/26 15:06:02 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/10/30 23:35:20 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS+= string_validator_pipes.c
 SRCS+= exec_cmd_pipe.c
 SRCS+= redirect_input.c
 SRCS+= redirect_output.c
+SRCS+= get_path.c
 SRCS+= env_var_new.c
 SRCS+= env_var_new_value.c
 SRCS+= env_var_delete.c

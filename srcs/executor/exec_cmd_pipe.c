@@ -6,12 +6,16 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/26 15:07:25 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/10/31 00:09:11 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <unistd.h>
+
+//TODO Of course this is just a patch until our environment is done
+#define PATH_STR "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"
+char	*get_path(char *file, char *path_env);
 
 static void	clean_pipes(int (*pipev)[2], int pos, int size)
 {
@@ -87,8 +91,8 @@ void	exec_child(t_cmd *cmd, size_t cmdn, int (*pipev)[2], size_t cmd_index)
 	if (redirect_input(cmd->lst_redir_in) == -1
 			|| redirect_output(cmd->lst_redir_out) == -1)
 		exit(-1); //TODO couldn't open file error
-	//TODO output redirections
-	execve(cmd->argv[0], cmd->argv, NULL);
+	//TODO getpath considerations.
+	execve(get_path(cmd->argv[0], PATH_STR), cmd->argv, NULL);
 	//TODO Something went wrong here. Do whatever bash does here
 	perror(cmd->argv[0]);
 	exit(-1);
