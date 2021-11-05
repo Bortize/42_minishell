@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/05 19:21:53 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/05 20:37:09 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int	main(int argc, char **argv, char **env)
 	char	*line;
 	char	*trimmed;
 	t_list	*cmd_lst;
+	t_list	*env_lst;
 
 	(void)(argc);
 	(void)(argv);
-	builtins_env(env);
+	builtins_env(env, &env_lst);
 	while (1)
 	{
 		line = NULL;
