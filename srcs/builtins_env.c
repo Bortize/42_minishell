@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/10/25 19:09:32 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/05 20:32:49 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-
-void builtins_env(char **argv, char **env);
-
-int	main(int argc, char **argv, char **env)
-{
-	builtins_env(argv, env);
-	return (0);
-}
+#include "minishell.h"
 
 /*
 ** Copies the environment variables of an array so as not to modify the
@@ -29,12 +22,15 @@ int	main(int argc, char **argv, char **env)
 ** Need free();
 */
 
-void	builtins_env(char **argv, char **env)
+void	builtins_env(char **env, t_list *env_list)
 {
 	char **ptr;// pointer for no lost the reference of **env
 	int	env_count;// counter of lines for reserve memory whith malloc for matrix of env
 	char **filas;// for reserve memory for matrix
+	char **lst_env;
 	int i;
+	int j;
+	t_env_var	*lst_env;
 
 	ptr = env;// For no lost the reference of pointer
 	env_count = 0;
@@ -47,13 +43,20 @@ void	builtins_env(char **argv, char **env)
 	filas = (char **)malloc(env_count * sizeof(char *));
 
 	ptr = env;
+	lst_env = env;
 	i = 0;
 	while(i != env_count)
 	{
 		*filas = strdup(*ptr);// TO DO: modify by the original function
 		printf("%s\n", *filas);
 		ptr++;
+		printf("%p\n", filas);
 		filas++;
 		i++;
+	}
+	j = 0;
+	while(j != env_count)
+	{
+		printf("%s\n", *lst_env);
 	}
 }

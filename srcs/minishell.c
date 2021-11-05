@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/10/26 11:26:00 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/05 19:21:53 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int	main(int argc, char **argv, char **env)
 	char	*trimmed;
 	t_list	*cmd_lst;
 
+	(void)(argc);
+	(void)(argv);
+	builtins_env(env);
 	while (1)
 	{
 		line = NULL;
@@ -37,7 +40,7 @@ int	main(int argc, char **argv, char **env)
 			ft_lstiter(cmd_lst, print_cmd);
 			ft_lstclear(&cmd_lst, &free_cmd);
 		}
-		builtins(env, argv, env);
+//		builtins(env, argv, env);
 		free(trimmed);
 		system("leaks -q minishell");
 	}
