@@ -6,17 +6,22 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:41:08 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/08 16:06:50 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:14:42 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/wait.h>
-#include <stddef.h> //NULL TODO
+#include <minishell.h>
 
-		//TODO Do we need to do extra work here?
-		//TODO How do we get the exit status of the last pid
 void	wait_children(size_t cmd_num)
 {
+	int	status;
+
+	cmd_num--;
+	waitpid(g_pidv[cmd_num], &status, 0);
+	if (WIFEXITED(status))
+		printf("Last child exit status: %d\n", WEXITSTATUS(status));
+	else if (WIFSIGNALED(status))
+		printf("Last got signaled: %d\n", WTERMSIG(status));
 	while (cmd_num > 0)
 	{
 		wait(NULL);
