@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/10/23 19:38:11 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/07 21:49:59 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int	main(void)
 			cmd_lst = NULL;
 			split_in_cmds(trimmed, &cmd_lst);
 			ft_lstiter(cmd_lst, print_cmd);
-			exec_cmd_pipe(cmd_lst, ft_lstsize(cmd_lst));
+			start_execution(cmd_lst);
+			//exec_cmd((t_cmd *)cmd_lst->content);
+			//exec_cmd_pipe(cmd_lst, ft_lstsize(cmd_lst));
 			ft_lstclear(&cmd_lst, &free_cmd);
 		}
 		free(trimmed);

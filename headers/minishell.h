@@ -6,18 +6,22 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/26 15:07:55 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:58:45 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft/libft.h"
+# include <errno.h>
+# include <limits.h>
 # include <stdlib.h>
 # include <stdio.h>
 
 #define READ_END 0
 #define WRITE_END 1
+
+pid_t	g_pidv[CHILD_MAX];
 
 typedef enum e_behavior
 {
@@ -64,9 +68,11 @@ int		string_validator_pipes(char *line);
 void	print_error(char *str);
 
 //Executor
+void	start_execution(t_list *cmd_lst);
 int		exec_cmd_pipe(t_list *cmd_lst, size_t cmdn);
 int		redirect_input(t_list *in_lst);
 int		redirect_output(t_list *out_lst);
+void	wait_children(size_t cmd_num);
 
 //Utils  (?)
 char	**build_str_arr(t_list *str_lst);

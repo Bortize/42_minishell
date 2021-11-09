@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:34:17 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/26 15:38:24 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/07 20:39:09 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+//TODO Inputs include here-doc as a pipe.
 int	redirect_input(t_list *in_lst)
 {
 	int			fd;
