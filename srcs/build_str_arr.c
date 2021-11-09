@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/22 19:09:13 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/08 13:34:26 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	**build_str_arr(t_list *str_lst)
 	while (str_lst)
 	{
 		str_arr[i] = str_lst->content;
-		printf("INFN: %s\n", *str_arr);
 		str_lst = str_lst->next;
 		i++;
 	}
