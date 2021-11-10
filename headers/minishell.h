@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/08 15:58:45 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:09:17 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ void	print_redir(void *elem);
 int		string_validator(char *line);
 int		string_validator_pipes(char *line);
 void	print_error(char *str);
+
+//Signals
+void	set_msh_signals(void);
+void	sigint_handle(int sig_num);
+void	sigquit_handle(int sig_num);
 
 //Executor
 void	start_execution(t_list *cmd_lst);

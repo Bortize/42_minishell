@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/08 15:59:06 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/11/10 15:04:39 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ ODIR=objects
 vpath %.c srcs
 vpath %.c srcs/environment
 vpath %.c srcs/executor
+vpath %.c srcs/signals
 vpath %.h headers
 vpath %.o $(ODIR)
 
@@ -35,6 +36,11 @@ SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
 SRCS+= string_validator.c
 SRCS+= string_validator_pipes.c
+
+#Signals
+SRCS+= sigint_handle.c
+SRCS+= sigquit_handle.c
+SRCS+= set_msh_signals.c
 
 #Executor
 SRCS+= start_execution.c
