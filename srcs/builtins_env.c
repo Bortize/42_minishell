@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/05 20:32:49 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/11 16:22:12 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,61 @@
 ** originals and prints the copy on the screen.
 ** Need free();
 */
+// =================================================================================================================
+static void	*env_var_borti(char *key_str, char *value_str)
+{
+	t_env_var	*node;
 
-void	builtins_env(char **env, t_list *env_list)
+	node = ft_calloc(1, sizeof(t_env_var));
+	if (!node)
+		return (NULL);
+	node->key = key_str;
+	node->value = value_str;
+	return (node);
+}
+// =================================================================================================================
+static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_env)
+{
+	char *equal;
+	char *value_str;
+	char *key_str;
+	int len_key_str;
+	int i;
+
+	equal = ft_strchr(line_env, '=');
+	value_str = ft_strdup(equal + 1);
+	i = 0;
+	while (equal != line_env)
+	{
+		equal--;
+		i++;
+	}
+	len_key_str = i;
+	key_str = ft_strndup(line_env, len_key_str);
+	struct_env = env_var_borti(key_str, value_str);// puntero que devuelve despues de crear la estructura
+//	printf("%s=", struct_env->key);
+//	printf("%s\n", struct_env->value);
+	if (list == NULL)
+	{
+		list = ft_lstnew(struct_env);
+	}
+	else
+	{
+		ft_lstadd_back(&list, ft_lstnew(struct_env));
+	}
+	return (list);
+}
+// =================================================================================================================
+t_list	*builtins_env(char **env)
 {
 	char **ptr;// pointer for no lost the reference of **env
 	int	env_count;// counter of lines for reserve memory whith malloc for matrix of env
-	char **filas;// for reserve memory for matrix
-	char **lst_env;
 	int i;
-	int j;
-	t_env_var	*lst_env;
+	t_list *list;
+	t_env_var *struct_env;
 
+	list = NULL;
+	struct_env = NULL;
 	ptr = env;// For no lost the reference of pointer
 	env_count = 0;
 	while (*ptr != NULL)
@@ -40,23 +84,14 @@ void	builtins_env(char **env, t_list *env_list)
 //		printf("%i\n", env_count);// showed for screen the lines counted of env
 		ptr++;
 	}
-	filas = (char **)malloc(env_count * sizeof(char *));
 
-	ptr = env;
-	lst_env = env;
 	i = 0;
 	while(i != env_count)
 	{
-		*filas = strdup(*ptr);// TO DO: modify by the original function
-		printf("%s\n", *filas);
-		ptr++;
-		printf("%p\n", filas);
-		filas++;
+		asign_env_struct(*env, list, struct_env);
+		env++;
 		i++;
 	}
-	j = 0;
-	while(j != env_count)
-	{
-		printf("%s\n", *lst_env);
-	}
+	ft_lstiter(list, printf("%s\n", struct_env->key));
+	return (list);
 }

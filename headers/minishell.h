@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/05 20:37:05 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/11 12:37:19 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	print_error(char *str);
 //void	builtins(t_list *cmd_lst, char **argv, char **env);// <------------------------------------------
 void	builtint_echo(char **argv, char **env);
 void	builtint_pwd(char **argv, char **env);
-void	builtins_env(char **env, t_list );
+t_list	*builtins_env(char **env);
 void	builtins_env_list(char **argv, char **env);
 
 //Environment
