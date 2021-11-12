@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/11 16:22:12 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 09:44:39 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,21 @@
 #include <string.h>
 #include "minishell.h"
 
+static void print_env(void *content)
+{
+	t_env_var *env_item;
+
+	env_item = content;
+	printf("%s\n", env_item->key);
+}
+
 /*
 ** Copies the environment variables of an array so as not to modify the
 ** originals and prints the copy on the screen.
 ** Need free();
 */
 // =================================================================================================================
-static void	*env_var_borti(char *key_str, char *value_str)
+static void	*env_var_struct(char *key_str, char *value_str)
 {
 	t_env_var	*node;
 
@@ -52,7 +60,7 @@ static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_en
 	}
 	len_key_str = i;
 	key_str = ft_strndup(line_env, len_key_str);
-	struct_env = env_var_borti(key_str, value_str);// puntero que devuelve despues de crear la estructura
+	struct_env = env_var_struct(key_str, value_str);// puntero que devuelve despues de crear la estructura
 //	printf("%s=", struct_env->key);
 //	printf("%s\n", struct_env->value);
 	if (list == NULL)
@@ -73,6 +81,7 @@ t_list	*builtins_env(char **env)
 	int i;
 	t_list *list;
 	t_env_var *struct_env;
+	int count_node_size;
 
 	list = NULL;
 	struct_env = NULL;
@@ -88,10 +97,13 @@ t_list	*builtins_env(char **env)
 	i = 0;
 	while(i != env_count)
 	{
-		asign_env_struct(*env, list, struct_env);
+		list = asign_env_struct(*env, list, struct_env);
+//		asign_env_struct(*env, list, struct_env);
 		env++;
 		i++;
 	}
-	ft_lstiter(list, printf("%s\n", struct_env->key));
+	count_node_size = ft_lstsize(list);
+	printf("%d\n", count_node_size);
+	ft_lstiter(list, print_env);
 	return (list);
 }

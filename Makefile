@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/05 19:24:05 by bgomez-r         ###   ########.fr        #
+#    Updated: 2021/11/12 09:56:06 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,16 +43,17 @@ SRCS+= env_var_cmp.c
 #SRCS+= builtins_pwd.c
 SRCS+= builtins_env.c
 #SRCS+= read_variable.c
+SRCS+= free_env_var.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
-CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers -g
+CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers #-g3
 
 OBJS=$(SRCS:.c=.o)
 
 TEST=$(filter minishell, $(OBJS))
 
-LDFLAGS=-Llibft
+LDFLAGS=-Llibft #-fsanitize=address
 LDLIBS=-lreadline -lft
 
 .PHONY: all clean fclean re test relibs

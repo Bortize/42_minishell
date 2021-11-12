@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/11 13:57:45 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 10:07:17 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ int	main(int argc, char **argv, char **env)
 		}
 //		builtins(env, argv, env);
 		free(trimmed);
-		system("leaks -q minishell");
+//		system("leaks -q minishell");
 	}
-	ft_lstclear(&env_lst, free);
+	ft_lstclear(&env_lst, free_env_var);
+	system("leaks -q minishell");
 	return (0);
 }
