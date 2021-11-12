@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/26 17:44:34 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 20:20:52 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	read_token_behavior(char *line, t_behavior *type)
 	return (0);
 }
 
-static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
+static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type, t_list *env_lst)
 {
 	void	*aux;
 
@@ -62,6 +62,9 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 		if (!aux)
 			exit (1); //TODO we need to have a proper 'error handler'
 		ft_lstadd_back(&cmd_node->arg, aux);
+//		ft_lstiter(env_lst, print_env);
+//		<< ===========	INSERT FUNCTION TO CHECK BUILTINS  ================
+		builtins(env_lst, token);
 	}
 	else
 	{
@@ -73,11 +76,12 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 	}
 }
 
-void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)// linea leida | estructura cmd
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node, t_list *env_lst)// linea leida | estructura cmd
 {
-	t_behavior	token_behavior;
-	size_t		token_len;
+	t_behavior	token_behavior;// Estructura de flags de tipos de redirección
+	size_t		token_len;// Longitud del key o del value
 
+//	ft_lstiter(env_lst, print_env);
 	cmd_txt += count_spaces(cmd_txt);
 	if (*cmd_txt == 0)
 		return ;
@@ -92,6 +96,6 @@ void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)// linea leida | estructura cmd
 		else
 			token_len++;
 	}
-	save_token(cmd_node, ft_strndup(cmd_txt, token_len), token_behavior);
-	return (tokenize_cmd(cmd_txt + token_len, cmd_node));
+	save_token(cmd_node, ft_strndup(cmd_txt, token_len), token_behavior, env_lst);
+	return (tokenize_cmd(cmd_txt + token_len, cmd_node, env_lst));
 }

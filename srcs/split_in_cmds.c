@@ -6,19 +6,20 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 18:28:09 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/19 15:34:10 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/12 20:13:26 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	split_in_cmds(char *line, t_list **last_cmd)
+void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst)
 {
-	t_list	*cmd_node;
-	t_cmd	*cmd;
-	char	*tmp;
-	size_t	cmd_len;
+	t_list	*cmd_node;// Lista
+	t_cmd	*cmd;// Estructura
+	char	*tmp;// Duplicado de linea
+	size_t	cmd_len;// Contador de carácter a carácter
 
+//	ft_lstiter(env_lst, print_env);
 	cmd_len = 0;
 	while (line[cmd_len] && line[cmd_len] != '|')
 	{
@@ -32,9 +33,9 @@ void	split_in_cmds(char *line, t_list **last_cmd)
 	cmd_node = ft_lstnew(cmd);
 	if (!cmd || !cmd_node)
 		exit(1); //Exit handler to print errors //TODO NO-MEM
-	tokenize_cmd(tmp, cmd);
+	tokenize_cmd(tmp, cmd, env_lst);
 	ft_lstadd_back(last_cmd, cmd_node);
 	free(tmp);
 	if (line[cmd_len])
-		return (split_in_cmds(line + cmd_len + 1, &(*last_cmd)->next));
+		return (split_in_cmds(line + cmd_len + 1, &(*last_cmd)->next, env_lst));
 }

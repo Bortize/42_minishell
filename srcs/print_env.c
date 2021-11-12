@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 09:05:10 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/12 20:24:33 by bgomez-r         ###   ########.fr       */
+/*   Created: 2021/11/12 18:58:31 by bgomez-r          #+#    #+#             */
+/*   Updated: 2021/11/12 20:27:11 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtins(t_list *env_lst, char *token)
+void print_env(void *content)
 {
-	if (ft_strncmp(token, "env", 3) == 0)
-	{
-		ft_lstiter(env_lst, print_env);
-	}
-/*
-	else if argumento == "pwd"
-		ToDo
-	else if artmento == "echo"
-		ToDo
-*/
+	t_env_var *env_item;
+
+	env_item = content;
+	printf("%s=", env_item->key);
+	printf("%s\n", env_item->value);
 }

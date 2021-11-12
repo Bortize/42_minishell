@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/12 10:07:17 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 20:21:44 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,14 @@ int	main(int argc, char **argv, char **env)
 		if (trimmed && *trimmed && string_validator(trimmed))
 		{
 			cmd_lst = NULL;
-			split_in_cmds(trimmed, &cmd_lst);
+			split_in_cmds(trimmed, &cmd_lst, env_lst);
 			ft_lstiter(cmd_lst, print_cmd);
 			ft_lstclear(&cmd_lst, &free_cmd);
 		}
-//		builtins(env, argv, env);
 		free(trimmed);
-//		system("leaks -q minishell");
+		system("leaks -q minishell");
 	}
 	ft_lstclear(&env_lst, free_env_var);
-	system("leaks -q minishell");
+//	system("leaks -q minishell");
 	return (0);
 }

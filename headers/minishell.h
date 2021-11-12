@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/12 09:56:25 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 20:20:04 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int		is_space(char c);
 size_t	count_spaces(char *line);
 size_t	count_until_repeat(char *line);
 
-void	split_in_cmds(char *line, t_list **last_cmd);
-void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node);
+void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst);
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node, t_list *env_lst);
 void	free_cmd(void *elem);
 void	free_redirect(void *elem);
 void	print_cmd(void *elem);
@@ -58,7 +58,7 @@ void	print_redir(void *elem);
 int		string_validator(char *line);
 int		string_validator_pipes(char *line);
 void	print_error(char *str);
-//void	builtins(t_list *cmd_lst, char **argv, char **env);// <------------------------------------------
+void	builtins(t_list *env_lst, char *token);// <------------------------------------------
 void	builtint_echo(char **argv, char **env);
 void	builtint_pwd(char **argv, char **env);
 t_list	*builtins_env(char **env);
@@ -70,4 +70,5 @@ void	env_var_new_value(t_env_var *node, char *new_val);
 void	env_var_delete(t_env_var *var);
 int		env_var_cmp(void *elem1, void *elem2);
 void	free_env_var(void *ptr);
+void 	print_env(void *content);
 #endif

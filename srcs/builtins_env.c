@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/12 09:44:39 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 18:59:47 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,14 @@
 #include <string.h>
 #include "minishell.h"
 
-static void print_env(void *content)
-{
-	t_env_var *env_item;
-
-	env_item = content;
-	printf("%s\n", env_item->key);
-}
+// ===========================================================================
 
 /*
 ** Copies the environment variables of an array so as not to modify the
 ** originals and prints the copy on the screen.
 ** Need free();
 */
-// =================================================================================================================
+
 static void	*env_var_struct(char *key_str, char *value_str)
 {
 	t_env_var	*node;
@@ -41,7 +35,7 @@ static void	*env_var_struct(char *key_str, char *value_str)
 	node->value = value_str;
 	return (node);
 }
-// =================================================================================================================
+// ===========================================================================
 static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_env)
 {
 	char *equal;
@@ -73,7 +67,7 @@ static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_en
 	}
 	return (list);
 }
-// =================================================================================================================
+// ===========================================================================
 t_list	*builtins_env(char **env)
 {
 	char **ptr;// pointer for no lost the reference of **env
@@ -103,7 +97,8 @@ t_list	*builtins_env(char **env)
 		i++;
 	}
 	count_node_size = ft_lstsize(list);
-	printf("%d\n", count_node_size);
-	ft_lstiter(list, print_env);
+//	printf("%d\n", count_node_size);// Imprime 
+//	ft_lstiter(list, print_env);
 	return (list);
 }
+// 
