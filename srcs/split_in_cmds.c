@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 18:28:09 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/12 20:13:26 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 20:31:19 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst)
 	char	*tmp;// Duplicado de linea
 	size_t	cmd_len;// Contador de carácter a carácter
 
-//	ft_lstiter(env_lst, print_env);
 	cmd_len = 0;
 	while (line[cmd_len] && line[cmd_len] != '|')
 	{

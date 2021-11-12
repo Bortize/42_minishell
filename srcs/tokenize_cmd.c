@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/12 20:20:52 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 20:31:03 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type, t_li
 		if (!aux)
 			exit (1); //TODO we need to have a proper 'error handler'
 		ft_lstadd_back(&cmd_node->arg, aux);
-//		ft_lstiter(env_lst, print_env);
-//		<< ===========	INSERT FUNCTION TO CHECK BUILTINS  ================
+//	====	INSERT FUNCTION TO CHECK BUILTINS  ====
 		builtins(env_lst, token);
 	}
 	else
@@ -81,7 +80,6 @@ void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node, t_list *env_lst)// linea leida
 	t_behavior	token_behavior;// Estructura de flags de tipos de redirección
 	size_t		token_len;// Longitud del key o del value
 
-//	ft_lstiter(env_lst, print_env);
 	cmd_txt += count_spaces(cmd_txt);
 	if (*cmd_txt == 0)
 		return ;
