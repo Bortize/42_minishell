@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/12 20:20:04 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 13:33:42 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ size_t	count_spaces(char *line);
 size_t	count_until_repeat(char *line);
 
 void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst);
-void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node, t_list *env_lst);
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node);//, t_list *env_lst);
 void	free_cmd(void *elem);
 void	free_redirect(void *elem);
 void	print_cmd(void *elem);
@@ -60,7 +60,7 @@ int		string_validator_pipes(char *line);
 void	print_error(char *str);
 void	builtins(t_list *env_lst, char *token);// <------------------------------------------
 void	builtint_echo(char **argv, char **env);
-void	builtint_pwd(char **argv, char **env);
+void	builtint_pwd(char *str);
 t_list	*builtins_env(char **env);
 void	builtins_env_list(char **argv, char **env);
 
