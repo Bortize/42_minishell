@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 03:05:17 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/19 15:52:38 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/14 18:11:49 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_cmd(void *elem)
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *)elem;
-	printf("Arguments:\n");
+	printf("\nArguments:\n");
 	ft_lstiter(cmd->arg, putendl_wrapper);
 	printf("In redirections:\n");
 	ft_lstiter(cmd->lst_redir_in, print_redir);

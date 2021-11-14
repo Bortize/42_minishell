@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 18:28:09 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/13 13:23:20 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/14 18:22:33 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst)
 			cmd_len++;
 	}
 	tmp = ft_strndup(line, cmd_len);
-//	builtins(env_lst, tmp);//	====  INSERT FUNCTION TO CHECK BUILTINS  ====
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	cmd_node = ft_lstnew(cmd);
 	if (!cmd || !cmd_node)
 		exit(1); //Exit handler to print errors //TODO NO-MEM
 	tokenize_cmd(tmp, cmd);//, env_lst);
-	ft_lstadd_back(last_cmd, cmd_node);
+	ft_lstadd_back(last_cmd, cmd_node);// Añade el ultimo nodo que se ha contrudio a la lista principal
 	free(tmp);
 	if (line[cmd_len])
 		return (split_in_cmds(line + cmd_len + 1, &(*last_cmd)->next, env_lst));
