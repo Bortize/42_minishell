@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/10 15:04:39 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/11/14 18:46:48 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,9 @@ SRCS+= string_validator.c
 SRCS+= string_validator_pipes.c
 
 #Signals
-SRCS+= sigint_handle.c
-SRCS+= sigquit_handle.c
+SRCS+= sig_handler.c
+SRCS+= sigint_handler.c
+SRCS+= sigquit_handler.c
 SRCS+= set_msh_signals.c
 
 #Executor
@@ -61,14 +62,14 @@ SRCS+= build_str_arr.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
-CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers -g
+CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers #-I./readline -g
 
 OBJS=$(SRCS:.c=.o)
 
 TEST=$(filter minishell, $(OBJS))
 
-LDFLAGS=-Llibft
-LDLIBS=-lreadline -lft
+LDFLAGS=-Llibft #-Lreadline
+LDLIBS=-lreadline -lft #-lhistory
 
 .PHONY: all clean fclean re test relibs
 

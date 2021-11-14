@@ -6,8 +6,8 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/10 15:09:17 by vicmarti         ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2021/11/14 18:43:41 by vicmarti         ###   ########.fr       */
+/*                                                                        r   */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -22,6 +22,7 @@
 #define WRITE_END 1
 
 pid_t	g_pidv[CHILD_MAX];
+int		g_interrupted;
 
 typedef enum e_behavior
 {
@@ -69,8 +70,9 @@ void	print_error(char *str);
 
 //Signals
 void	set_msh_signals(void);
-void	sigint_handle(int sig_num);
-void	sigquit_handle(int sig_num);
+void	sig_handler(int signum);
+void	sigint_handler(void);
+void	sigquit_handler(void);
 
 //Executor
 void	start_execution(t_list *cmd_lst);

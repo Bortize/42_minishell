@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 14:38:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/10 15:15:23 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/14 18:45:27 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 void	set_msh_signals(void)
 {
-	signal(SIGINT, sigint_handle);
-	signal(SIGQUIT, sigquit_handle);
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);
 }
