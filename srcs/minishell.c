@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/14 18:54:16 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/14 22:35:13 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 #include "minishell.h"
 #include <stdlib.h>
 
+#include <sys/ioctl.h>
+#include <termios.h>
+
 #include <stdio.h>
-#include <signal.h>
 #include <unistd.h>
 
 int	main(void)
@@ -24,18 +26,24 @@ int	main(void)
 	char	*line;
 	char	*trimmed;
 	t_list	*cmd_lst;
+	struct termios	tty_attr;
 
-	system("stty -a");
+	ioctl(STDIN_FILENO, TIOCGETA, &tty_attr);
+	tty_attr.c_lflag &= ~ECHOCTL;
+	ioctl(STDIN_FILENO, TIOCSETA, &tty_attr);
 	set_msh_signals();
+	system("stty -a");
+	//system("stty -echoctl");
+	//system("stty -a");
 	g_interrupted = 0;
 	printf("RL version: %s\n", rl_library_version);
 	printf("RL version: %#X\n", rl_readline_version);
-	printf("RL redisplay hook: %p\n", rl_redisplay_function);
 	printf("RL redisplay hook: %p\n", rl_redisplay_function);
 	while (1)
 	{
 		line = NULL;
 		line = readline("minishell> ");
+		rl_already_prompted = 0;
 		if (g_interrupted)
 		{
 			free(line);
