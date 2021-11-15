@@ -6,17 +6,22 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/14 18:43:41 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/15 13:39:41 by vicmarti         ###   ########.fr       */
 /*                                                                        r   */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+//Readline dependency
+//Always call to stdio before readline.
+#include <stdio.h>
+#include "readline/readline.h"
+#include "readline/history.h"
+//END Readline
 # include "libft/libft.h"
 # include <errno.h>
 # include <limits.h>
 # include <stdlib.h>
-# include <stdio.h>
 
 #define READ_END 0
 #define WRITE_END 1
