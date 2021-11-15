@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/14 20:11:39 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/11/15 13:20:11 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ SRCS+= build_str_arr.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
-CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers -I./readine/include -g
+CFLAGS= -O3 -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g
 
 OBJS=$(SRCS:.c=.o)
 

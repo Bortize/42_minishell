@@ -6,10 +6,11 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/14 22:35:13 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/15 13:26:09 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "readline/readline.h"
 #include "readline/history.h"
 #include "minishell.h"
@@ -18,7 +19,6 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
-#include <stdio.h>
 #include <unistd.h>
 
 int	main(void)
