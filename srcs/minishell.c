@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/16 15:34:16 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:46:12 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ int	main(int argc, char **argv, char **env)
 	{
 		line = NULL;
 		line = readline("minishell> ");
+		if (!line)
+			break ;
 		add_history(line);
 		trimmed = ft_strtrim(line, " ");
-		printf("trimmed %s\n", trimmed);
 		free(line);
 		if (trimmed && *trimmed && string_validator(trimmed))
 		{
@@ -39,6 +40,7 @@ int	main(int argc, char **argv, char **env)
 			split_in_cmds(trimmed, &cmd_lst, env_lst);
 			builtins(cmd_lst, env_lst);// << =============== WORKING HERE NOW
 			ft_lstiter(cmd_lst, print_cmd);
+			exec_cmd_pipe(cmd_lst, ft_lstsize(cmd_lst));
 			ft_lstclear(&cmd_lst, &free_cmd);
 		}
 		free(trimmed);

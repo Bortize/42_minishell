@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/16 15:34:11 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:49:09 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 # include "libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
+
+#define READ_END 0
+#define WRITE_END 1
 
 typedef enum e_behavior
 {
@@ -33,6 +36,7 @@ typedef struct s_redirect
 
 typedef struct	s_cmd
 {
+	char	**argv;
 	t_list	*arg;
 	t_list	*lst_redir_in;
 	t_list	*lst_redir_out;
@@ -64,6 +68,14 @@ void	builtint_pwd(char *str);
 t_list	*builtins_env(char **env);
 void	builtins_env_list(char **argv, char **env);
 
+//Executor
+int		exec_cmd_pipe(t_list *cmd_lst, size_t cmdn);
+int		redirect_input(t_list *in_lst);
+int		redirect_output(t_list *out_lst);
+
+//Utils  (?)
+char	**build_str_arr(t_list *str_lst);
+
 //Environment
 void	*env_var_new(char *key_str, char *value_str);
 void	env_var_new_value(t_env_var *node, char *new_val);
@@ -73,4 +85,4 @@ void	free_env_var(void *ptr);
 void 	print_env(void *content);
 void	print_echo(void *elem);
 void	ft_exit(void *elem);
-#endif
+#endi

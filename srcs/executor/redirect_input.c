@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_cmd.c                                         :+:      :+:    :+:   */
+/*   redirect_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/29 01:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/22 20:20:33 by vicmarti         ###   ########.fr       */
+/*   Created: 2021/10/25 15:34:17 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/10/26 15:38:24 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
+#include <fcntl.h>
+#include <unistd.h>
 
-void	free_cmd(void *elem)
+int	redirect_input(t_list *in_lst)
 {
-	t_cmd	*cmd;
+	int			fd;
+	t_redirect	*redir_data;
 
-	cmd = (t_cmd *)elem;
-	free(cmd->argv);
-	ft_lstclear(&cmd->arg, free);
-	ft_lstclear(&cmd->lst_redir_in, free_redirect);
-	ft_lstclear(&cmd->lst_redir_out, free_redirect);
-	free(cmd);
+	fd = STDIN_FILENO;
+	while (in_lst)
+	{
+		redir_data = in_lst->content;
+		in_lst = in_lst->next;
+		close(fd);
+		fd = open(redir_data->text, O_RDONLY);
+		if (fd == -1 || dup2(fd, STDIN_FILENO == -1))
+		{
+			perror(redir_data->text);
+			return (-1);
+		}
+	}
+	return (fd);
 }
