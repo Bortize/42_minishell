@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/15 07:57:15 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:34:16 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdlib.h>
 
 int	main(int argc, char **argv, char **env)
-//int	main(void)
 {
 	char	*line;
 	char	*trimmed;
@@ -38,7 +37,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			cmd_lst = NULL;
 			split_in_cmds(trimmed, &cmd_lst, env_lst);
-			builtins(cmd_lst, env_lst, trimmed);// << =============== WORKING HERE NOW
+			builtins(cmd_lst, env_lst);// << =============== WORKING HERE NOW
 			ft_lstiter(cmd_lst, print_cmd);
 			ft_lstclear(&cmd_lst, &free_cmd);
 		}

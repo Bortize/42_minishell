@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/14 13:27:39 by bgomez-r         ###   ########.fr        #
+#    Updated: 2021/11/15 18:28:42 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS+= builtins_env.c
 SRCS+= free_env_var.c
 SRCS+= print_env.c
 SRCS+= print_echo.c
+SRCS+= ft_exit.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe

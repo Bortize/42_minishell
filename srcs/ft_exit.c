@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_echo.c                                       :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 13:23:30 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/16 15:28:36 by bgomez-r         ###   ########.fr       */
+/*   Created: 2021/11/15 18:09:29 by bgomez-r          #+#    #+#             */
+/*   Updated: 2021/11/16 14:28:23 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 static void print_token(void *str)
 {
 	printf("%s ", str);
 }
 
-void	print_echo(void *elem)
+void	ft_exit(void *elem)
 {
 	t_cmd *cmd;
 
 	cmd = (t_cmd *)elem;
-	ft_lstiter(cmd->arg->next, print_token);
+	if(ft_isdigit(cmd->arg->next));
+		printf("perfecto cheeecho \n");
+	printf("cmd->arg->next\n");
+	exit(1);
 }
+*/
