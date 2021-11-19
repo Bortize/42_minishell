@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 20:49:44 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/19 22:45:32 by vicmarti         ###   ########.fr       */
 /*                                                                        r   */
 /* ************************************************************************** */
 
@@ -79,13 +79,19 @@ void	sig_handler(int signum);
 
 //Executor
 void	start_execution(t_list *cmd_lst);
+char	*get_path(char *file, char *path_env);
 int		exec_cmd_pipe(t_list *cmd_lst, size_t cmdn);
 int		redirect_input(t_list *in_lst);
 int		redirect_output(t_list *out_lst);
 void	wait_children(size_t cmd_num);
+int		create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count);
+int		configure_pipeline(int cmd_index, int cmd_count, int (*pipev)[2]);
+void	clean_pipes(int pipev[CHILD_MAX - 1][2], int size);
 
 //Utils  (?)
 char	**build_str_arr(t_list *str_lst);
+void	ft_free_arr(void **ptr_arr);
+t_list	*ft_lst_at(t_list *lst, size_t pos);
 
 //Environment
 void	*env_var_new(char *key_str, char *value_str);

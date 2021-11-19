@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 18:29:05 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/09 22:34:44 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/19 22:14:32 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,8 @@ static int	valid_file(char *path)
 	return  (!(stat(path, &info) == -1 || (info.st_mode & S_IFREG) == 0));
 }
 
-//TODO I'm adding this to the libft.
-static void	ft_free_arr(void **ptr_arr)
-{
-	int	i;
 
-	i = 0;
-	while (ptr_arr[i])
-	{
-		free(ptr_arr[i]);
-		i++;
-	}
-	free(ptr_arr);
-}
-
-//Absolute paths uses '.' as current dir and '..' as the parent dir.
+//Absolute paths use '.' as current dir and '..' as the parent dir.
 //Syscalls have no issue accessing any absolute path.
 static int	is_absolute(char *path)
 {
@@ -63,6 +50,7 @@ static void	*set_memory(char ***pathv, char *path_env)
 
 //Build a path, usually it needs a slash '/' between elements.
 //TODO add to libft?
+//Maybe a "join_three" function
 static char	*path_add(char *prefix, char *suffix)
 {
 	const size_t	prefix_len = ft_strlen(prefix);
@@ -80,6 +68,9 @@ static char	*path_add(char *prefix, char *suffix)
 }
 
 //Find the file using the PATH environment as prefix (like sh).
+//TODO if path is just a list, split is unnecesasary.
+//FIXME It will execute a binary in the CWD, even if it's not part of the PATH
+//return (NULL);  that would kind-of work, but error message is misleading.
 char	*get_path(char *file, char *path_env)
 {
 	char	**pathv;

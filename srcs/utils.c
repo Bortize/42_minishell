@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_str_arr.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/08 13:34:26 by vicmarti         ###   ########.fr       */
+/*   Created: 2021/11/19 21:57:42 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/11/19 22:35:53 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <libft/libft.h>
+//TODO I'm adding this to the libft.
 
-//TODO honestly this only needs include <libft.h>
-
-#include <stdio.h> //TODO just placeholder printf
 char	**build_str_arr(t_list *str_lst)
 {
 	const int	len = ft_lstsize(str_lst);
@@ -33,4 +33,27 @@ char	**build_str_arr(t_list *str_lst)
 		i++;
 	}
 	return (str_arr);
+}
+
+void	ft_free_arr(void **ptr_arr)
+{
+	size_t	i;
+
+	i = 0;
+	while (ptr_arr[i])
+	{
+		free(ptr_arr[i]);
+		i++;
+	}
+	free(ptr_arr);
+}
+
+t_list	*ft_lst_at(t_list *lst, size_t pos)
+{
+	while (lst && pos > 0)
+	{
+		pos--;
+		lst = lst->next;
+	}
+	return (lst);
 }
