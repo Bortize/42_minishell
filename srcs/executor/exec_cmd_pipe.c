@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/09 19:55:32 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/19 20:05:57 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,6 @@ static int	configure_pipeline(int cmd_index, int cmd_count, int (*pipev)[2])
 	return (0);
 }
 
-//TODO Have the child open it's pipe?
-//Maybe open one pipe every loop sans the last one, and just close it?
-//It should keep this function compact and the pipe-closing simpler
 static int	create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count)
 {
 	size_t	i;
@@ -98,18 +95,14 @@ int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 {
 	int		pipev[CHILD_MAX - 1][2];
 	size_t	i;
+	t_cmd	*cmd;
 
 	if (create_pipes(pipev, cmdn) == -1)
 		return (-1); //Memory error somewhere, someone'll handle that.
-	i = 0; //Create n children
+	i = 0;
 	while (i < cmdn)
 	{
-		t_cmd *cmd = cmd_lst->content;
-		//TODO build string array before executor (parser?), also check errors
-		cmd->argv = build_str_arr(cmd->arg);
-		if (!cmd->arg)
-			return (-1);//No memory, not here
-		//--This before executor [END]
+		cmd = cmd_lst->content;
 		g_pidv[i] = fork();
 		if (g_pidv[i] == -1)
 		{
