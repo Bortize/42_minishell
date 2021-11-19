@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/15 14:17:46 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/19 19:34:57 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,39 @@
 #include <termios.h>
 
 #include <unistd.h>
+
+static int	build_argvs(t_list *cmd_lst)
+{
+	t_cmd	*cmd;
+
+	while (cmd_lst)
+	{
+		cmd = (t_cmd *)cmd_lst->content;
+		cmd->argv = build_str_arr(cmd->arg);
+		if (!cmd->arg)
+			return (-1);//No memory, not here
+		cmd_lst = cmd_lst->next;
+	}
+	return (0);
+}
+
+static int	parse_line(char *line, t_list **cmd_lst, t_list *lst_env)
+{
+	char	*trimmed;
+
+	(void)lst_env;
+	trimmed = ft_strtrim(line, " ");
+	if (trimmed && *trimmed && string_validator(trimmed))
+	{
+		*cmd_lst = NULL;
+		split_in_cmds(trimmed, cmd_lst);
+	}
+	free(trimmed);
+	if (build_argvs(*cmd_lst) == -1)
+		return (-1);
+	//ft_lstiter(*cmd_lst, print_cmd);
+	return (0);
+}
 
 static void	initialize_minishell(void)
 {
@@ -29,17 +62,31 @@ static void	initialize_minishell(void)
 	g_interrupted = 0;
 }
 
+static int	only_spaces(char *str)
+{
+	if (!str)
+		return (1);
+	while (*str && *str == ' ')//ft_isspace(*str))
+		str++;
+	return (*str == '\0');
+}
+
 static char	*wait_input(void)
 {
 	char	*line;
 
 	g_interrupted = 0;
 	line = readline("minishell> ");
-	while (g_interrupted)
+	if (!line)
+		return (line);
+	while (g_interrupted || only_spaces(line))
 	{
+		if (g_interrupted)
 		g_interrupted = 0;
 		free(line);
 		line = readline("minishell> ");
+		if (!line)
+			return (line);
 	}
 	return (line);
 }
@@ -47,7 +94,6 @@ static char	*wait_input(void)
 int	main(void)
 {
 	char	*line;
-	char	*trimmed;
 	t_list	*cmd_lst;
 
 	initialize_minishell();
@@ -57,17 +103,11 @@ int	main(void)
 		if (!line)
 			break ;
 		add_history(line);
-		trimmed = ft_strtrim(line, " ");
+		if (parse_line(line, &cmd_lst, NULL) == -1)
+			return (-1); //TODO Another error, should behave better than this
 		free(line);
-		if (trimmed && *trimmed && string_validator(trimmed))
-		{
-			cmd_lst = NULL;
-			split_in_cmds(trimmed, &cmd_lst);
-			ft_lstiter(cmd_lst, print_cmd);
-			start_execution(cmd_lst);
-			ft_lstclear(&cmd_lst, &free_cmd);
-		}
-		free(trimmed);
+		start_execution(cmd_lst);
+		ft_lstclear(&cmd_lst, &free_cmd);
 		system("leaks -q minishell");
 	}
 	return (0);
