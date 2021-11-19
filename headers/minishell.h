@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/15 13:39:41 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/19 20:49:44 by vicmarti         ###   ########.fr       */
 /*                                                                        r   */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ void	print_error(char *str);
 //Signals
 void	set_msh_signals(void);
 void	sig_handler(int signum);
-void	sigint_handler(void);
-void	sigquit_handler(void);
 
 //Executor
 void	start_execution(t_list *cmd_lst);

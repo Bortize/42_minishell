@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/17 13:35:07 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/11/19 20:47:23 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,6 @@ SRCS+= string_validator_pipes.c
 
 #Signals
 SRCS+= sig_handler.c
-SRCS+= sigint_handler.c
-SRCS+= sigquit_handler.c
 SRCS+= set_msh_signals.c
 
 #Executor
