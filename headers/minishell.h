@@ -6,15 +6,18 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/16 15:49:09 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/20 16:49:08 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 # include "libft/libft.h"
-# include <stdlib.h>
-# include <stdio.h>
+# include <stdlib.h>// For
+# include <stdio.h>//  For 
+# include <string.h>// For builtins_pwd.c
+# include <unistd.h>// For 
+# include <limits.h>// For builtins_pwd.c, back_home.c
 
 #define READ_END 0
 #define WRITE_END 1
@@ -62,7 +65,7 @@ void	print_redir(void *elem);
 int		string_validator(char *line);
 int		string_validator_pipes(char *line);
 void	print_error(char *str);
-void	builtins(t_list *cmd_lst, t_list *env_lst);// <------------------------------------------
+void	builtins(t_list *cmd_lst, t_list *env_lst, char **str_args);// <------------------------------------------
 void	builtint_echo(char **argv);
 void	builtint_pwd(char *str);
 t_list	*builtins_env(char **env);
@@ -85,4 +88,7 @@ void	free_env_var(void *ptr);
 void 	print_env(void *content);
 void	print_echo(void *elem);
 void	ft_exit(void *elem);
-#endi
+void	print_echo_str(char **str);
+void	builtins_cd(char **arg, t_list *env_lst);
+
+#endif
