@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/20 17:43:58 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:56:20 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,15 @@ static int	build_argvs(t_list *cmd_lst)
 	return (0);
 }
 
-static int	parse_line(char *line, t_list **cmd_lst, t_list *lst_env)
+static int	parse_line(char *line, t_list **cmd_lst, t_list *env_lst)
 {
 	char	*trimmed;
 
-	(void)lst_env;
 	trimmed = ft_strtrim(line, " ");
 	if (trimmed && *trimmed && string_validator(trimmed))
 	{
 		*cmd_lst = NULL;
-		split_in_cmds(trimmed, cmd_lst);
+		split_in_cmds(trimmed, cmd_lst, env_lst);
 	}
 	free(trimmed);
 	if (build_argvs(*cmd_lst) == -1)
@@ -89,7 +88,6 @@ static char	*wait_input(void)
 }
 
 int	main(int argc, char **argv, char **envp)
->>>>>>> development
 {
 	char	*line;
 	t_list	*cmd_lst;
@@ -98,8 +96,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)(argv);
 	(void)(argc); //TODO Just return and print error og argc > 1;
 	initialize_minishell();
-	env_lst = builtins_env(env);
->>>>>>> development
+	env_lst = builtins_env(envp);
 	while (1)
 	{
 		line = wait_input();
@@ -109,7 +106,8 @@ int	main(int argc, char **argv, char **envp)
 		if (parse_line(line, &cmd_lst, NULL) == -1)
 			return (-1); //TODO Another error, should behave better than this
 		free(line);
-		builtins(cmd_lst, env_lst, cmd->argv);// << =============== WORKING HERE NOW
+		//TODO Move to the proper executor places.
+		builtins(cmd_lst, env_lst, ((t_cmd *)cmd_lst->content)->argv);// << =============== WORKING HERE NOW
 		start_execution(cmd_lst);
 		ft_lstclear(&cmd_lst, &free_cmd);
 		system("leaks -q minishell");
