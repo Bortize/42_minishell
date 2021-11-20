@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/20 17:35:58 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/20 19:39:53 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	clean_pipes(int pipev[CHILD_MAX - 1][2], int size);
 char	**build_str_arr(t_list *str_lst);
 void	ft_free_arr(void **ptr_arr);
 t_list	*ft_lst_at(t_list *lst, size_t pos);
+t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *));
 
 //Environment
 void	*env_var_new(char *key_str, char *value_str);
@@ -111,5 +112,6 @@ void	print_echo(void *elem);
 void	ft_exit(void *elem);
 void	print_echo_str(char **str);
 void	builtins_cd(char **arg, t_list *env_lst);
+
 
 #endif

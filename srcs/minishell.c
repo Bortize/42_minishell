@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/20 17:56:20 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/20 19:46:26 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,19 @@ int	main(int argc, char **argv, char **envp)
 	char	*line;
 	t_list	*cmd_lst;
 	t_list	*env_lst;
+	t_env_var shelevelref;
+	t_list	*found_shlvl;
+	t_env_var *tmp;
 
 	(void)(argv);
 	(void)(argc); //TODO Just return and print error og argc > 1;
 	initialize_minishell();
 	env_lst = builtins_env(envp);
+	shelevelref.key = "SHLVL";
+	shelevelref.value = NULL;
+	found_shlvl = ft_lst_find(env_lst, &shelevelref, env_var_cmp);
+	tmp = found_shlvl->content;
+	printf(" Muestramelo perra -> %s %s\n", tmp->key, tmp->value);
 	while (1)
 	{
 		line = wait_input();
