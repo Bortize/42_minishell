@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 21:57:42 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 22:35:53 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/20 16:23:42 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ char	**build_str_arr(t_list *str_lst)
 		i++;
 	}
 	return (str_arr);
+}
+
+t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp(void *, void *)))
+{
+	while (lst)
+	{
+		if (cmp(data_ref, lst->content) == 0)
+			break ;
+		lst = lst->next;
+	}
+	return (lst);
 }
 
 void	ft_free_arr(void **ptr_arr)
