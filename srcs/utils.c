@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_str_arr.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/17 10:52:03 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:45:16 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <libft/libft.h>
+//TODO I'm adding this to the libft.
 
-//TODO honestly this only needs include <libft.h>
-
-#include <stdio.h> //TODO just placeholder printf
 char	**build_str_arr(t_list *str_lst)
 {
 	const int	len = ft_lstsize(str_lst);
@@ -29,10 +29,42 @@ char	**build_str_arr(t_list *str_lst)
 	while (str_lst)
 	{
 		str_arr[i] = str_lst->content;
-//		printf("INFN: %s\n", *str_arr);
-		printf("INFN: %s\n", str_lst->content);
 		str_lst = str_lst->next;
 		i++;
 	}
 	return (str_arr);
+}
+
+t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp(void *, void *)))
+{
+	while (lst)
+	{
+		if (cmp(data_ref, lst->content) == 0)
+			break ;
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+void	ft_free_arr(void **ptr_arr)
+{
+	size_t	i;
+
+	i = 0;
+	while (ptr_arr[i])
+	{
+		free(ptr_arr[i]);
+		i++;
+	}
+	free(ptr_arr);
+}
+
+t_list	*ft_lst_at(t_list *lst, size_t pos)
+{
+	while (lst && pos > 0)
+	{
+		pos--;
+		lst = lst->next;
+	}
+	return (lst);
 }

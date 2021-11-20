@@ -6,49 +6,112 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/20 12:57:38 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:43:58 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline/readline.h"
-#include "readline/history.h"
-#include "minishell.h"
-#include <stdlib.h>
+#include <minishell.h>
 
-int	main(int argc, char **argv, char **env)
+#include <sys/ioctl.h>
+#include <termios.h>
+
+static int	build_argvs(t_list *cmd_lst)
+{
+	t_cmd	*cmd;
+
+	while (cmd_lst)
+	{
+		cmd = (t_cmd *)cmd_lst->content;
+		cmd->argv = build_str_arr(cmd->arg);
+		if (!cmd->arg)
+			return (-1);//No memory, not here
+		cmd_lst = cmd_lst->next;
+	}
+	return (0);
+}
+
+static int	parse_line(char *line, t_list **cmd_lst, t_list *lst_env)
+{
+	char	*trimmed;
+
+	(void)lst_env;
+	trimmed = ft_strtrim(line, " ");
+	if (trimmed && *trimmed && string_validator(trimmed))
+	{
+		*cmd_lst = NULL;
+		split_in_cmds(trimmed, cmd_lst);
+	}
+	free(trimmed);
+	if (build_argvs(*cmd_lst) == -1)
+		return (-1);
+	//ft_lstiter(*cmd_lst, print_cmd);
+	return (0);
+}
+
+static void	initialize_minishell(void)
+{
+	struct termios	tty_attr;
+
+	ioctl(STDIN_FILENO, TIOCGETA, &tty_attr);
+	tty_attr.c_lflag &= ~ECHOCTL;
+	ioctl(STDIN_FILENO, TIOCSETA, &tty_attr);
+	set_msh_signals();
+	g_interrupted = 0;
+}
+
+static int	only_spaces(char *str)
+{
+	if (!str)
+		return (1);
+	while (*str && *str == ' ')//ft_isspace(*str))
+		str++;
+	return (*str == '\0');
+}
+
+static char	*wait_input(void)
 {
 	char	*line;
-	char	*trimmed;
+
+	g_interrupted = 0;
+	line = readline("minishell> ");
+	if (!line)
+		return (line);
+	while (g_interrupted || only_spaces(line))
+	{
+		if (g_interrupted)
+		g_interrupted = 0;
+		free(line);
+		line = readline("minishell> ");
+		if (!line)
+			return (line);
+	}
+	return (line);
+}
+
+int	main(int argc, char **argv, char **envp)
+>>>>>>> development
+{
+	char	*line;
 	t_list	*cmd_lst;
 	t_list	*env_lst;
 
-	(void)(argc);
 	(void)(argv);
+	(void)(argc); //TODO Just return and print error og argc > 1;
+	initialize_minishell();
 	env_lst = builtins_env(env);
+>>>>>>> development
 	while (1)
 	{
-		line = NULL;
-		line = readline("minishell> ");
+		line = wait_input();
 		if (!line)
 			break ;
 		add_history(line);
-		trimmed = ft_strtrim(line, " ");
+		if (parse_line(line, &cmd_lst, NULL) == -1)
+			return (-1); //TODO Another error, should behave better than this
 		free(line);
-		if (trimmed && *trimmed && string_validator(trimmed))
-		{
-			cmd_lst = NULL;
-			split_in_cmds(trimmed, &cmd_lst, env_lst);
-			//TODO build string array before executor (parser?), also check errors
-			t_cmd	*cmd;
-			cmd = (t_cmd *)(cmd_lst->content);
-			cmd->argv = build_str_arr(cmd->arg);
-			//--This before executor [END]
-			ft_lstiter(cmd_lst, print_cmd);
-			builtins(cmd_lst, env_lst, cmd->argv);// << =============== WORKING HERE NOW
-			//exec_cmd_pipe(cmd_lst, ft_lstsize(cmd_lst));
-			ft_lstclear(&cmd_lst, &free_cmd);
-		}
-		free(trimmed);
+		builtins(cmd_lst, env_lst, cmd->argv);// << =============== WORKING HERE NOW
+		start_execution(cmd_lst);
+		ft_lstclear(&cmd_lst, &free_cmd);
 		system("leaks -q minishell");
 	}
 	ft_lstclear(&env_lst, free_env_var);

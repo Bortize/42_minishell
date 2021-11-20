@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 14:01:53 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/26 15:54:13 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/08 13:32:56 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	redirect_output(t_list *out_lst)
 			fd = open(redir_data->text, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		if (fd == -1 || dup2(fd, STDOUT_FILENO) == -1)
 		{
-			write(2, "lolok", 5);
 			perror(redir_data->text);
 			return (-1);
 		}

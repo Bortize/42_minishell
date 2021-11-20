@@ -1,0 +1,98 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_path.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/30 18:29:05 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/11/19 22:14:32 by vicmarti         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <minishell.h>
+#include <sys/stat.h>
+#include <stdlib.h>
+
+#include <unistd.h>
+
+//File exists and -is- a regular file. False if NULL.
+static int	valid_file(char *path)
+{
+	struct stat	info;
+
+	return  (!(stat(path, &info) == -1 || (info.st_mode & S_IFREG) == 0));
+}
+
+
+//Absolute paths use '.' as current dir and '..' as the parent dir.
+//Syscalls have no issue accessing any absolute path.
+static int	is_absolute(char *path)
+{
+	return (!path || ft_strncmp(path, "./", 2) == 0
+			|| ft_strncmp(path, "../", 3) == 0);
+}
+
+//Memory management done in the side corner, hidden from the public eye.
+//Return is just error-checking.
+static void	*set_memory(char ***pathv, char *path_env)
+{
+	if (!path_env)
+		return (NULL);
+	*pathv = ft_split(path_env, ':');
+	if (!*pathv)
+	{
+		perror("MINISHELL:");
+		return (NULL);
+	}
+	return (pathv);
+}
+
+//Build a path, usually it needs a slash '/' between elements.
+//TODO add to libft?
+//Maybe a "join_three" function
+static char	*path_add(char *prefix, char *suffix)
+{
+	const size_t	prefix_len = ft_strlen(prefix);
+	const size_t	suffix_len = ft_strlen(suffix);
+	char			*path;
+
+	path = malloc(prefix_len + suffix_len + 2);
+	if (!path)
+		return (path);
+	ft_strcpy(path, prefix);
+	path[prefix_len] = '/';
+	ft_strcpy(path + prefix_len + 1, suffix);
+	path[prefix_len + suffix_len + 1] = '\0';
+	return (path);
+}
+
+//Find the file using the PATH environment as prefix (like sh).
+//TODO if path is just a list, split is unnecesasary.
+//FIXME It will execute a binary in the CWD, even if it's not part of the PATH
+//return (NULL);  that would kind-of work, but error message is misleading.
+char	*get_path(char *file, char *path_env)
+{
+	char	**pathv;
+	char	**path_iter;
+	char	*full_path;
+
+	if (!file || is_absolute(file))
+		return (file);
+	if (!set_memory(&pathv, path_env))
+		return (NULL);
+	path_iter = pathv;
+	full_path = NULL;
+	while (*path_iter)
+	{
+		full_path = path_add(*path_iter, file);
+		if (valid_file(full_path))
+			break ;
+		free(full_path);
+		path_iter++;
+	}
+	ft_free_arr((void **)pathv);
+	if (*path_iter)
+		return (full_path);
+	return (file);
+}

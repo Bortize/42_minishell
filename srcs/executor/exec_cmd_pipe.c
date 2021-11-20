@@ -6,144 +6,60 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/26 15:07:25 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/19 22:45:57 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <unistd.h>
 
-static void	clean_pipes(int (*pipev)[2], int pos, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (i != pos)
-			close(pipev[i][WRITE_END]);
-		if (i != pos - 1)
-			close(pipev[i][READ_END]);
-		i++;
-	}
-}
-
-static int	configure_pipeline(int cmd_index, int cmd_count, int (*pipev)[2])
-{
-	if (cmd_count > 1)
-	{
-		if (cmd_index != cmd_count - 1)
-			if (dup2(pipev[cmd_index][WRITE_END], STDOUT_FILENO) == -1)
-				return (-1);
-		if (cmd_index != 0)
-			if (dup2(pipev[cmd_index - 1][READ_END], STDIN_FILENO) == -1)
-				return (-1);
-	}
-	clean_pipes(pipev, cmd_index, cmd_count - 1);
-	return (0);
-}
-
-//TODO Have the child open it's pipe?
-//Maybe open one pipe every loop sans the last one, and just close it?
-//It should keep this function compact and the pipe-closing simpler
-static int	alloc_memory(pid_t **pidv, int (**pipev)[2], size_t cmd_count)
-{
-	size_t	i;
-
-	*pidv = ft_calloc(sizeof(pid_t), cmd_count);
-	*pipev = ft_calloc(sizeof(int *), cmd_count - 1);
-	if (!*pidv || !*pipev)
-	{
-		perror("MINSH:");
-		free(*pidv);
-		free(*pipev);
-		return (-1); //TODO me error
-	}
-	i = 0;
-	while (i < cmd_count - 1)
-	{
-		if (pipe((*pipev)[i]) == -1)
-		{
-			perror("PIPE:");
-			while (i-- > 0)
-			{
-				close((*pipev)[i][WRITE_END]);
-				close((*pipev)[i][READ_END]);
-			}
-			free(*pidv);
-			free(*pipev);
-			return(-1);
-		}
-		i++;
-	}
-	return (0);
-}
+//TODO Of course this is just a patch until our environment is done
+#define PATH_STR "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"
 
 void	exec_child(t_cmd *cmd, size_t cmdn, int (*pipev)[2], size_t cmd_index)
 {
-	if (configure_pipeline(cmd_index, cmdn, pipev) == -1)
-		exit (-1); //TODO error with pipes
-	//TODO Inputs include here-doc and shouldn't
-	if (redirect_input(cmd->lst_redir_in) == -1
+	if (configure_pipeline(cmd_index, cmdn, pipev) == -1
+			|| redirect_input(cmd->lst_redir_in) == -1
 			|| redirect_output(cmd->lst_redir_out) == -1)
-		exit(-1); //TODO couldn't open file error
-	//TODO output redirections
-	execve(cmd->argv[0], cmd->argv, NULL);
-	//TODO Something went wrong here. Do whatever bash does here
+		exit(errno);
+	execve(get_path(cmd->argv[0], PATH_STR), cmd->argv, NULL);
 	perror(cmd->argv[0]);
-	exit(-1);
+	exit(errno);
 }
 
-static int	fork_fail(void)
+static int	fork_fail(int pipev[CHILD_MAX - 1][2], size_t fail_at)
 {
-	//TODO
-	//Error routine again
-	//Sigkill all children, kill them all.
 	perror("FORK");
+	clean_pipes(pipev, fail_at);
+	//TODO Sigkill all children, kill them all.
 	return (-1);
 }
 
-//TODO Only iterate using [i], and go through the cmd_list as if cmd_lst[i]
-//It's probably less time efficient but cleaner and less redundant.
+/*
+**	Execute the commands given in a pipeline.
+**	Be as clean as possible with memory usage.
+**	Don't handle children unless failure.
+**	Return -1 on error, 0 otherwise.
+*/
 int	exec_cmd_pipe(t_list *cmd_lst, size_t cmdn)
 {
-	int		(*pipev)[2];
-	pid_t	*pidv;
+	int		pipev[CHILD_MAX - 1][2];
 	size_t	i;
 
-	if (alloc_memory(&pidv, &pipev, cmdn) == -1)
-		return (-1); //Memory error somewhere, someone'll handle that.
-	i = 0; //Create n children
-	while (i < cmdn)
-	{
-		t_cmd *cmd = cmd_lst->content;
-		//TODO build string array before executor (parser?), also check errors
-		cmd->argv = build_str_arr(cmd->arg);
-		if (!cmd->arg)
-			return (-1);//No memory
-		//--This before executor [END]
-		pidv[i] = fork();
-		if (pidv[i] == -1)
-			return (fork_fail());
-		else if (pidv[i] == 0)
-			exec_child(cmd, cmdn, pipev, i);
-		else
-		{
-			cmd_lst = cmd_lst->next;
-			i++;
-		}
-	}
-	//Wait all
-	clean_pipes(pipev, -1, cmdn - 1);
-		//TODO Do we need to do extra work here?
-		//TODO How do we get the exit status of the last pid
+	if (create_pipes(pipev, cmdn) == -1)
+		//Memory error somewhere, someone'll handle that.
+		return (-1);
 	i = 0;
 	while (i < cmdn)
 	{
-		waitpid(pidv[i], NULL, 0);
+		g_pidv[i] = fork();
+		if (g_pidv[i] == -1)
+		//Memory error somewhere, someone'll handle that.
+			return (fork_fail(pipev, i));
+		else if (g_pidv[i] == 0)
+			exec_child(ft_lst_at(cmd_lst, i)->content, cmdn, pipev, i);
 		i++;
 	}
-	free(pipev);
-	free(pidv);
+	clean_pipes(pipev, cmdn - 1);
 	return (0);
 }
