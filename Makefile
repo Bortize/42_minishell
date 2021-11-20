@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/10/26 15:06:02 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/11/20 16:44:07 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ ODIR=objects
 vpath %.c srcs
 vpath %.c srcs/environment
 vpath %.c srcs/executor
+vpath %.c srcs/parser
 vpath %.h headers
 vpath %.o $(ODIR)
 
