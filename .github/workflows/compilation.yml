@@ -22,15 +22,12 @@ jobs:
 #################### TASKS ########################
 
     steps:
-    - uses: actions/checkout@v2
-      with:
-        path:  minishell
-        
+    - name: Checkout repository
+      uses: actions/checkout@v2
     - name: Checkout submodules
-      run:  git submodule update --init --recursive
-      
-    - name: show env
-      run: env
+      uses: textbook/git-checkout-submodule-action@master
+      with:
+        remote: true
       
     - name: Make
       working-directory: minishell
