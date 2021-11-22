@@ -25,12 +25,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-      with:
-        submodules: recursive
       
-#   - name: Checkout submodules
-#     run: git submodule update --init --recursive
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
       
     - name: Make
       working-directory: minishell
-      run: make
+      run: make re
