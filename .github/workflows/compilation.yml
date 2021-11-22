@@ -26,11 +26,8 @@ jobs:
       with:
         path:  minishell
         
-    - name: stablish the submodules
-      run:  git submodule init
-
-    - name: update the submodule
-      run:  git submodule update
+    - name: Checkout submodules
+      run:  git submodule update --init --recursive
       
     - name: show env
       run: env
