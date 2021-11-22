@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/20 19:39:53 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 14:17:03 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,5 @@ void	print_echo(void *elem);
 void	ft_exit(void *elem);
 void	print_echo_str(char **str);
 void	builtins_cd(char **arg, t_list *env_lst);
-
 
 #endif

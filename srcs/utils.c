@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/20 19:39:30 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 16:31:24 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**build_str_arr(t_list *str_lst)
 /*
 ** Searches each node of a list for the contents passed by parameter, where:
 ** @ t_list *lst -> This is the list in where go to search the data.
-** @ void *data_ref -> this is the reference to compare (in this case is t_env_var)
+** @ void *data_ref -> This is the reference to compare (here is t_env_var)
 ** @ int (*cmp(void *, void *)) -> This is your own function that have to compare
 */
 
@@ -46,7 +46,7 @@ t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *))
 {
 	while (lst)
 	{
-		if (cmp(data_ref, lst->content) == 0)
+		if (cmp(data_ref, lst->content) == 0)// <<================
 			break ;
 		lst = lst->next;
 	}
