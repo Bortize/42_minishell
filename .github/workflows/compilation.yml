@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest]
-        language: [ 'c' ]
+#        language: [ 'c' ]
         enviroment: [xterm-256color]
     name: ${{matrix.os}}
     env:
@@ -26,15 +26,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
       
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
-      with:
-        languages: ${{ matrix.language }}
-      
     - name: Checkout submodules
-      uses: srt32/git-actions@v0.0.3
-      with:
-        args: git submodule update --init --recursive
+      run: git submodule update --init --recursive
       
     - name: Make
       working-directory: minishell
