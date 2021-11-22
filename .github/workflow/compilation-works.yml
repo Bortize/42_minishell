@@ -2,7 +2,7 @@ name: minishell
 
 on:
   push:
-    branches: [ development, builtins ]
+    branches: [ master, development, builtins, parser, executor, signaling, echo]
 
 ############## ENVIROMENT PREPARATION ##############
 
