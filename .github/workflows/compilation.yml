@@ -1,10 +1,8 @@
 name: minishell
 
-############# CONFIGURE THE BRANCHES TO RUN#########
-
 on:
   push:
-    branches: [development, builtins]
+    branches: [ development, builtins ]
 
 ############## ENVIROMENT PREPARATION ##############
 
@@ -14,7 +12,6 @@ jobs:
     strategy:
       matrix:
         os: [macos-latest]
-#        language: [ 'c' ]
         enviroment: [xterm-256color]
     name: ${{matrix.os}}
     env:
