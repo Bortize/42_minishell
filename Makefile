@@ -6,13 +6,14 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/20 17:31:03 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/11/21 14:13:13 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ODIR=objects
 
 vpath %.c srcs
+vpath %.c srcs/builtins
 vpath %.c srcs/environment
 vpath %.c srcs/executor
 vpath %.c srcs/signals

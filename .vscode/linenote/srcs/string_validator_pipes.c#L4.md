@@ -1,1 +1,0 @@
-Esta funcion tiene que recorrer la cadena para encontrar o el final de la cadena o un pipe. En caso de que se pipe, tiene que guardar la direccion de memoria y seguir avanzando por la cadena hasta encontrar otro pipe, luego tengo que comprobar si entre los 2 pipes hay algun comando.
