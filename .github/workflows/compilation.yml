@@ -20,10 +20,12 @@ jobs:
 #################### TASKS ########################
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+      with:
+        path:  minishell
       
     - name: Checkout submodules
+      working-directory: minishell
       run: git submodule update --init --recursive
       
     - name: Make
