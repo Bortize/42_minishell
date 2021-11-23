@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/21 16:31:24 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/23 23:36:12 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include <unistd.h>
 #include <libft/libft.h>
 //TODO I'm adding this to the libft.
+
+/*
+** This function takes the arguments stored in a "t_list *arg" of the t_cmd
+** structure and transforms them into an array matrix "char **argv".
+** @ *str_lst -> List of arguments
+** @ len -> List size
+** @ **str_arr ->  Argument array
+*/
 
 char	**build_str_arr(t_list *str_lst)
 {

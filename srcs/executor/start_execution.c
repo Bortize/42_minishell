@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/23 15:12:41 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/23 23:26:18 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	start_execution(t_list *cmd_lst, t_list *env_lst)
 	g_builtin = 0;
 	if (cmd_num == 1)
 		//TODO do something about exit status
-		builtins(cmd_lst, env_lst, ((t_cmd *)cmd_lst->content)->argv);
+		builtins(env_lst, ((t_cmd *)cmd_lst->content)->argv);
 	if (g_builtin == 0)
 	{
 		exec_cmd_pipe(cmd_lst, env_lst, cmd_num);

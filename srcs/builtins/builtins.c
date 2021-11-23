@@ -6,13 +6,13 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 09:05:10 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/20 18:42:46 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/23 20:07:23 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtins(t_list *cmd_lst, t_list *env_lst, char **str_args)
+void	builtins(/*t_list *cmd_lst, */t_list *env_lst, char **str_args)
 {
 	g_builtin = 1;
 	if(ft_strcmp(str_args[0], "exit") == 0)// <<====== cambiarlo porque puede llevar argumentos
@@ -41,7 +41,6 @@ void	builtins(t_list *cmd_lst, t_list *env_lst, char **str_args)
 	else if (ft_strcmp(str_args[0], "cd") == 0)
 	{
 		printf("\n---- debbuger 5 ---- \n\n");
-		ft_lstiter(cmd_lst, print_echo);
 		builtins_cd(str_args, env_lst);
 	}
 	else

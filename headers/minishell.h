@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/23 15:50:27 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/24 00:43:33 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	print_redir(void *elem);
 int		string_validator(char *line);
 int		string_validator_pipes(char *line);
 void	print_error(char *str);
-void	builtins(t_list *cmd_lst, t_list *env_lst, char **str_args);
+void	builtins(/*t_list *cmd_lst, */t_list *env_lst, char **str_args);
 void	builtint_echo(char **argv);
 void	builtint_pwd(char *str);
 t_list	*builtins_env(char **env);
