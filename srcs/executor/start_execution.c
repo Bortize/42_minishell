@@ -6,37 +6,29 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 22:09:04 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:12:41 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
-
-//TODO Temporary just to leave way top the builtins once thet come.
-static int	is_builtin(void)
-{
-	return (0);
-}
-
-static void	run_builtin(void)
-{
-	return ;
-}
 
 /*
 **	The execution takes the commands given and executes them.
 **	Built-ins modify the shell status when called alone, no fork happens.
 **	Otherwise a pipeline is created.
 */
-void	start_execution(t_list *cmd_lst)
+void	start_execution(t_list *cmd_lst, t_list *env_lst)
 {
 	const size_t	cmd_num = ft_lstsize(cmd_lst);
 
-	if (cmd_num == 1 && is_builtin())
-		run_builtin();
-	else
+	g_builtin = 0;
+	if (cmd_num == 1)
+		//TODO do something about exit status
+		builtins(cmd_lst, env_lst, ((t_cmd *)cmd_lst->content)->argv);
+	if (g_builtin == 0)
 	{
-		exec_cmd_pipe(cmd_lst, cmd_num);
+		exec_cmd_pipe(cmd_lst, env_lst, cmd_num);
 		wait_children(cmd_num);
 	}
+	g_builtin = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 09:05:10 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/20 16:56:35 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/20 18:42:46 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	builtins(t_list *cmd_lst, t_list *env_lst, char **str_args)
 {
+	g_builtin = 1;
 	if(ft_strcmp(str_args[0], "exit") == 0)// <<====== cambiarlo porque puede llevar argumentos
 	{
 		printf("\n---- debbuger 1 ---- \n\n");
@@ -43,5 +44,6 @@ void	builtins(t_list *cmd_lst, t_list *env_lst, char **str_args)
 		ft_lstiter(cmd_lst, print_echo);
 		builtins_cd(str_args, env_lst);
 	}
-
+	else
+		g_builtin = 0;
 }

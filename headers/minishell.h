@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/20 17:35:58 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/23 15:10:26 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 pid_t	g_pidv[CHILD_MAX];
 int		g_interrupted;
+int		g_builtin;
 
 typedef enum e_behavior
 {
@@ -85,9 +86,9 @@ void	set_msh_signals(void);
 void	sig_handler(int signum);
 
 //Executor
-void	start_execution(t_list *cmd_lst);
+void	start_execution(t_list *cmd_lst, t_list *env_lst);
 char	*get_path(char *file, char *path_env);
-int		exec_cmd_pipe(t_list *cmd_lst, size_t cmdn);
+int		exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn);
 int		redirect_input(t_list *in_lst);
 int		redirect_output(t_list *out_lst);
 void	wait_children(size_t cmd_num);

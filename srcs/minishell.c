@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/20 17:56:20 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/20 19:02:56 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,7 @@ int	main(int argc, char **argv, char **envp)
 		if (parse_line(line, &cmd_lst, NULL) == -1)
 			return (-1); //TODO Another error, should behave better than this
 		free(line);
-		//TODO Move to the proper executor places.
-		builtins(cmd_lst, env_lst, ((t_cmd *)cmd_lst->content)->argv);// << =============== WORKING HERE NOW
-		start_execution(cmd_lst);
+		start_execution(cmd_lst, env_lst);
 		ft_lstclear(&cmd_lst, &free_cmd);
 		system("leaks -q minishell");
 	}
