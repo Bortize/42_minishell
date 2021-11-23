@@ -19,7 +19,7 @@ int	env_var_cmp(void *elem1, void *elem2)
 
 	if (ev1 == ev2 || (ev1 && ev2 && ev1->key == ev2->key))
 		return (0);
-	else if (!ev2->key || !ev2->key)
+	else if (!ev1->key || !ev2->key)
 		return (1);
 	return (ft_strcmp(ev1->key, ev2->key));
 }
