@@ -6,14 +6,10 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/12 18:59:47 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/24 14:29:21 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
 #include "minishell.h"
 
 // ===========================================================================
@@ -67,7 +63,12 @@ static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_en
 	}
 	return (list);
 }
-// ===========================================================================
+
+/*
+** Makes a copy of the environment variables of the host on which the
+** program is executed and stores this copy in a list.
+*/
+
 t_list	*builtins_env(char **env)
 {
 	char **ptr;// pointer for no lost the reference of **env
@@ -96,9 +97,10 @@ t_list	*builtins_env(char **env)
 		env++;
 		i++;
 	}
-	count_node_size = ft_lstsize(list);
-//	printf("%d\n", count_node_size);// Imprime 
+	check_existence_environment(list);
+	count_node_size = ft_lstsize(list);// Cuenta los nodos de la lista que se acaba de crear
+//	printf("%d\n", count_node_size);// Imprime el numero de nodos de la lista
 //	ft_lstiter(list, print_env);
 	return (list);
 }
-// 
+//

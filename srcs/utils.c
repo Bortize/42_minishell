@@ -6,13 +6,14 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/23 23:36:12 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/24 21:16:44 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <libft/libft.h>
+#include <stdio.h>
 //TODO I'm adding this to the libft.
 
 /*
@@ -54,9 +55,10 @@ t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *))
 {
 	while (lst)
 	{
-		if (cmp(data_ref, lst->content) == 0)// <<================
+		if (cmp(data_ref, lst->content) == 0)// <<===cmp functions calls here
 			break ;
 		lst = lst->next;
+		printf("%p\n", lst);
 	}
 	return (lst);
 }
