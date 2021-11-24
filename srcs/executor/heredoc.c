@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 12:27:57 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/16 13:20:08 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/24 12:23:30 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,6 @@
 
 static void	wait_input(char *eof, int ignore_input)
 {
-	char	*line;
-
-	line = readline("<< ");
-	while (line && ft_strmcp(line, eof) != 0)
-	{
-		if (!ignore_input)
-			write(1, line, ft_strlen(line));
-		free(line);
-		line = readline("<< ");
-	}
-}
 
 void	heredoc(t_list *input_redirs)
 {
@@ -42,3 +31,5 @@ void	heredoc(t_list *input_redirs)
 	if (redir_data->type == here_doc)
 		wait_input(redir_data->text, 0);
 }
+
+

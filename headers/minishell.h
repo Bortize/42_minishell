@@ -6,8 +6,8 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 22:45:32 by vicmarti         ###   ########.fr       */
-/*                                                                        r   */
+/*   Updated: 2021/11/24 14:03:02 by vicmarti         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
@@ -47,6 +47,7 @@ typedef struct s_redirect
 typedef struct	s_cmd
 {
 	char	**argv;
+	char	*heredoc_filename;
 	t_list	*arg;
 	t_list	*lst_redir_in;
 	t_list	*lst_redir_out;
@@ -81,7 +82,7 @@ void	sig_handler(int signum);
 void	start_execution(t_list *cmd_lst);
 char	*get_path(char *file, char *path_env);
 int		exec_cmd_pipe(t_list *cmd_lst, size_t cmdn);
-int		redirect_input(t_list *in_lst);
+int		redirect_input(t_list *in_lst, char *heredoc_file);
 int		redirect_output(t_list *out_lst);
 void	wait_children(size_t cmd_num);
 int		create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count);
