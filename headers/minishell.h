@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/24 14:26:19 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:29:49 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	builtint_echo(char **argv);
 void	builtint_pwd(char *str);
 t_list	*builtins_env(char **env);
 void	builtins_env_list(char **argv, char **env);
+t_list	*build_env_lst(char **env);
 
 //Signals
 void	set_msh_signals(void);

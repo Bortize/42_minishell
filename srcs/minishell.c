@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/24 20:37:39 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:41:58 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,9 @@ int	main(int argc, char **argv, char **envp)
 	(void)(argv);
 	(void)(argc); //TODO Just return and print error og argc > 1;
 	initialize_minishell();
-	env_lst = builtins_env(envp);
+	env_lst = build_env_lst(envp);
+	ft_lstiter(env_lst, print_env);
+
 //	shelevelref.key = "PATH";
 //	shelevelref.value = NULL;
 //	found_shlvl = ft_lst_find(env_lst, &shelevelref, env_var_cmp);

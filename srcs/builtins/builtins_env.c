@@ -6,50 +6,48 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/25 13:30:52 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:28:23 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// ===========================================================================
-
-/*
-** Copies the environment variables of an array so as not to modify the
-** originals and prints the copy on the screen.
-** Need free();
-*/
-
-static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_env)
+//Build and add a new env node to the list, we should make it smaller. //TODO
+//It takes too many lines of error checking
+static int	asign_env_struct(char *line_env, t_list **list)
 {
-	char *equal;
-	char *value_str;
-	char *key_str;
-	int len_key_str;
-	int i;
+	char		*equal;
+	char		*value_str;
+	char		*key_str;
+	t_env_var	*env_var;
+	t_list		*node_aux;
 
 	equal = ft_strchr(line_env, '=');
 	value_str = ft_strdup(equal + 1);
-	i = 0;
-	while (equal != line_env)
+	key_str = ft_strndup(line_env, equal - line_env);
+	if (!value_str || !key_str)
 	{
-		equal--;
-		i++;
+		free(value_str);
+		free(key_str);
+		return (0); //TODO Error no mem
 	}
-	len_key_str = i;
-	key_str = ft_strndup(line_env, len_key_str);
-	struct_env = env_var_new(key_str, value_str);// puntero que devuelve despues de crear la estructura
-//	printf("%s=", struct_env->key);
-//	printf("%s\n", struct_env->value);
-	if (list == NULL)
+	env_var = env_var_new(key_str, value_str);
+	if (!env_var) //Duplicate move to sttic //TODO
 	{
-		list = ft_lstnew(struct_env);
+		free(value_str);
+		free(key_str);
+		return (0); //TODO Error no mem
 	}
-	else
+	node_aux = ft_lstnew(env_var);
+	if (!node_aux)
 	{
-		ft_lstadd_back(&list, ft_lstnew(struct_env));
+		free(env_var);
+		free(value_str);
+		free(key_str);
+		return (0); //TODO Error no mem
 	}
-	return (list);
+	ft_lstadd_back(list, node_aux);
+	return (1);
 }
 
 /*
@@ -57,38 +55,22 @@ static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_en
 ** program is executed and stores this copy in a list.
 */
 
-t_list	*builtins_env(char **env)
+t_list	*build_env_lst(char **env)
 {
-	char **ptr;// pointer for no lost the reference of **env
-	int	env_count;// counter of lines for reserve memory whith malloc for matrix of env
-	int i;
 	t_list *list;
-	t_env_var *struct_env;
-	int count_node_size;
 
 	list = NULL;
-	struct_env = NULL;
-	ptr = env;// For no lost the reference of pointer
-	env_count = 0;
-	while (*ptr != NULL)
+	if (!env)
+		return (list); //TODO Perhaps add some custom env of our own.
+	while(*env)
 	{
-		env_count++; //counted the number of lines of env
-//		printf("%i\n", env_count);// showed for screen the lines counted of env
-		ptr++;
-	}
-
-	i = 0;
-	while(i != env_count)
-	{
-		list = asign_env_struct(*env, list, struct_env);
-//		asign_env_struct(*env, list, struct_env);
+		if (!asign_env_struct(*env, &list))
+		{
+			ft_lstclear(&list, free);//TODO will leak, use custom fcton to free
+			return (NULL); //TODO Error no mem
+		}
 		env++;
-		i++;
 	}
-	count_node_size = ft_lstsize(list);// Cuenta los nodos de la lista que se acaba de crear
-//	printf("%d\n", count_node_size);// Imprime el numero de nodos de la lista
-	check_existence_environment(list);
-//	ft_lstiter(list, print_env);
+	//check_existence_environment(list); TODO the SHLVL stuff
 	return (list);
 }
-//
