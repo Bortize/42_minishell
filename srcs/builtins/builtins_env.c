@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/25 02:33:18 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:30:52 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@
 ** Need free();
 */
 
-static void	*env_var_struct(char *key_str, char *value_str)
-{
-	t_env_var	*node;
-
-	node = ft_calloc(1, sizeof(t_env_var));
-	if (!node)
-		return (NULL);
-	node->key = key_str;
-	node->value = value_str;
-	return (node);
-}
-// ===========================================================================
 static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_env)
 {
 	char *equal;
@@ -50,7 +38,7 @@ static void *asign_env_struct(char *line_env, t_list *list, t_env_var *struct_en
 	}
 	len_key_str = i;
 	key_str = ft_strndup(line_env, len_key_str);
-	struct_env = env_var_struct(key_str, value_str);// puntero que devuelve despues de crear la estructura
+	struct_env = env_var_new(key_str, value_str);// puntero que devuelve despues de crear la estructura
 //	printf("%s=", struct_env->key);
 //	printf("%s\n", struct_env->value);
 	if (list == NULL)
