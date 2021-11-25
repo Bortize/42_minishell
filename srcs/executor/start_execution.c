@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/24 14:27:29 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:59:10 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,30 @@ static void	run_builtin(void)
 {
 	return ;
 }
+
+static void	find_available(char *name)
+{
+	const int	mode = F_OK;
+	int			i;
+
+	while (access(name, mode) == 0)
+	{
+		i = 0;
+		while (name[i] == '9')
+			name[i++] = '0';
+		if (name[i] == '.')
+			break ;
+		name[i]++;
+	}
+}
 //TODO unfleshed out
 char	*get_tmp_filename(void)
 {
 	char	*filename;
-
-	filename = ft_strdup("msh_heredoc.tmp");
+	
+	write(2, "hola", 4);
+	filename = ft_strdup("00000000000000.tmp");
+	find_available(filename);
 	return (filename);
 }
 
