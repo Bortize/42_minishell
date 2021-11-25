@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/25 15:28:23 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:50:18 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 //Build and add a new env node to the list, we should make it smaller. //TODO
 //It takes too many lines of error checking
+//TODO Some of this should potentially rest on env_related functions
 static int	asign_env_struct(char *line_env, t_list **list)
 {
 	char		*equal;
@@ -66,7 +67,7 @@ t_list	*build_env_lst(char **env)
 	{
 		if (!asign_env_struct(*env, &list))
 		{
-			ft_lstclear(&list, free);//TODO will leak, use custom fcton to free
+			ft_lstclear(&list, free_env_var);
 			return (NULL); //TODO Error no mem
 		}
 		env++;
