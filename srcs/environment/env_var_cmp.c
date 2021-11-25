@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 11:53:11 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/24 21:05:53 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/25 02:55:39 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 */
 
 int	env_var_cmp(void *elem1, void *elem2)
-
 {
 	const t_env_var	*ev1 = elem1;
 	const t_env_var	*ev2 = elem2;

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/24 14:29:21 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/11/25 02:33:18 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ t_list	*builtins_env(char **env)
 		env++;
 		i++;
 	}
-	check_existence_environment(list);
 	count_node_size = ft_lstsize(list);// Cuenta los nodos de la lista que se acaba de crear
 //	printf("%d\n", count_node_size);// Imprime el numero de nodos de la lista
+	check_existence_environment(list);
 //	ft_lstiter(list, print_env);
 	return (list);
 }
