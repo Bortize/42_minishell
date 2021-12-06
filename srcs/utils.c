@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/25 02:46:39 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/06 19:09:40 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,18 @@ char	**build_str_arr(t_list *str_lst)
 t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *))
 {
 	int i;
+	int p;
 
+	p = ft_lstsize(lst);
 	i = 0;
-	while (i < ft_lstsize(lst))
+	while (i < p)
 	{
 		if (cmp(data_ref, lst->content) == 0)// <<===cmp functions calls here
-			break ;
+			return(lst);
 		lst = lst->next;
 		i++;
 	}
-	return (lst);
+	return (NULL);
 }
 
 void	ft_free_arr(void **ptr_arr)
