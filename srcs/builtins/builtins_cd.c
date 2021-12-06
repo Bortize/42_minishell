@@ -6,12 +6,17 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/06 19:09:29 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/07 00:24:33 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <limits.h>
+
+/*
+** It searches in 'env_lst' the key OLDPWD to update its value with the
+** path that is passed by parameter.
+*/
 
 char *get_oldpwd(t_list *env_lst, char *str)
 {
@@ -32,6 +37,11 @@ char *get_oldpwd(t_list *env_lst, char *str)
 	return (((t_env_var *)found_shlvl->content)->value);
 }
 
+/*
+** Searches the linked list of environment variables for the key HOME to
+** obtain its value and return it as a return.
+*/
+
 char	*get_home(t_list *env_lst)
 {
 	t_env_var shelevelref;
@@ -44,6 +54,10 @@ char	*get_home(t_list *env_lst)
 	tmp = found_shlvl->content;
 	return (tmp->value);
 }
+
+/*
+** Moves the prompt between directory levels
+*/
 
 void builtins_cd(char **arg, t_list *env_lst)
 {
@@ -66,7 +80,7 @@ void builtins_cd(char **arg, t_list *env_lst)
 	}
 
 	pwd = getcwd(NULL, 4096);
-	if (ft_strcmp(arg[1], "--") == 0)
+	if (ft_strcmp(arg[0], "cd") == 0 || ft_strcmp(arg[1], "--") == 0)
 	{
 		chdir(get_home(env_lst));
 		free(pwd);
