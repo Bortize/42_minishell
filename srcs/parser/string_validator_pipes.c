@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 19:05:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/24 14:48:27 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:14:54 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	string_validator_pipes(char *line)
 			text = 1;
 		i++;
 	}
-		printf("Pipe %d, text%d\n", pipe, text);
 	if (pipe  && !text)
 	{
 		print_error("parse error near `|'"); // TODO error because not have text in pipe

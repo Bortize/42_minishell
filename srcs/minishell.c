@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/19 19:34:57 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/07 18:18:35 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ static int	build_argvs(t_list *cmd_lst)
 	while (cmd_lst)
 	{
 		cmd = (t_cmd *)cmd_lst->content;
-		cmd->argv = build_str_arr(cmd->arg);
 		if (!cmd->arg)
-			return (-1);//No memory, not here
+			return (0);
+		cmd->argv = build_str_arr(cmd->arg);
+		if (!cmd->argv)
+			return (1);//TODO No memory error
 		cmd_lst = cmd_lst->next;
 	}
 	return (0);
