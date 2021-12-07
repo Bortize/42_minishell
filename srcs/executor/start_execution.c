@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/07 17:05:57 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/07 17:24:24 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ int	read_user_input(t_cmd *cmd, char *delimiter, void *has_next)
 		if (fd == -1)
 			return (1);
 	}
-	g_heredoc = 1;
 	line = readline("<< ");
-	while (line && ft_strcmp(line, delimiter) != 0)
+	while (!g_interrupted && line && ft_strcmp(line, delimiter) != 0)
 	{
 		ft_putendl_fd(line, fd);
 		free(line);
@@ -74,9 +73,10 @@ int	read_user_input(t_cmd *cmd, char *delimiter, void *has_next)
 	}
 	free(line);
 	if (!line)
-		ft_putstr_fd("HEREDOC: Reached EOF", 2);
+		ft_putstr_fd("HEREDOC: Reached EOF\n", 2);
 	close(fd);
-	g_heredoc = 0;
+	if (g_interrupted)
+		return (1);
 	return (0);
 }
 
@@ -92,7 +92,7 @@ int	read_all_heredocs(t_cmd *cmd)
 		redir_in = lst_redir_in->content;
 		if (redir_in->type == here_doc)
 		{
-			if (read_user_input(cmd, redir_in->text, lst_redir_in->next) == -1)
+			if (read_user_input(cmd, redir_in->text, lst_redir_in->next) == 1)
 				return (1);
 		}
 		lst_redir_in = lst_redir_in->next;
@@ -123,7 +123,8 @@ void	start_execution(t_list *cmd_lst)
 {
 	const size_t	cmd_num = ft_lstsize(cmd_lst);
 
-	heredoc(cmd_lst);
+	if (heredoc(cmd_lst) == 1)
+		return ;
 	if (cmd_num == 1 && is_builtin())
 		run_builtin();
 	else
