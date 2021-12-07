@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/24 15:59:10 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/07 17:05:57 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ char	*get_tmp_filename(void)
 {
 	char	*filename;
 	
-	write(2, "hola", 4);
 	filename = ft_strdup("00000000000000.tmp");
 	find_available(filename);
 	return (filename);
@@ -65,6 +64,7 @@ int	read_user_input(t_cmd *cmd, char *delimiter, void *has_next)
 		if (fd == -1)
 			return (1);
 	}
+	g_heredoc = 1;
 	line = readline("<< ");
 	while (line && ft_strcmp(line, delimiter) != 0)
 	{
@@ -76,6 +76,7 @@ int	read_user_input(t_cmd *cmd, char *delimiter, void *has_next)
 	if (!line)
 		ft_putstr_fd("HEREDOC: Reached EOF", 2);
 	close(fd);
+	g_heredoc = 0;
 	return (0);
 }
 
