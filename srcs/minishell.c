@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/25 15:41:58 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/07 21:39:05 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	main(int argc, char **argv, char **envp)
 		if (parse_line(line, &cmd_lst, NULL) == -1)
 			return (-1); //TODO Another error, should behave better than this
 		free(line);
-		start_execution(cmd_lst, env_lst);
+		start_execution(cmd_lst, &env_lst);
 		ft_lstclear(&cmd_lst, &free_cmd);
 		system("leaks -q minishell");
 	}

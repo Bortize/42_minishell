@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/21 11:53:11 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/25 02:55:39 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/07 22:40:41 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,5 @@ int	env_var_cmp(void *elem1, void *elem2)
 	const t_env_var	*ev1 = elem1;
 	const t_env_var	*ev2 = elem2;
 
-	if (ft_strcmp(ev1->key, ev2->key) == 0)
-		return (0);
-	else
-		return (1);
+	return (ft_strcmp(ev1->key, ev2->key));
 }
