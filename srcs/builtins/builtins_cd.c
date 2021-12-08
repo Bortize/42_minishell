@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/08 15:23:23 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/08 16:51:14 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,42 @@
 /*
 ** Searches the linked list of environment variables for the key HOME to
 ** obtain its value and return it as a return.
+** @ content_env -> Node contents of the environment variable list
+** @ lst_env -> environment variable list
+** @ tmp ->
 */
 
 char	*get_current_path(t_list *env_lst, char *str)
 {
-	t_env_var shelevelref;
-	t_list	*found_shlvl;
+	t_env_var content_env;
+	t_list	*lst_env;
 	t_env_var *tmp;
 
-	shelevelref.key = str;
-	shelevelref.value = NULL;
-	found_shlvl = ft_lst_find(env_lst, &shelevelref, env_var_cmp);
-	tmp = found_shlvl->content;
+	content_env.key = str;
+	content_env.value = NULL;
+	lst_env = ft_lst_find(env_lst, &content_env, env_var_cmp);
+	tmp = lst_env->content;
 	return (tmp->value);
 }
 
 /*
 ** Search 'env_lst' for the key to update its value with the path
-** passed as parameter.
+** that the function receives as parameter.
 */
 
 char	*set_key_value(t_list *env_lst, char *str, char *search)
 {
-	t_env_var shelevelref;
-	t_list	*found_shlvl;
+	t_env_var content_env;
+	t_list	*lst_env;
 	t_env_var *tmp;
 
-	shelevelref.key = search;
-	shelevelref.value = NULL;
-	found_shlvl = ft_lst_find(env_lst, &shelevelref, env_var_cmp);
-	tmp = found_shlvl->content;
+	content_env.key = search;
+	content_env.value = NULL;
+	lst_env = ft_lst_find(env_lst, &content_env, env_var_cmp);
+	tmp = lst_env->content;
 	free(tmp->value);
 	tmp->value = ft_strdup(str);
-	return (((t_env_var *)found_shlvl->content)->value);
+	return (tmp->value);
 }
 
 /*
