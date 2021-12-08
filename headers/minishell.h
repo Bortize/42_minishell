@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/08 15:10:50 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/08 16:55:14 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	print_env(void *content);
 void	print_echo(void *elem);
 void	ft_exit(void *elem);
 void	print_echo_str(char **str);
-void	builtins_cd(char **arg, t_list *env_lst);
+int		builtins_cd(char **arg, t_list *env_lst);
 void	check_existence_environment(t_list *str);
 
 #endif
