@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/08 15:12:02 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/08 19:29:01 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,10 @@ SRCS+= pipes.c
 #Env
 SRCS+= env_var_new.c
 SRCS+= env_var_new_value.c
+SRCS+= env_var_add.c
 SRCS+= env_var_delete.c
 SRCS+= env_var_cmp.c
+SRCS+= env_var_find.c
 
 #Builtins
 SRCS+= builtins.c

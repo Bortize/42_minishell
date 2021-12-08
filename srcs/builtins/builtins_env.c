@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 12:25:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/25 15:50:18 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/08 18:50:06 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ static int	asign_env_struct(char *line_env, t_list **list)
 	equal = ft_strchr(line_env, '=');
 	value_str = ft_strdup(equal + 1);
 	key_str = ft_strndup(line_env, equal - line_env);
+	//
+	// env_var_add(list, key_str, value_str);
+	//
 	if (!value_str || !key_str)
 	{
 		free(value_str);
