@@ -6,11 +6,21 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 18:09:25 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/08 19:39:22 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/08 21:28:35 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
+
+static int	check_input(char *key, char *value)
+{
+	if (!key || !value)
+	{
+		free(key);
+		free(value);
+	}
+	return (key && value);
+}
 
 /*
 **	Modify the environment list:
@@ -25,12 +35,8 @@ void	env_var_add(t_list **env_lst, char *key, char *value)
 	t_env_var	*target;
 	t_list		*node_aux;
 
-	if (!key || !value)
-	{
-		free(key);
-		free(value);
+	if (!check_input(key, value))
 		return ;
-	}
 	target = env_var_find(*env_lst, key);
 	if (target)
 	{

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/08 19:39:03 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/08 22:38:55 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	print_error(char *str);
 void	builtins(/*t_list *cmd_lst, */t_list **env_lst, char **str_args);
 void	builtint_echo(char **argv);
 void	builtint_pwd(char *str);
-t_list	*builtins_env(char **env);
+int		builtins_env(t_list *env_lst);
+int		builtins_exit(char **argv);
 int	builtins_unset(t_list **env_lst, char **str_args);
 void	builtins_env_list(char **argv, char **env);
 t_list	*build_env_lst(char **env);
@@ -107,6 +108,7 @@ t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *));
 //Environment
 void	*env_var_new(char *key_str, char *value_str);
 void	env_var_add(t_list **env_lst, char *key, char *value);
+void	env_var_add_str(char *line_env, t_list **list);
 void	env_var_new_value(t_env_var *node, char *new_val);
 void	env_var_delete(t_env_var *var);
 int		env_var_cmp(void *elem1, void *elem2);

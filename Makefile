@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/08 19:29:01 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/08 22:40:06 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS+= pipes.c
 SRCS+= env_var_new.c
 SRCS+= env_var_new_value.c
 SRCS+= env_var_add.c
+SRCS+= env_var_add_str.c
 SRCS+= env_var_delete.c
 SRCS+= env_var_cmp.c
 SRCS+= env_var_find.c
@@ -70,12 +71,14 @@ SRCS+= builtins_echo.c
 SRCS+= builtins_pwd.c
 SRCS+= builtins_env.c
 SRCS+= builtins_unset.c
+SRCS+= builtins_exit.c
+SRCS+= builtins_cd.c
+SRCS+= build_env_lst.c
 SRCS+= free_env_var.c
 SRCS+= print_env.c
 SRCS+= print_echo.c
 SRCS+= ft_exit.c
 SRCS+= print_echo_str.c
-SRCS+= builtins_cd.c
 SRCS+= check_existence_environment.c
 
 CC=clang
