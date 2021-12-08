@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/08 19:29:01 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/08 20:16:28 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS+= print_cmd.c
 SRCS+= print_redir.c
 SRCS+= free_cmd.c
 SRCS+= free_redirect.c
+SRCS+= update_shlvl.c
 
 #Parser
 SRCS+= split_in_cmds.c
