@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/25 15:29:49 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:10:50 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ void	print_redir(void *elem);
 int		string_validator(char *line);
 int		string_validator_pipes(char *line);
 void	print_error(char *str);
-void	builtins(/*t_list *cmd_lst, */t_list *env_lst, char **str_args);
+void	builtins(/*t_list *cmd_lst, */t_list **env_lst, char **str_args);
 void	builtint_echo(char **argv);
 void	builtint_pwd(char *str);
 t_list	*builtins_env(char **env);
+int	builtins_unset(t_list **env_lst, char **str_args);
 void	builtins_env_list(char **argv, char **env);
 t_list	*build_env_lst(char **env);
 
@@ -87,7 +88,7 @@ void	set_msh_signals(void);
 void	sig_handler(int signum);
 
 //Executor
-void	start_execution(t_list *cmd_lst, t_list *env_lst);
+void	start_execution(t_list *cmd_lst, t_list **env_lst);
 char	*get_path(char *file, char *path_env);
 int		exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn);
 int		redirect_input(t_list *in_lst);

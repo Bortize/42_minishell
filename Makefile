@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/24 14:26:42 by bgomez-r         ###   ########.fr        #
+#    Updated: 2021/12/08 15:12:02 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRCS+= builtins.c
 SRCS+= builtins_echo.c
 SRCS+= builtins_pwd.c
 SRCS+= builtins_env.c
+SRCS+= builtins_unset.c
 SRCS+= free_env_var.c
 SRCS+= print_env.c
 SRCS+= print_echo.c
