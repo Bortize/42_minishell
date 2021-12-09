@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 13:11:02 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:46:25 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static void	exec_child(t_cmd *cmd, t_list *env_lst)
 		exit(errno);
 	g_builtin = 0;
 	builtins(&env_lst, cmd->argv);//FIXME that should work like that, aprox
-	if (g_builtin == 0)
-	{
-		envp = build_str_arr(env_lst); //TODO needs to stringify key-value
+	if (g_builtin == 1)
+		exit(-1); //TODO builtin exit status
+	envp = stringify_env(env_lst);
+	if (envp)
 		execve(get_path(cmd->argv[0], PATH_STR), cmd->argv, envp);
-	}
 	perror(cmd->argv[0]);
 	exit(errno);
 }

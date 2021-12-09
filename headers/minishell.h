@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 14:52:50 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:47:35 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ void	env_var_new_value(t_env_var *node, char *new_val);
 void	env_var_delete(t_env_var *var);
 int		env_var_cmp(void *elem1, void *elem2);
 t_env_var	*env_var_find(t_list *env_lst, char *key);
+char	*stringify_var(t_env_var *var);
+char	**stringify_env(t_list *env);
 void	free_env_var(void *ptr);
 void	print_env(void *content);
 void	ft_exit(void *elem);
