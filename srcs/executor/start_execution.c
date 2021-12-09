@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 12:38:11 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:39:59 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 //TODO  in iont's owm file dummy
 #include <fcntl.h>
 #include <unistd.h>
-
-//TODO Temporary just to leave way top the builtins once thet come.
-static int	is_builtin(void)
-{
-	return (0);
-}
-
-static void	run_builtin(void)
-{
-	return ;
-}
 
 static void	find_available(char *name)
 {

@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 12:33:24 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 13:11:02 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	exec_child(t_cmd *cmd, t_list *env_lst)
 {
 	char	**envp;
 
-	if (redirect_input(cmd->lst_redir_in) == -1
+	if (redirect_input(cmd->lst_redir_in, cmd->heredoc_filename) == -1
 			|| redirect_output(cmd->lst_redir_out) == -1)
 		exit(errno);
 	g_builtin = 0;
-	//builtins(cmd->argv, env_lst);//FIXME that should work like that, aprox
+	builtins(&env_lst, cmd->argv);//FIXME that should work like that, aprox
 	if (g_builtin == 0)
 	{
 		envp = build_str_arr(env_lst); //TODO needs to stringify key-value
@@ -65,6 +65,7 @@ int	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn)
 			return (fork_fail(pipev, i));
 		else if (g_pidv[i] == 0)
 		{
+			g_child = 1;
 			if (configure_pipeline(i, cmdn, pipev) == -1)
 				exit(errno);
 			//exit(42);

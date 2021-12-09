@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 12:30:15 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 13:09:35 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ pid_t	g_pidv[CHILD_MAX];
 int		g_interrupted;
 int		g_heredoc;
 int		g_builtin;
+int		g_child;
 
 typedef enum e_behavior
 {

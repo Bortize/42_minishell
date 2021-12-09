@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:16:55 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/08 22:37:31 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 13:09:14 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	builtins_exit(char **argv)
 		exit(0);
 	else
 	{
+		errno = 0;
 		exit_sts = (unsigned char)ft_strtoi(argv[1], &str_end);
 		if (errno || *str_end)
 		{
@@ -34,6 +35,8 @@ int	builtins_exit(char **argv)
 		if (argv[2] != NULL)
 		{
 			ft_putstr_fd("exit: too many arguments\n", 2);
+			if (g_child)
+				exit(1);
 			return (1);
 		}
 		exit(exit_sts);
