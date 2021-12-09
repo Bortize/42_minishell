@@ -1,1 +1,0 @@
-Esto podemos trabjarlo mas adelante para salir de manera correcta. GEstion de error

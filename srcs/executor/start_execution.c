@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   start_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/07 17:24:24 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 12:38:11 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
+//TODO  in iont's owm file dummy
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -80,7 +81,6 @@ int	read_user_input(t_cmd *cmd, char *delimiter, void *has_next)
 	return (0);
 }
 
-
 int	read_all_heredocs(t_cmd *cmd)
 {
 	t_list		*lst_redir_in;
@@ -100,7 +100,6 @@ int	read_all_heredocs(t_cmd *cmd)
 	return (0);
 }
 
-
 int	heredoc(t_list *cmd_lst)
 {
 	while (cmd_lst)
@@ -119,17 +118,20 @@ int	heredoc(t_list *cmd_lst)
 **	Otherwise a pipeline is created.
 */
 
-void	start_execution(t_list *cmd_lst)
+void	start_execution(t_list *cmd_lst, t_list **env_lst)
 {
 	const size_t	cmd_num = ft_lstsize(cmd_lst);
 
 	if (heredoc(cmd_lst) == 1)
 		return ;
-	if (cmd_num == 1 && is_builtin())
-		run_builtin();
-	else
+	g_builtin = 0;
+	if (cmd_num == 1)
+		//TODO do something about exit status
+		builtins(env_lst, ((t_cmd *)cmd_lst->content)->argv);
+	if (g_builtin == 0)
 	{
-		exec_cmd_pipe(cmd_lst, cmd_num);
+		exec_cmd_pipe(cmd_lst, *env_lst, cmd_num);
 		wait_children(cmd_num);
 	}
+	g_builtin = 0;
 }

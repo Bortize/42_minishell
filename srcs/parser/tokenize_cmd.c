@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/10/27 14:32:30 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/16 15:46:26 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	read_token_behavior(char *line, t_behavior *type)
 	return (0);
 }
 
-static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
+static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)//, t_list *env_lst)
 {
 	void	*aux;
 
@@ -75,8 +75,8 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 
 void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 {
-	t_behavior	token_behavior;
-	size_t		token_len;
+	t_behavior	token_behavior;// Estructura de flags de tipos de redirección
+	size_t		token_len;// Longitud del key o del value
 
 	cmd_txt += count_spaces(cmd_txt);
 	if (*cmd_txt == 0)

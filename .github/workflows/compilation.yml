@@ -1,0 +1,33 @@
+name: minishell
+
+on:
+  push:
+    branches: [ development, builtins ]
+
+############## ENVIROMENT PREPARATION ##############
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [macos-latest]
+        enviroment: [xterm-256color]
+    name: ${{matrix.os}}
+    env:
+      TERM: ${{matrix.enviroment}}
+      
+#################### TASKS ########################
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        path:  minishell
+      
+    - name: Checkout submodules
+      working-directory: minishell
+      run: git submodule update --init --recursive
+      
+    - name: Make
+      working-directory: minishell
+      run: make re

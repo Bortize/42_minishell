@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 03:05:17 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 20:08:17 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:46:01 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	print_cmd(void *elem)
 	t_cmd	*cmd;
 
 	cmd = (t_cmd *)elem;
-	printf("Arguments:\n");
+	printf("\nArguments:\n");
 	ft_lstiter(cmd->arg, putendl_wrapper);
 	printf("Argument Vector:\n");
 	put_str_arr(cmd->argv, 1);

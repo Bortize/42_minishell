@@ -6,13 +6,14 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/11/20 17:11:22 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/08 22:43:37 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ODIR=objects
 
 vpath %.c srcs
+vpath %.c srcs/builtins
 vpath %.c srcs/environment
 vpath %.c srcs/executor
 vpath %.c srcs/signals
@@ -26,18 +27,22 @@ SRCS:=
 SRCS+= minishell.c
 SRCS+= utils.c
 SRCS+= error.c
-SRCS+= split_in_cmds.c
-SRCS+= tokenize_cmd.c
 SRCS+= print_cmd.c
 SRCS+= print_redir.c
 SRCS+= free_cmd.c
 SRCS+= free_redirect.c
+SRCS+= update_shlvl.c
+
+#Parser
+SRCS+= split_in_cmds.c
+SRCS+= tokenize_cmd.c
 SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
 SRCS+= string_validator.c
 SRCS+= string_validator_pipes.c
+#SRCS+= read_variable.c
 
 #Signals
 SRCS+= sig_handler.c
@@ -55,13 +60,31 @@ SRCS+= pipes.c
 #Env
 SRCS+= env_var_new.c
 SRCS+= env_var_new_value.c
+SRCS+= env_var_add.c
+SRCS+= env_var_add_str.c
 SRCS+= env_var_delete.c
 SRCS+= env_var_cmp.c
-#SRCS+= read_variable.c
+SRCS+= env_var_find.c
+
+#Builtins
+SRCS+= builtins.c
+SRCS+= builtins_echo.c
+SRCS+= builtins_pwd.c
+SRCS+= builtins_env.c
+SRCS+= builtins_unset.c
+SRCS+= builtins_exit.c
+SRCS+= builtins_cd.c
+SRCS+= build_env_lst.c
+SRCS+= free_env_var.c
+SRCS+= print_env.c
+SRCS+= print_echo.c
+SRCS+= ft_exit.c
+SRCS+= print_echo_str.c
+SRCS+= check_existence_environment.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
-CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g #-O3
+CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g -O2
 
 OBJS=$(SRCS:.c=.o)
 
