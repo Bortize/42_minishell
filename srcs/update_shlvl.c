@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:22:18 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/08 20:15:48 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:49:43 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** obtain its value and return it as a return.
 ** @ content_env -> Node contents of the environment variable list
 ** @ lst_env -> environment variable list
-** @ tmp ->
+** @ tmp -> content of the struct
 */
 
 static char	*get(t_list *env_lst, char *str)
