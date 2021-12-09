@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/08 22:43:37 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/09 13:18:03 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ SRCS+= env_var_find.c
 
 #Builtins
 SRCS+= builtins.c
-SRCS+= builtins_echo.c
+#SRCS+= builtins_echo.c
 SRCS+= builtins_pwd.c
 SRCS+= builtins_env.c
 SRCS+= builtins_unset.c
@@ -77,9 +77,8 @@ SRCS+= builtins_cd.c
 SRCS+= build_env_lst.c
 SRCS+= free_env_var.c
 SRCS+= print_env.c
-SRCS+= print_echo.c
 SRCS+= ft_exit.c
-SRCS+= print_echo_str.c
+SRCS+= print_echo_str.c #FIXME
 SRCS+= check_existence_environment.c
 
 CC=clang
