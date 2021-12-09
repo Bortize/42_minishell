@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/09 13:18:03 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/09 14:53:46 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS+= count_spaces.c
 SRCS+= count_until_repeat.c
 SRCS+= string_validator.c
 SRCS+= string_validator_pipes.c
+SRCS+= string_validator_quotes.c
 #SRCS+= read_variable.c
 
 #Signals

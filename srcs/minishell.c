@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/09 13:10:32 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:15:31 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,17 @@ static int	parse_line(char *line, t_list **cmd_lst, t_list *env_lst)
 {
 	char	*trimmed;
 
+	*cmd_lst = NULL;
 	trimmed = ft_strtrim(line, " ");
-	if (trimmed && *trimmed && string_validator(trimmed))
+	if (!trimmed || !*trimmed || string_validator(trimmed) == 0)
 	{
-		*cmd_lst = NULL;
-		split_in_cmds(trimmed, cmd_lst, env_lst);
+		free(trimmed);
+		return (1);
 	}
+	split_in_cmds(trimmed, cmd_lst, env_lst);
 	free(trimmed);
 	if (build_argvs(*cmd_lst) == -1)
-		return (-1);
-	//ft_lstiter(*cmd_lst, print_cmd);
+		return (1);
 	return (0);
 }
 
@@ -65,7 +66,7 @@ static int	only_spaces(char *str)
 {
 	if (!str)
 		return (1);
-	while (*str && *str == ' ')//ft_isspace(*str))
+	while (*str && ft_isspace(*str))
 		str++;
 	return (*str == '\0');
 }
@@ -102,18 +103,18 @@ int	main(int argc, char **argv, char **envp)
 	env_lst = build_env_lst(envp);
 	update_shlvl(env_lst);
 	ft_lstiter(env_lst, print_env);
-	while (1)
+	line = wait_input();
+	while (line)
 	{
-		line = wait_input();
-		if (!line)
-			break ;
 		add_history(line);
-		if (parse_line(line, &cmd_lst, NULL) == -1)
-			return (-1); //TODO Another error, should behave better than this
+		if (parse_line(line, &cmd_lst, NULL) == 0)//TODO use env
+		{
+			start_execution(cmd_lst, &env_lst);
+			ft_lstclear(&cmd_lst, &free_cmd);
+			system("leaks -q minishell");
+		}
 		free(line);
-		start_execution(cmd_lst, &env_lst);
-		ft_lstclear(&cmd_lst, &free_cmd);
-		system("leaks -q minishell");
+		line = wait_input();
 	}
 	ft_lstclear(&env_lst, free_env_var);
 //	system("leaks -q minishell");

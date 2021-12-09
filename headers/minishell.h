@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 13:19:07 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/09 14:52:50 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	print_cmd(void *elem);
 void	print_redir(void *elem);
 int		string_validator(char *line);
 int		string_validator_pipes(char *line);
+int		string_validator_quotes(char *line);
 void	print_error(char *str);
 void	builtins(/*t_list *cmd_lst, */t_list **env_lst, char **str_args);
 //void	builtins_echo(char **argv);FIXME
