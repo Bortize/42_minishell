@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/09 15:46:56 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/10 00:18:33 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,7 @@ SRCS+= free_env_var.c
 SRCS+= print_env.c
 SRCS+= ft_exit.c
 SRCS+= print_echo_str.c #FIXME
+SRCS+=builtins_export.c
 SRCS+= check_existence_environment.c
 
 CC=clang
