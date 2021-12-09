@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 12:59:28 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/24 00:41:19 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/09 23:44:10 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,19 @@ void	print_echo_str(char **str)
 	char *aux_free;// para liberar el string
 	char *aux_free_space;// para liberar el string con el espacio
 	int i;
+	int flag_n;
 
+	flag_n = 0;
 	aux = "\0";
 	aux = ft_strjoin(aux, "");
-	i = 1;// comienza en 1 para evitar imprimir echo
+	i = 1;
+	if (strcmp(str[i], "-n") == 0)
+	{
+		flag_n++;
+		i++;
+		while (strcmp(str[i], "-n") == 0)
+			i++;
+	}
 	while (str[i])
 	{
 		aux_free = aux;
@@ -41,6 +50,8 @@ void	print_echo_str(char **str)
 		free(aux_free);
 		free(aux_free_space);
 	}
-	printf("%s\n", aux);
+	printf("%s", aux);
+	if (flag_n == 0)
+		printf("\n");
 	free(aux);
 }
