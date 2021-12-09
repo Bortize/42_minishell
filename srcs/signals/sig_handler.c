@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:36:50 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 20:50:21 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/07 17:24:24 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 static void	sigint_handler(void)
 {
+	g_interrupted = 1;
 	if (g_pidv[0] != 0) //Dirty way to know we are in iteractive move TODO
 		return ;
-	g_interrupted = 1;
 	ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	rl_on_new_line();
 }
