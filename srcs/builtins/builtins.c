@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 09:05:10 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/10 00:09:05 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:12:39 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 ** forward each builtins to its respective builtin function.
 */
 
-void	builtins(t_list **env_lst, char **str_args)
+int	builtins(t_list **env_lst, char **str_args)
 {
+	if (str_args[0] == NULL)
+		return (-1);
 	g_builtin = 1;
 	if(ft_strcmp(str_args[0], "exit") == 0)
 		builtins_exit(str_args);
@@ -36,4 +38,5 @@ void	builtins(t_list **env_lst, char **str_args)
 		builtins_unset(env_lst, str_args);
 	else
 		g_builtin = 0;
+	return (-1);
 }

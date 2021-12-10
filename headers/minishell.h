@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/10 00:06:53 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/10 23:04:10 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ int		string_validator(char *line);
 int		string_validator_pipes(char *line);
 int		string_validator_quotes(char *line);
 void	print_error(char *str);
-void	builtins(/*t_list *cmd_lst, */t_list **env_lst, char **str_args);
+int		builtins(t_list **env_lst, char **str_args);
 //void	builtins_echo(char **argv);FIXME
-void	builtint_pwd(char *str);
+int		builtint_pwd(char *str);
 int		builtins_env(t_list *env_lst);
 int		builtins_exit(char **argv);
 int	builtins_unset(t_list **env_lst, char **str_args);
@@ -127,5 +127,6 @@ void	print_echo_str(char **str);
 int		builtins_cd(char **arg, t_list *env_lst);
 int		builtins_export(t_list **env_lst, char **str_args);
 void	check_existence_environment(t_list *str);
+size_t	read_variable(char *text);
 
 #endif
