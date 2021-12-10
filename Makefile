@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/09 15:46:56 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/10 22:01:35 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,7 @@ LDLIBS=-lreadline -lft
 all : $(NAME)
 
 libft/libft.a :
+	git submodule update --init
 	make -C libft
 
 $(NAME) : $(OBJS) libft/libft.a
