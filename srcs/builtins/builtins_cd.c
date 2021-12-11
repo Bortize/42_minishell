@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/08 16:51:14 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:10:36 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ char	*get_current_path(t_list *env_lst, char *str)
 	content_env.key = str;
 	content_env.value = NULL;
 	lst_env = ft_lst_find(env_lst, &content_env, env_var_cmp);
-	tmp = lst_env->content;
-	return (tmp->value);
+	if (!lst_env)
+		return (NULL);
+	else
+	{
+		tmp = lst_env->content;
+		return (tmp->value);
+	}
 }
 
 /*
@@ -82,14 +87,22 @@ int	builtins_cd(char **arg, t_list *env_lst)
 	pwd = getcwd(NULL, 4096);
 	if (i == 1)
 	{
-		set_key_value(env_lst, pwd, "OLDPWD");// Guarda el path antes de cambiar
-		chdir(get_current_path(env_lst, "HOME"));// busca el value de HOME y se cambia
-		set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");// Establece PWD al nuevo valor
+		set_key_value(env_lst, pwd, "OLDPWD");
+		if (chdir(get_current_path(env_lst, "HOME")) == -1)// <<===============
+			perror("mierda: No such file or directory\n");// <<===============
+		set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");
 	}
 	else if (ft_strcmp(arg[0], "cd") == 0 && ft_strcmp(arg[1], "--") == 0)
 	{
-		set_key_value(env_lst, pwd, "OLDPWD");// Guarda el path antes de cambiar
-		chdir(get_current_path(env_lst, "HOME"));// busca el value de HOME y se cambia
+		set_key_value(env_lst, pwd, "OLDPWD");
+		if (!get_current_path(env_lst, "HOME"))
+		{
+			ft_putstr_fd("cd: HOME not set\n", 2);
+			free(pwd);
+			return (-1);
+		}
+		if (chdir(get_current_path(env_lst, "HOME")) == -1)// <<===============
+			perror("mierda: No such file or directory\n");// <<===============
 		set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");
 	}
 	else if (ft_strcmp(arg[1], "..") == 0)

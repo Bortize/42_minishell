@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/10 23:49:17 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/11 21:53:23 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,15 @@ int	builtins_export(t_list **env_lst, char **str_args)
 		return (-1);
 	else
 	{
-		len = read_variable(str_args[1]);
-		if(!(ft_strcmp(&str_args[1][len], "=") == 0))
-			return (-1);
-		env_var_add_str(str_args[1], env_lst);
+		i = 1;
+		while (str_args[i])
+		{
+			len = read_variable(str_args[i]);
+			if(str_args[i][len] != '=')
+				return (-1);
+			env_var_add_str(str_args[i], env_lst);
+			i++;
+		}
 	}
 	return (0);
 }

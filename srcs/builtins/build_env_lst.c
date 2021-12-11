@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 21:35:32 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 20:00:43 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/11 22:10:14 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,15 @@ t_list	*build_env_lst(char **env)
 	tmp = get(list, "SHLVL");
 	if (tmp == NULL)
 		env_var_add_str("SHLVL=1", &list);
+	tmp = get(list, "PWD");
+	if (tmp == NULL)
+		env_var_add_str("PWD=./", &list);
+	tmp = get(list, "OLDPWD");
+	if (tmp == NULL)
+		env_var_add_str("OLDPWD=./", &list);
+//	tmp = get(list, "HOME");
+//	if (tmp == NULL)
+//		env_var_add_str("HOME=not", &list);
 	}
 	else
 		;//TODO BASH creates PWD, SHLVL and _
