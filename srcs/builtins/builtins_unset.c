@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:23:14 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/08 16:51:00 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/12 22:53:54 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int	builtins_unset(t_list **env_lst, char **str_args)
 	{
 		ref.key = *str_args;
 		ref.value = NULL;
-		ft_lst_remove_if(env_lst, &ref, env_var_cmp
-				, (void (*)(void *))env_var_delete);
+		ft_lst_remove_if(env_lst, &ref, env_var_cmp,
+			(void (*)(void *))env_var_delete);
 		str_args++;
 	}
 	return (0);

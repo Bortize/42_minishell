@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_echo_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 12:59:28 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/10 23:06:40 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/12 23:05:24 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 
 void	print_echo_str(char **str)
 {
-	char *aux;
-	char *aux_free;// para liberar el string
-	char *aux_free_space;// para liberar el string con el espacio
-	int i;
-	int flag_n;
+	char	*aux;
+	char	*aux_free;
+	char	*aux_free_space;
+	int		i;
+	int		flag_n;
 
 	flag_n = 0;
 	aux = "\0";
@@ -46,7 +46,7 @@ void	print_echo_str(char **str)
 		aux = ft_strjoin(aux, str[i]);
 		aux_free_space = aux;
 		aux = ft_strjoin(aux, " ");
-		i++;;
+		i++;
 		free(aux_free);
 		free(aux_free_space);
 	}

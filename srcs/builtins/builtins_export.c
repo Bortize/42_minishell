@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/11 21:53:23 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/12 22:43:29 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,31 @@
 ** does, adding 'declare -x' in addition.
 */
 
-static void print_env_export(void *content)
+static void	print_env_export(void *content)
 {
-	t_env_var *env_item;
+	t_env_var	*env_item;
 
 	env_item = content;
 	write(1, "declare -x ", 11);
 	printf("%s=", env_item->key);
 	printf("%s\n", env_item->value);
+}
+
+static int	insert(t_list **env_lst, char **str_args)
+{
+	int	i;
+	int	len;
+
+	i = 1;
+	while (str_args[i])
+	{
+		len = read_variable(str_args[i]);
+		if (str_args[i][len] != '=')
+			return (-1);
+		env_var_add_str(str_args[i], env_lst);
+		i++;
+	}
+	return (0);
 }
 
 /*
@@ -34,11 +51,9 @@ static void print_env_export(void *content)
 
 int	builtins_export(t_list **env_lst, char **str_args)
 {
-	(void)env_lst;
-	int i;
-	int len;
+	int	i;
 
-	len = 0;
+	(void)env_lst;
 	i = 1;
 	while (str_args[i])
 	{
@@ -50,16 +65,6 @@ int	builtins_export(t_list **env_lst, char **str_args)
 	else if (read_variable(str_args[1]) == 0)
 		return (-1);
 	else
-	{
-		i = 1;
-		while (str_args[i])
-		{
-			len = read_variable(str_args[i]);
-			if(str_args[i][len] != '=')
-				return (-1);
-			env_var_add_str(str_args[i], env_lst);
-			i++;
-		}
-	}
+		return (insert(env_lst, str_args));
 	return (0);
 }

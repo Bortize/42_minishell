@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   search_in_lists.c                                  :+:      :+:    :+:   */
+/*   search_in_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 20:56:37 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/12 20:57:04 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/12 23:06:42 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 char	*get_current_path(t_list *env_lst, char *str)
 {
-	t_env_var content_env;
-	t_list	*lst_env;
-	t_env_var *tmp;
+	t_env_var	content_env;
+	t_list		*lst_env;
+	t_env_var	*tmp;
 
 	content_env.key = str;
 	content_env.value = NULL;
@@ -45,9 +45,9 @@ char	*get_current_path(t_list *env_lst, char *str)
 
 char	*set_key_value(t_list *env_lst, char *str, char *search)
 {
-	t_env_var content_env;
-	t_list	*lst_env;
-	t_env_var *tmp;
+	t_env_var	content_env;
+	t_list		*lst_env;
+	t_env_var	*tmp;
 
 	content_env.key = search;
 	content_env.value = NULL;

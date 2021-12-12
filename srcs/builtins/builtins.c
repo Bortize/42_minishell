@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 09:05:10 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/12 20:11:33 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/12 22:30:43 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	builtins(t_list **env_lst, char **str_args)
 	if (str_args[0] == NULL)
 		return (-1);
 	g_builtin = 1;
-	if(ft_strcmp(str_args[0], "exit") == 0)
+	if (ft_strcmp(str_args[0], "exit") == 0)
 		builtins_exit(str_args);
 	else if (ft_strcmp(str_args[0], "env") == 0)
 		builtins_env(*env_lst);
