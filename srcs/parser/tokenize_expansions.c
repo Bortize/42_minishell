@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:40:52 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/12 21:56:22 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/12 22:03:41 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ t_list	*tokenize_expansions(char *line, t_list *env)
 			substr_bgn = line;
 		}
 		else if (!*line || (*line == '$' && !(status & SINGLEQ))
-				|| (~(status & SINGLEQ) && *line == '\"')
-				|| (~(status & DOUBLEQ) && *line == '\''))
+				|| (!(status & SINGLEQ) && *line == '\"')
+				|| (!(status & DOUBLEQ) && *line == '\''))
 		{
 			if (!add_tk_cln_fail(&tk_lst, ft_strndup(substr_bgn, line - substr_bgn)))
 				return (NULL);
