@@ -1,6 +1,9 @@
 #Program names.
 minishell
 
+#Ctags
+srcs/tags
+
 #Back-up vim files.
 *.sw?
 
