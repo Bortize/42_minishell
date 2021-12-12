@@ -3,78 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/11 22:10:36 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/12 22:21:42 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <limits.h>
 
 /*
-** Searches the linked list of environment variables for the key HOME to
-** obtain its value and return it as a return.
-** @ content_env -> Node contents of the environment variable list
-** @ lst_env -> environment variable list
-** @ tmp ->
+** Counts the number of arguments that are passed
 */
 
-char	*get_current_path(t_list *env_lst, char *str)
+static int	count_arguments(char **arg)
 {
-	t_env_var content_env;
-	t_list	*lst_env;
-	t_env_var *tmp;
-
-	content_env.key = str;
-	content_env.value = NULL;
-	lst_env = ft_lst_find(env_lst, &content_env, env_var_cmp);
-	if (!lst_env)
-		return (NULL);
-	else
-	{
-		tmp = lst_env->content;
-		return (tmp->value);
-	}
-}
-
-/*
-** Search 'env_lst' for the key to update its value with the path
-** that the function receives as parameter.
-*/
-
-char	*set_key_value(t_list *env_lst, char *str, char *search)
-{
-	t_env_var content_env;
-	t_list	*lst_env;
-	t_env_var *tmp;
-
-	content_env.key = search;
-	content_env.value = NULL;
-	lst_env = ft_lst_find(env_lst, &content_env, env_var_cmp);
-	tmp = lst_env->content;
-	free(tmp->value);
-	tmp->value = ft_strdup(str);
-	return (tmp->value);
-}
-
-/*
-** Moves the prompt between directory levels
-*/
-
-int	builtins_cd(char **arg, t_list *env_lst)
-{
-	(void) (arg);
-	(void) (env_lst);
-
-
-	char *pwd;
-	char *aux;
-	int i;
+	int	i;
 
 	i = 0;
-	while(arg[i])
+	while (arg[i])
 	{
 		i++;
 		if (i == 3)
@@ -83,44 +30,80 @@ int	builtins_cd(char **arg, t_list *env_lst)
 			return (-1);
 		}
 	}
+	return (0);
+}
 
+/*
+** Controls the behavior when you want to place the prompt in the
+** 'HOME' and it does not exist or is not valid.
+*/
+
+static int	home(t_list *env_lst, char *pwd)
+{
+	set_key_value(env_lst, pwd, "OLDPWD");
+	if (!get_current_path(env_lst, "HOME"))
+	{
+		printf("hola amigos\n");
+		ft_putstr_fd("cd: HOME not set\n", 2);
+		return (1);
+	}
+	if (chdir(get_current_path(env_lst, "HOME")) == -1)
+	{
+		printf("hola putas\n");
+		perror("cd");
+	}
+	set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");
+	return (0);
+}
+
+/*
+** Moves the prompt one level up
+*/
+
+static void	go_up(t_list *env_lst, char *pwd)
+{
+	set_key_value(env_lst, pwd, "OLDPWD");
+	chdir("..");
+	free(pwd);
 	pwd = getcwd(NULL, 4096);
-	if (i == 1)
-	{
-		set_key_value(env_lst, pwd, "OLDPWD");
-		if (chdir(get_current_path(env_lst, "HOME")) == -1)// <<===============
-			perror("mierda: No such file or directory\n");// <<===============
-		set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");
-	}
-	else if (ft_strcmp(arg[0], "cd") == 0 && ft_strcmp(arg[1], "--") == 0)
-	{
-		set_key_value(env_lst, pwd, "OLDPWD");
-		if (!get_current_path(env_lst, "HOME"))
-		{
-			ft_putstr_fd("cd: HOME not set\n", 2);
-			free(pwd);
-			return (-1);
-		}
-		if (chdir(get_current_path(env_lst, "HOME")) == -1)// <<===============
-			perror("mierda: No such file or directory\n");// <<===============
-		set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");
-	}
+	set_key_value(env_lst, pwd, "PWD");
+}
+
+/*
+** Returns the prompt to the place it came from
+*/
+
+static void	back(t_list *env_lst, char *pwd, char *aux)
+{
+	aux = ft_strdup(get_current_path(env_lst, "OLDPWD"));
+	set_key_value(env_lst, pwd, "OLDPWD");
+	chdir(aux);
+	set_key_value(env_lst, aux, "PWD");
+	free(aux);
+}
+
+/*
+** Moves the prompt between directory levels
+*/
+
+int	builtins_cd(char **arg, t_list *env_lst)
+{
+	char	*pwd;
+	char	*aux;
+	int		i;
+
+	(void)(arg);
+	(void)(env_lst);
+	i = count_arguments(arg);
+	aux = NULL;
+	pwd = getcwd(NULL, 4096);
+	if ((i == 1)
+		|| (ft_strcmp(arg[0], "cd") == 0 && ft_strcmp(arg[1], "--") == 0))
+		return (home(env_lst, pwd));
 	else if (ft_strcmp(arg[1], "..") == 0)
-	{
-		set_key_value(env_lst, pwd, "OLDPWD");
-		chdir("..");
-		free(pwd);
-		pwd = getcwd(NULL, 4096);
-		set_key_value(env_lst, pwd, "PWD");
-	}
+		go_up(env_lst, pwd);
 	else if (ft_strcmp(arg[1], "-") == 0)
-	{
-		aux = ft_strdup(get_current_path(env_lst, "OLDPWD"));
-		set_key_value(env_lst, pwd, "OLDPWD");
-		chdir(aux);
-		set_key_value(env_lst, aux, "PWD");
-		free(aux);
-	}
+		back(env_lst, pwd, aux);
 	else
 	{
 		if (chdir(arg[1]) == -1)

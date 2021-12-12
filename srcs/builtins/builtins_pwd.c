@@ -6,16 +6,11 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 15:19:39 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/10 23:03:51 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/12 20:41:45 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <limits.h>// for the PATH_MAX. if not allowed to use, replace with value 4096
+#include "minishell.h"
 
 int	builtint_pwd(char *str)
 {

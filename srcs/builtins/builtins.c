@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 09:05:10 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/10 23:12:39 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/12 20:11:33 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	builtins(t_list **env_lst, char **str_args)
 	else if (ft_strcmp(str_args[0], "echo") == 0)
 		print_echo_str(str_args);
 	else if (ft_strcmp(str_args[0], "cd") == 0)
-		builtins_cd(str_args, *env_lst); //TODO I think this is needed.
+		builtins_cd(str_args, *env_lst);
 	else if (ft_strcmp(str_args[0], "export") == 0)
 		builtins_export(env_lst, str_args);
 	else if (ft_strcmp(str_args[0], "unset") == 0)
