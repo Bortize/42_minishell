@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/10 23:04:10 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/12 21:11:21 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft/libft.h"
-# include <string.h>// For builtins_pwd.c
-# include <limits.h>// For builtins_pwd.c, back_home.c
+# include <string.h>
+# include <limits.h>
 # include <errno.h>
 
 # define READ_END 0
@@ -70,7 +70,7 @@ size_t	count_spaces(char *line);
 size_t	count_until_repeat(char *line);
 
 void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst);
-void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node);//, t_list *env_lst);
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node);
 void	free_cmd(void *elem);
 void	free_redirect(void *elem);
 void	print_cmd(void *elem);
@@ -80,12 +80,14 @@ int		string_validator_pipes(char *line);
 int		string_validator_quotes(char *line);
 void	print_error(char *str);
 int		builtins(t_list **env_lst, char **str_args);
-//void	builtins_echo(char **argv);FIXME
 int		builtint_pwd(char *str);
 int		builtins_env(t_list *env_lst);
 int		builtins_exit(char **argv);
-int	builtins_unset(t_list **env_lst, char **str_args);
+int		builtins_unset(t_list **env_lst, char **str_args);
 void	builtins_env_list(char **argv, char **env);
+int		builtins_cd(char **arg, t_list *env_lst);
+char	*get_current_path(t_list *env_lst, char *str);
+char	*set_key_value(t_list *env_lst, char *str, char *search);
 t_list	*build_env_lst(char **env);
 int		update_shlvl(t_list *env_lst);
 
@@ -124,9 +126,7 @@ void	free_env_var(void *ptr);
 void	print_env(void *content);
 void	ft_exit(void *elem);
 void	print_echo_str(char **str);
-int		builtins_cd(char **arg, t_list *env_lst);
 int		builtins_export(t_list **env_lst, char **str_args);
-void	check_existence_environment(t_list *str);
 size_t	read_variable(char *text);
 
 #endif

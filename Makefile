@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
+#    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/10 20:29:30 by bgomez-r         ###   ########.fr        #
+#    Updated: 2021/12/12 21:10:14 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,6 @@ SRCS+= stringify_env.c
 
 #Builtins
 SRCS+= builtins.c
-#SRCS+= builtins_echo.c
 SRCS+= builtins_pwd.c
 SRCS+= builtins_env.c
 SRCS+= builtins_unset.c
@@ -82,8 +81,8 @@ SRCS+= free_env_var.c
 SRCS+= print_env.c
 SRCS+= ft_exit.c
 SRCS+= print_echo_str.c #FIXME
-SRCS+=builtins_export.c
-SRCS+= check_existence_environment.c
+SRCS+= builtins_export.c
+SRCS+= search_in_list.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
