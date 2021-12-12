@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/10 22:19:32 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/12 18:28:11 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ NAME=minishell
 SRCS:=
 SRCS+= minishell.c
 SRCS+= utils.c
+SRCS+= ft_strcat_lst.c
 SRCS+= error.c
 SRCS+= print_cmd.c
 SRCS+= print_redir.c
@@ -36,6 +37,7 @@ SRCS+= update_shlvl.c
 #Parser
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
+SRCS+= tokenize_expansions.c
 SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
@@ -44,7 +46,7 @@ SRCS+= string_validator.c
 SRCS+= string_validator_pipes.c
 SRCS+= string_validator_quotes.c
 SRCS+= string_validator_redir.c
-#SRCS+= read_variable.c
+SRCS+= read_variable.c
 
 #Signals
 SRCS+= sig_handler.c
@@ -87,7 +89,7 @@ SRCS+= check_existence_environment.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
-CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g -O2
+CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g#-O2
 
 OBJS=$(SRCS:.c=.o)
 
@@ -110,6 +112,7 @@ $(NAME) : $(OBJS) libft/libft.a
 %.o : %.c minishell.h
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $< -c -o $(ODIR)/$@
+	ctags -a $<
 
 test : $(TEST) syntax_tester.o libft/libft.a
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(TEST) syntax_tester.o -o test

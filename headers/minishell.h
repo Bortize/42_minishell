@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/10 22:19:06 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/11 21:36:56 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,7 @@ typedef struct s_env_var
 	char	*value;
 }			t_env_var;
 
-int		is_delimiter(char c);
-int		is_space(char c);
-size_t	count_spaces(char *line);
-size_t	count_until_repeat(char *line);
-
-void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst);
-void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node);//, t_list *env_lst);
-void	free_cmd(void *elem);
-void	free_redirect(void *elem);
-void	print_cmd(void *elem);
-void	print_redir(void *elem);
-int		string_validator(char *line);
-int		string_validator_pipes(char *line);
-int		string_validator_quotes(char *line);
-int		string_validator_redir(char *line);
+//Builtins
 void	print_error(char *str);
 void	builtins(/*t_list *cmd_lst, */t_list **env_lst, char **str_args);
 //void	builtins_echo(char **argv);FIXME
@@ -89,6 +75,24 @@ int	builtins_unset(t_list **env_lst, char **str_args);
 void	builtins_env_list(char **argv, char **env);
 t_list	*build_env_lst(char **env);
 int		update_shlvl(t_list *env_lst);
+
+//Parser
+int		is_delimiter(char c);
+int		is_space(char c);
+size_t	count_spaces(char *line);
+size_t	count_until_repeat(char *line);
+size_t	read_variable(char *text);
+void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst);
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node);//, t_list *env_lst);
+t_list	*tokenize_expansions(char *line, t_list *env);
+void	free_cmd(void *elem);
+void	free_redirect(void *elem);
+void	print_cmd(void *elem);
+void	print_redir(void *elem);
+int		string_validator(char *line);
+int		string_validator_pipes(char *line);
+int		string_validator_quotes(char *line);
+int		string_validator_redir(char *line);
 
 //Signals
 void	set_msh_signals(void);
@@ -110,6 +114,7 @@ char	**build_str_arr(t_list *str_lst);
 void	ft_free_arr(void **ptr_arr);
 t_list	*ft_lst_at(t_list *lst, size_t pos);
 t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *));
+char	*ft_strcat_lst(t_list *str_lst);
 
 //Environment
 void	*env_var_new(char *key_str, char *value_str);
