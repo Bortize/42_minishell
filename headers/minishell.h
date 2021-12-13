@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/13 15:54:07 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:41:23 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int		g_interrupted;
 int		g_heredoc;
 int		g_builtin;
 int		g_child;
+int		g_status;
 
 typedef enum e_behavior
 {

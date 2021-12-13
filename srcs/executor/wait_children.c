@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:41:08 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 20:07:32 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:45:15 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ void	wait_children(size_t cmd_num)
 	waitpid(g_pidv[cmd_num], &status, 0);
 	g_pidv[cmd_num] = 0;
 	if (WIFEXITED(status))
-		printf("Last child exit status: %d\n", WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
-		printf("Last got signaled: %d\n", WTERMSIG(status));
+		g_status = WEXITSTATUS(status) % 256;
 	while (cmd_num > 0)
 	{
 		wait(NULL);
