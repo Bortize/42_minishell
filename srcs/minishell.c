@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/12 20:46:37 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:06:01 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static int	build_argvs(t_list *cmd_lst)
 static int	parse_line(char *line, t_list **cmd_lst, t_list *env_lst)
 {
 	char	*trimmed;
-	t_list	*exp;//
 
 	*cmd_lst = NULL;
 	trimmed = ft_strtrim(line, " ");
@@ -45,14 +44,8 @@ static int	parse_line(char *line, t_list **cmd_lst, t_list *env_lst)
 		return (1);
 	}
 	split_in_cmds(trimmed, cmd_lst, env_lst);
-	exp = tokenize_expansions(trimmed, env_lst);//
+	ft_lstiter(*cmd_lst, print_cmd);
 	free(trimmed);
-	trimmed = ft_strcat_lst(exp);
-	ft_lstclear(&exp, free);
-	ft_putstr_fd(trimmed, 2);
-		ft_putstr_fd("\n", 2);
-	free(trimmed);
-	//expansions(cmd_lst, env_lst);
 	if (build_argvs(*cmd_lst) == -1)
 		return (1);
 	return (0);

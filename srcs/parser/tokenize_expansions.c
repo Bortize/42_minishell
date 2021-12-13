@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:40:52 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/12 22:03:41 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:06:03 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,11 @@ static char	*get_var_str(t_list *env, char *str)
 	t_env_var	*var_node;
 	char		*var_key;
 
-	var_key = ft_substr(str + 1, 0, read_variable(str + 1));//
-			ft_putstr_fd("var:", 2);
-			ft_putstr_fd(var_key, 2);
-			ft_putstr_fd("\n", 2);
+	var_key = ft_substr(str + 1, 0, read_variable(str + 1));//TODO (?)
 	if (!var_key)
 		return (NULL);
 	var_node = env_var_find(env, var_key);
 	free(var_key);
-	dprintf(2, "val %p\n", var_node);
 	if (!var_node || !var_node->value)
 		return (ft_strdup(""));
 	return (ft_strdup(var_node->value));

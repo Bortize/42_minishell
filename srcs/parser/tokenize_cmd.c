@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/16 15:46:26 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/13 15:57:03 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,28 @@ static int	read_token_behavior(char *line, t_behavior *type)
 	return (0);
 }
 
-static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)//, t_list *env_lst)
+static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type,
+		t_list *env_lst)
 {
 	void	*aux;
+	char	*expanded_token;
 
+	if (!token)
+		exit (1); //TODO Print FATAL no memory and exit;
+	expanded_token = expand_str(token, env_lst);
+	free(token);
+	if (!expanded_token)
+		exit (1); //TODO Print FATAL no memory and exit;
 	if (token_type == plain)
 	{
-		aux = ft_lstnew(token);
+		aux = ft_lstnew(expanded_token);
 		if (!aux)
 			exit (1); //TODO we need to have a proper 'error handler'
 		ft_lstadd_back(&cmd_node->arg, aux);
 	}
 	else
 	{
-		aux = create_redirect_node(token, token_type);
+		aux = create_redirect_node(expanded_token, token_type);
 		if (token_type == redir_in || token_type == here_doc)
 			ft_lstadd_back(&cmd_node->lst_redir_in, aux);
 		else
@@ -73,7 +81,7 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)//, t
 	}
 }
 
-void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
+void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node, t_list *env_lst)
 {
 	t_behavior	token_behavior;// Estructura de flags de tipos de redirección
 	size_t		token_len;// Longitud del key o del value
@@ -92,6 +100,7 @@ void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 		else
 			token_len++;
 	}
-	save_token(cmd_node, ft_strndup(cmd_txt, token_len), token_behavior);
-	return (tokenize_cmd(cmd_txt + token_len, cmd_node));
+	save_token(cmd_node, ft_strndup(cmd_txt, token_len), token_behavior,
+			env_lst);
+	return (tokenize_cmd(cmd_txt + token_len, cmd_node, env_lst));
 }

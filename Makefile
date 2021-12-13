@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/12 18:28:11 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/13 15:53:12 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS+= update_shlvl.c
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
 SRCS+= tokenize_expansions.c
+SRCS+= expand_str.c
 SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
