@@ -3,14 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   print_echo_str.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 12:59:28 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/11/24 00:41:19 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:51:28 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Count all the '-n' to advance the iterate to the part where
+** the printed text begins.
+*/
+
+static void	remove_endline(char **str, int *i)
+{
+	(*i)++;
+	while (ft_strcmp(str[*i], "-n") == 0)
+		(*i)++;
+}
+
+/*
+** Concatenates all tokens into a single string
+*/
+
+static char	*join_args(char **str, int i)
+{
+	char	*aux;
+	char	*aux_free;
+	char	*aux_free_space;
+
+	aux = ft_strdup("");
+	while (str[i])
+	{
+		aux_free = aux;
+		aux = ft_strjoin(aux, str[i]);
+		aux_free_space = aux;
+		aux = ft_strjoin(aux, " ");
+		i++;
+		free(aux_free);
+		free(aux_free_space);
+	}
+	return (aux);
+}
 
 /*
 ** Converts all str tokens into a single storing for printing with
@@ -23,24 +59,15 @@
 
 void	print_echo_str(char **str)
 {
-	char *aux;
-	char *aux_free;// para liberar el string
-	char *aux_free_space;// para liberar el string con el espacio
-	int i;
+	char	*aux;
+	int		i;
 
-	aux = "\0";
-	aux = ft_strjoin(aux, "");
-	i = 1;// comienza en 1 para evitar imprimir echo
-	while (str[i])
-	{
-		aux_free = aux;
-		aux = ft_strjoin(aux, str[i]);
-		aux_free_space = aux;
-		aux = ft_strjoin(aux, " ");
-		i++;;
-		free(aux_free);
-		free(aux_free_space);
-	}
-	printf("%s\n", aux);
+	i = 1;
+	if (strcmp(str[i], "-n") == 0)
+		remove_endline(str, &i);
+	aux = join_args(str, i);
+	printf("%.*s", (int)ft_strlen(aux) - 1, aux);
+	if (i == 1)
+		printf("\n");
 	free(aux);
 }

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/06 19:09:40 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:04:00 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *))
 	i = 0;
 	while (i < p)
 	{
-		if (cmp(data_ref, lst->content) == 0)// <<===cmp functions calls here
+		if (cmp(data_ref, lst->content) == 0)
 			return(lst);
 		lst = lst->next;
 		i++;

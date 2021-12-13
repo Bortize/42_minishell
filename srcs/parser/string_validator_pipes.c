@@ -1,12 +1,12 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   string_validator_pipes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 19:05:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/10 22:50:31 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 20:08:38 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	string_validator_pipes(char *line)
 {
-	int text;
-	int pipe;
-	int i;
+	int	text;
+	int	pipe;
+	int	i;
 
 	text = 0;
 	pipe = 0;
@@ -27,7 +27,7 @@ int	string_validator_pipes(char *line)
 		{
 			pipe = 1;
 			if (!text)
-				break ; //TODO esta mal
+				break ;
 			text = 0;
 		}
 		else if (line[i] != ' ')

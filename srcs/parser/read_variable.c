@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   read_variable.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 16:49:43 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/08/03 17:21:23 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/10 20:20:24 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Checks that the first character of the string it receives is not a number,
+** in which case it returns zero. Otherwise, it returns the length of the string.
+*/
 
 size_t	read_variable(char *text)
 {
