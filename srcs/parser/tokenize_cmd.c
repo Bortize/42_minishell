@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/16 15:46:26 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:10:58 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_list	*create_redirect_node(char *redir_name, t_behavior redir_type)
 	new_redir = ft_calloc(1, sizeof(t_redirect));
 	redir_node = ft_lstnew(new_redir);
 	if (!new_redir || !redir_node)
-		exit(1); //Exit handler to print errors //TODO NO-MEM
+		exit(1);
 	new_redir->text = redir_name;
 	new_redir->type = redir_type;
 	return (redir_node);
@@ -52,7 +52,7 @@ static int	read_token_behavior(char *line, t_behavior *type)
 	return (0);
 }
 
-static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)//, t_list *env_lst)
+static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)
 {
 	void	*aux;
 
@@ -60,7 +60,7 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)//, t
 	{
 		aux = ft_lstnew(token);
 		if (!aux)
-			exit (1); //TODO we need to have a proper 'error handler'
+			exit (1);
 		ft_lstadd_back(&cmd_node->arg, aux);
 	}
 	else
@@ -75,8 +75,8 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type)//, t
 
 void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node)
 {
-	t_behavior	token_behavior;// Estructura de flags de tipos de redirección
-	size_t		token_len;// Longitud del key o del value
+	t_behavior	token_behavior;
+	size_t		token_len;
 
 	cmd_txt += count_spaces(cmd_txt);
 	if (*cmd_txt == 0)

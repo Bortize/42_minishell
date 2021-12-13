@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_validator_quotes.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 14:45:08 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 15:13:20 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:38:24 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	string_validator_quotes(char *line)
 			line = ft_strchr(line + 1, *line);
 			if (!line)
 			{
-				ft_putstr_fd("Parser error: unclosed quotes. \n" ,2);
+				ft_putstr_fd("Parser error: unclosed quotes. \n", 2);
 				return (0);
 			}
 		}

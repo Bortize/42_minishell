@@ -1,12 +1,12 @@
- /* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   string_validator_pipes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 19:05:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/07 18:14:54 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:37:20 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	string_validator_pipes(char *line)
 {
-	int text;
-	int pipe;
-	int i;
+	int	text;
+	int	pipe;
+	int	i;
 
 	text = 0;
 	pipe = 0;
@@ -27,17 +27,14 @@ int	string_validator_pipes(char *line)
 		{
 			pipe = 1;
 			if (!text)
-				break ; //TODO esta mal
+				break ;
 			text = 0;
 		}
 		else if (line[i] != ' ')
 			text = 1;
 		i++;
 	}
-	if (pipe  && !text)
-	{
-		print_error("parse error near `|'"); // TODO error because not have text in pipe
-		return (0);
-	}
+	if (pipe && !text)
+		print_error("parse error near `|'");
 	return (1);
 }

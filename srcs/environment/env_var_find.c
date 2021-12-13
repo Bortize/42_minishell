@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_find.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:16:23 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/08 19:39:09 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:39:28 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,3 @@ t_env_var	*env_var_find(t_list *env_lst, char *key)
 		return (NULL);
 	return (target->content);
 }
-

@@ -6,11 +6,16 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 12:59:28 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/13 18:33:08 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:51:28 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Count all the '-n' to advance the iterate to the part where
+** the printed text begins.
+*/
 
 static void	remove_endline(char **str, int *i)
 {
@@ -18,6 +23,10 @@ static void	remove_endline(char **str, int *i)
 	while (ft_strcmp(str[*i], "-n") == 0)
 		(*i)++;
 }
+
+/*
+** Concatenates all tokens into a single string
+*/
 
 static char	*join_args(char **str, int i)
 {

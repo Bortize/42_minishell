@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 22:43:33 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 22:47:36 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:40:45 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count)
 			perror("PIPE:");
 			while (i-- > 0)
 				close_pipe(pipev[i]);
-			return(-1);
+			return (-1);
 		}
 		i++;
 	}

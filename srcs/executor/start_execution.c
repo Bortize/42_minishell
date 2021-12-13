@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_execution.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 12:39:59 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:43:20 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ static void	find_available(char *name)
 		name[i]++;
 	}
 }
+
 //TODO unfleshed out
 char	*get_tmp_filename(void)
 {
 	char	*filename;
-	
+
 	filename = ft_strdup("00000000000000.tmp");
 	find_available(filename);
 	return (filename);

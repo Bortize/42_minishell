@@ -6,11 +6,15 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 15:19:39 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/12 22:52:31 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:54:06 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Prints the directory where the prompt is located using the getcwd function
+*/
 
 int	builtint_pwd(char *str)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_output.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 14:01:53 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/08 13:32:56 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/13 19:42:15 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 int	redirect_output(t_list *out_lst)
 {
 	int	fd;
-	t_redirect *redir_data;
+	t_redirect	*redir_data;
 
 	fd = STDOUT_FILENO;
 	while (out_lst)
