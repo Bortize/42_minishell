@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/12 22:21:42 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/13 21:15:38 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	count_arguments(char **arg)
 			return (-1);
 		}
 	}
-	return (0);
+	return (i);
 }
 
 /*
@@ -43,14 +43,15 @@ static int	home(t_list *env_lst, char *pwd)
 	set_key_value(env_lst, pwd, "OLDPWD");
 	if (!get_current_path(env_lst, "HOME"))
 	{
-		printf("hola amigos\n");
 		ft_putstr_fd("cd: HOME not set\n", 2);
+		free(pwd);
 		return (1);
 	}
 	if (chdir(get_current_path(env_lst, "HOME")) == -1)
 	{
-		printf("hola putas\n");
 		perror("cd");
+		free(pwd);
+		return (1);
 	}
 	set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");
 	return (0);
@@ -92,11 +93,12 @@ int	builtins_cd(char **arg, t_list *env_lst)
 	char	*aux;
 	int		i;
 
-	(void)(arg);
+	(void)(arg);// Creo que tendre que dejar arg como estaba
 	(void)(env_lst);
 	i = count_arguments(arg);
 	aux = NULL;
 	pwd = getcwd(NULL, 4096);
+	printf("Numero de argumentos %d\n", i);
 	if ((i == 1)
 		|| (ft_strcmp(arg[0], "cd") == 0 && ft_strcmp(arg[1], "--") == 0))
 		return (home(env_lst, pwd));
