@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 15:32:04 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 15:50:05 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/14 18:27:49 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*stringify_var(t_env_var *var)
 	val_len = 0;
 	if (var->value)
 		val_len = ft_strlen(var->value);
-	str_env = malloc((char)(key_len + val_len + 2));
+	str_env = malloc(sizeof(char) * (key_len + val_len + 2));
 	if (!str_env)
 		return (NULL);
 	ft_strcpy(str_env, var->key);
