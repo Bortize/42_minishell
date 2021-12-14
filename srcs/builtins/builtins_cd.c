@@ -93,8 +93,6 @@ int	builtins_cd(char **arg, t_list *env_lst)
 	char	*aux;
 	int		i;
 
-	(void)(arg);// Creo que tendre que dejar arg como estaba
-	(void)(env_lst);
 	i = count_arguments(arg);
 	aux = NULL;
 	pwd = getcwd(NULL, 4096);
