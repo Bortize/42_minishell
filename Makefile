@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/14 16:26:34 by bgomez-r         ###   ########.fr        #
+#    Updated: 2021/12/14 21:39:42 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,7 @@ OBJS=$(SRCS:.c=.o)
 TEST=$(filter minishell, $(OBJS))
 
 LDFLAGS=-Llibft -Lreadline/lib
-LDLIBS=-lreadline -lft
+LDLIBS=-lreadline -ltermcap -lft
 
 .PHONY: all clean fclean re test relibs
 
