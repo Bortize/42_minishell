@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/14 22:07:08 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/14 22:43:52 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 pid_t	g_pidv[CHILD_MAX];
 int		g_interrupted;
 int		g_heredoc;
-int		g_builtin;
 int		g_child;
 int		g_status;
 
@@ -103,9 +102,10 @@ void	sig_handler(int signum);
 //Executor
 void	start_execution(t_list *cmd_lst, t_list **env_lst);
 char	*get_path(char *file, char *path_env);
-int		redirect_input(t_list *in_lst, char *heredoc_file);
 int		exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn);
+int		redirect_input(t_list *in_lst, char *heredoc_file);
 int		redirect_output(t_list *out_lst);
+int		heredoc(t_list *cmd_lst);
 void	wait_children(size_t cmd_num);
 int		create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count);
 int		configure_pipeline(int cmd_index, int cmd_count, int (*pipev)[2]);

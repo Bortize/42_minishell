@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/14 22:03:40 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/14 22:57:34 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static void	initialize_minishell(void)
 	ioctl(STDIN_FILENO, TIOCSETA, &tty_attr);
 	set_msh_signals();
 	g_interrupted = 0;
+	g_status = 0;
 	g_child = 0;
 }
 
@@ -113,6 +114,7 @@ int	main(int argc, char **argv, char **envp)
 			start_execution(cmd_lst, &env_lst);
 			ft_lstclear(&cmd_lst, &free_cmd);
 			system("leaks -q minishell");
+			printf("DELETE ME. Last exit status: %d\n", g_status);
 		}
 		free(line);
 		line = wait_input();

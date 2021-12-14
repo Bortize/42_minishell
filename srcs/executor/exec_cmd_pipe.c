@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/14 16:24:53 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/14 22:46:12 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 static void	exec_child(t_cmd *cmd, t_list *env_lst)
 {
 	char	**envp;
+	int		builtin_return;
 
 	if (redirect_input(cmd->lst_redir_in, cmd->heredoc_filename) == -1
 		|| redirect_output(cmd->lst_redir_out) == -1)
 		exit(errno);
-	g_builtin = 0;
-	builtins(&env_lst, cmd->argv);//FIXME that should work like that, aprox
-	if (g_builtin == 1)
-		exit(-1); //TODO builtin exit status
+	builtin_return = builtins(&env_lst, cmd->argv);
+	if (builtin_return != -1)
+		exit(builtin_return);
 	envp = stringify_env(env_lst);
 	if (envp)
 		execve(get_path(cmd->argv[0], PATH_STR), cmd->argv, envp);
