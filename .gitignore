@@ -2,6 +2,7 @@
 minishell
 
 #Ctags
+tags
 srcs/tags
 
 #Back-up vim files.
