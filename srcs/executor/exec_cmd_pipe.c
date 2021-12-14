@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/09 15:46:25 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:24:53 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	exec_child(t_cmd *cmd, t_list *env_lst)
 	char	**envp;
 
 	if (redirect_input(cmd->lst_redir_in, cmd->heredoc_filename) == -1
-			|| redirect_output(cmd->lst_redir_out) == -1)
+		|| redirect_output(cmd->lst_redir_out) == -1)
 		exit(errno);
 	g_builtin = 0;
 	builtins(&env_lst, cmd->argv);//FIXME that should work like that, aprox

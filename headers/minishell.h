@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/12 21:11:21 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:26:26 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ char	*stringify_var(t_env_var *var);
 char	**stringify_env(t_list *env);
 void	free_env_var(void *ptr);
 void	print_env(void *content);
-void	ft_exit(void *elem);
 void	print_echo_str(char **str);
 int		builtins_export(t_list **env_lst, char **str_args);
 size_t	read_variable(char *text);

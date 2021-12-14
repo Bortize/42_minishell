@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/09 15:15:31 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:30:59 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static char	*wait_input(void)
 	while (g_interrupted || only_spaces(line))
 	{
 		if (g_interrupted)
-		g_interrupted = 0;
+			g_interrupted = 0;
 		free(line);
 		line = readline("minishell> ");
 		if (!line)

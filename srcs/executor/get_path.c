@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/30 18:29:05 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/19 22:14:32 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:24:29 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@ static int	valid_file(char *path)
 {
 	struct stat	info;
 
-	return  (!(stat(path, &info) == -1 || (info.st_mode & S_IFREG) == 0));
+	return (!(stat(path, &info) == -1 || (info.st_mode & S_IFREG) == 0));
 }
-
 
 //Absolute paths use '.' as current dir and '..' as the parent dir.
 //Syscalls have no issue accessing any absolute path.
 static int	is_absolute(char *path)
 {
 	return (!path || ft_strncmp(path, "./", 2) == 0
-			|| ft_strncmp(path, "../", 3) == 0);
+		|| ft_strncmp(path, "../", 3) == 0);
 }
 
 //Memory management done in the side corner, hidden from the public eye.

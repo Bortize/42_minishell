@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/11 18:04:00 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:32:26 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,15 @@ char	**build_str_arr(t_list *str_lst)
 
 t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *))
 {
-	int i;
-	int p;
+	int	i;
+	int	p;
 
 	p = ft_lstsize(lst);
 	i = 0;
 	while (i < p)
 	{
 		if (cmp(data_ref, lst->content) == 0)
-			return(lst);
+			return (lst);
 		lst = lst->next;
 		i++;
 	}
