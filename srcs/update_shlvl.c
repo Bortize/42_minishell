@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update_shlvl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:22:18 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/09 19:49:43 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/14 16:31:11 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 
 static char	*get(t_list *env_lst, char *str)
 {
-	t_env_var content_env;
-	t_list	*lst_env;
-	t_env_var *tmp;
+	t_env_var	content_env;
+	t_list		*lst_env;
+	t_env_var	*tmp;
 
 	content_env.key = str;
 	content_env.value = NULL;
@@ -40,9 +40,9 @@ static char	*get(t_list *env_lst, char *str)
 
 static char	*set(t_list *env_lst, char *str, char *search)
 {
-	t_env_var content_env;
-	t_list	*lst_env;
-	t_env_var *tmp;
+	t_env_var	content_env;
+	t_list		*lst_env;
+	t_env_var	*tmp;
 
 	content_env.key = search;
 	content_env.value = NULL;
@@ -56,24 +56,18 @@ static char	*set(t_list *env_lst, char *str, char *search)
 
 int	update_shlvl(t_list *env_lst)
 {
-	int p;
-	char *c;
+	int		p;
+	char	*c;
 
 	printf("🍉%s\n", get(env_lst, "SHLVL"));
-	// 1. Recojo el valor de lst_env -> SHLVL
 	c = get(env_lst, "SHLVL");
-	// 2. Convierto el valor de char a entero.
 	p = ft_atoi(c);
-	// 3. Le sumo el valor de 1
 	if (p < 1)
 		p = 1;
 	else
 		p = p + 1;
-	// 4. Convierto el valor de entero a char
 	c = ft_itoa(p);
-	// 5. seteo el nuevo valor en lst_env -> SHLVL
 	set(env_lst, c, "SHLVL");
-//	printf("🌽 %s\n", get(env_lst, "SHLVL"));
 	free(c);
 	return (0);
 }

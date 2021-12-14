@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/13 19:54:03 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/14 22:05:42 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,21 +83,20 @@ SRCS+= builtins_cd.c
 SRCS+= build_env_lst.c
 SRCS+= free_env_var.c
 SRCS+= print_env.c
-SRCS+= ft_exit.c
 SRCS+= print_echo_str.c #FIXME
 SRCS+= builtins_export.c
 SRCS+= search_in_list.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
-CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g#-O2
+CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g -O2
 
 OBJS=$(SRCS:.c=.o)
 
 TEST=$(filter minishell, $(OBJS))
 
 LDFLAGS=-Llibft -Lreadline/lib
-LDLIBS=-lreadline -lft
+LDLIBS=-lreadline -ltermcap -lft
 
 .PHONY: all clean fclean re test relibs
 
@@ -108,6 +107,7 @@ libft/libft.a :
 	make -C libft
 
 $(NAME) : $(OBJS) libft/libft.a
+	git submodule update --init
 	$(CC) $(LDFLAGS) $(LDLIBS) $(addprefix $(ODIR)/,$(OBJS)) -o $@
 
 %.o : %.c minishell.h
