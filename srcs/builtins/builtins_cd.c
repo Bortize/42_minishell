@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/13 21:15:38 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/15 00:01:00 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ static int	home(t_list *env_lst, char *pwd)
 	if (!get_current_path(env_lst, "HOME"))
 	{
 		ft_putstr_fd("cd: HOME not set\n", 2);
-		free(pwd);
 		return (1);
 	}
 	if (chdir(get_current_path(env_lst, "HOME")) == -1)
 	{
 		perror("cd");
-		free(pwd);
 		return (1);
 	}
 	set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");
@@ -99,7 +97,10 @@ int	builtins_cd(char **arg, t_list *env_lst)
 	printf("Numero de argumentos %d\n", i);
 	if ((i == 1)
 		|| (ft_strcmp(arg[0], "cd") == 0 && ft_strcmp(arg[1], "--") == 0))
+	{
+		free(pwd);
 		return (home(env_lst, pwd));
+	}
 	else if (ft_strcmp(arg[1], "..") == 0)
 		go_up(env_lst, pwd);
 	else if (ft_strcmp(arg[1], "-") == 0)
