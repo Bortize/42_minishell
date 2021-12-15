@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 17:35:05 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/15 17:35:44 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/15 21:56:19 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	remove_head_if(t_list **lst, void *data_ref, int (*cmp)(),
 		free_fun(garbage->content);
 		free(garbage);
 	}
+	*lst = head;
 }
 
 void	ft_lst_remove_if(t_list **lst, void *data_ref, int (*cmp)(),
@@ -37,7 +38,7 @@ void	ft_lst_remove_if(t_list **lst, void *data_ref, int (*cmp)(),
 	t_list	*prev;
 
 	remove_head_if(lst, data_ref, cmp, free_fun);
-	if (!lst || !*lst)
+	if (!*lst)
 		return ;
 	prev = *lst;
 	iter = prev->next;
