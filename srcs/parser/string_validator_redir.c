@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 22:03:20 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/10 23:24:09 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/15 21:25:20 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	string_validator_redir(char *line)
 				line++;
 		}
 		line++;
-		while (ft_isspace(*line))
+		while (*line && ft_isspace(*line))
 			line++;
 	}
 	if (token_expected)
