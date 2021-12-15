@@ -6,19 +6,17 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/14 22:46:12 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/15 19:01:28 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <unistd.h>
 
-//TODO Of course this is just a patch until our environment is done
-#define PATH_STR "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki"
-
 static void	exec_child(t_cmd *cmd, t_list *env_lst)
 {
 	char	**envp;
+	char	*file_path;
 	int		builtin_return;
 
 	if (redirect_input(cmd->lst_redir_in, cmd->heredoc_filename) == -1
@@ -27,9 +25,16 @@ static void	exec_child(t_cmd *cmd, t_list *env_lst)
 	builtin_return = builtins(&env_lst, cmd->argv);
 	if (builtin_return != -1)
 		exit(builtin_return);
+	file_path = get_path(cmd->argv[0], get_current_path(env_lst, "PATH"));
+	if (!file_path)
+	{
+		ft_putstr_fd(cmd->argv[0], 2);
+		ft_putstr_fd(": command not found\n" , 2);
+		exit(127);
+	}
 	envp = stringify_env(env_lst);
 	if (envp)
-		execve(get_path(cmd->argv[0], PATH_STR), cmd->argv, envp);
+		execve(file_path, cmd->argv, envp);
 	perror(cmd->argv[0]);
 	exit(errno);
 }
@@ -54,7 +59,7 @@ int	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn)
 	size_t	i;
 
 	if (create_pipes(pipev, cmdn) == -1)
-		//Memory error somewhere, someone'll handle that.
+		//Memory error somewhere, someone'll handle that. TODO Just fatal-error it
 		return (-1);
 	i = 0;
 	while (i < cmdn)
@@ -68,7 +73,6 @@ int	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn)
 			g_child = 1;
 			if (configure_pipeline(i, cmdn, pipev) == -1)
 				exit(errno);
-			//exit(42);
 			exec_child(ft_lst_at(cmd_lst, i)->content, env_lst);
 		}
 		i++;
