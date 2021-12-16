@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/16 15:46:18 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/16 21:15:55 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS+= print_redir.c
 SRCS+= free_cmd.c
 SRCS+= free_redirect.c
 SRCS+= update_shlvl.c
+SRCS+= perror_and_exit.c
 
 #Parser
 SRCS+= split_in_cmds.c
@@ -65,6 +66,7 @@ SRCS+= redirect_output.c
 SRCS+= wait_children.c
 SRCS+= get_path.c
 SRCS+= pipes.c
+SRCS+= set_exit_status.c
 
 #Env
 SRCS+= env_var_new.c

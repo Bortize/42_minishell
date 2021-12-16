@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 22:03:20 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 15:56:44 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:38:43 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	string_validator_redir(char *line)
 		else if (*line == '<' || *line == '>')
 		{
 			token_expected = 1;
-			if (*(line  + 1) == *line)
+			if (*(line + 1) == *line)
 				line++;
 		}
 		line++;
@@ -34,7 +34,6 @@ int	string_validator_redir(char *line)
 			line++;
 	}
 	if (token_expected)
-				ft_putstr_fd(
-						"Parser error: expected token after redirection.\n" ,2);
+		ft_putstr_fd("Parser error: expected token after redirection.\n", 2);
 	return (!token_expected);
 }

@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 22:25:32 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 17:06:42 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:59:27 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,3 @@ int	heredoc(t_list *cmd_lst)
 	}
 	return (0);
 }
-

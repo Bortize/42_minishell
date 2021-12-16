@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/13 20:10:13 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:37:03 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ void	tokenize_cmd(char *cmd_txt, t_cmd *cmd_node, t_list *env_lst)
 			token_len++;
 	}
 	save_token(cmd_node, ft_strndup(cmd_txt, token_len), token_behavior,
-			env_lst);
+		env_lst);
 	return (tokenize_cmd(cmd_txt + token_len, cmd_node, env_lst));
 }

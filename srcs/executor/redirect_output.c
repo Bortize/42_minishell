@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 14:01:53 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/14 16:51:17 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:58:11 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 **	Return either the opened FD, or -1 if something is wrong.
 */
 
-int	redirect_output(t_list *out_lst)
+void	redirect_output(t_list *out_lst)
 {
-	int	fd;
+	int			fd;
 	t_redirect	*redir_data;
 
 	fd = STDOUT_FILENO;
@@ -38,10 +38,6 @@ int	redirect_output(t_list *out_lst)
 		else if (redir_data->type == redir_out)
 			fd = open(redir_data->text, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		if (fd == -1 || dup2(fd, STDOUT_FILENO) == -1)
-		{
-			perror(redir_data->text);
-			return (-1);
-		}
+			perror_and_exit(redir_data->text, errno);
 	}
-	return (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 17:20:53 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 21:12:29 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,14 @@ void	start_execution(t_list *cmd_lst, t_list **env_lst);
 char	*get_path(char *file, char *path_env);
 int		exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn,
 			pid_t *last_pid);
-int		redirect_input(t_list *in_lst, char *heredoc_file);
-int		redirect_output(t_list *out_lst);
+void	redirect_input(t_list *in_lst, char *heredoc_file);
+void	redirect_output(t_list *out_lst);
 int		heredoc(t_list *cmd_lst);
 void	wait_children(size_t cmd_num, pid_t last_pid);
 int		create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count);
 int		configure_pipeline(int cmd_index, int cmd_count, int (*pipev)[2]);
 void	clean_pipes(int pipev[CHILD_MAX - 1][2], int size);
+void	set_exit_status(int	value);
 
 //Utils  (?)
 char	**build_str_arr(t_list *str_lst);
@@ -120,6 +121,7 @@ t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *));
 void	ft_lst_remove_if(t_list **lst, void *data_ref, int (*cmp)(),
 			void (*free_fun)(void *));
 char	*ft_strcat_lst(t_list *str_lst);
+void	perror_and_exit(char *msg, int exit_status);
 
 //Environment
 void	*env_var_new(char *key_str, char *value_str);

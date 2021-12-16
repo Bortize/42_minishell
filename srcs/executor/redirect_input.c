@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:34:17 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/24 14:21:05 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:49:51 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@
 **	Return either the opened FD, or -1 if something is wrong.
 */
 
-//TODO Heredoc temp files missing, ignore them for now.
-int	redirect_input(t_list *in_lst, char *heredoc_file)
+void	redirect_input(t_list *in_lst, char *heredoc_file)
 {
 	int			heredoc_fd;
 	int			fd;
@@ -41,18 +40,11 @@ int	redirect_input(t_list *in_lst, char *heredoc_file)
 		{
 			fd = open(redir_data->text, O_RDONLY);
 			if (fd == -1)
-			{
-				perror(redir_data->text);
-				return (-1);
-			}
+				perror_and_exit(redir_data->text, errno);
 		}
 		else if (redir_data->type == here_doc)
 			fd = heredoc_fd;
 	}
 	if (dup2(fd, STDIN_FILENO) == -1)
-	{
-		perror(redir_data->text);
-		return (-1);
-	}
-	return (fd);
+		perror_and_exit(redir_data->text, errno);
 }

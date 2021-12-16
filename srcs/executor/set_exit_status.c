@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wait_children.c                                    :+:      :+:    :+:   */
+/*   set_exit_status.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 15:41:08 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 21:12:05 by vicmarti         ###   ########.fr       */
+/*   Created: 2021/12/16 21:12:52 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/12/16 21:16:09 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-void	wait_children(size_t cmd_num, pid_t last_pid)
-{
-	int	status;
+/*
+**	Set the last byte of g_status to the value given (casted).
+*/
 
-	cmd_num--;
-	waitpid(last_pid, &status, 0);
-	if (WIFEXITED(status))
-		set_exit_status(WEXITSTATUS(status));
-	else if (WIFSIGNALED(status))
-		set_exit_status(128 + WTERMSIG(status));
-	while (cmd_num > 0)
-	{
-		wait(NULL);
-		cmd_num--;
-	}
+void	set_exit_status(int	value)
+{
+	g_status &= ~0xFF;
+	g_status += (unsigned char)value;
 }

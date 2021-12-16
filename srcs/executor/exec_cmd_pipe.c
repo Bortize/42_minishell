@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 17:16:18 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 20:57:20 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ static void	exec_child(t_cmd *cmd, t_list *env_lst)
 	char	*file_path;
 	int		builtin_return;
 
-	if (redirect_input(cmd->lst_redir_in, cmd->heredoc_filename) == -1
-		|| redirect_output(cmd->lst_redir_out) == -1)
-		exit(errno);
+	redirect_input(cmd->lst_redir_in, cmd->heredoc_filename);
+	redirect_output(cmd->lst_redir_out);
 	builtin_return = builtins(&env_lst, cmd->argv);
 	if (builtin_return != -1)
 		exit(builtin_return);
@@ -35,8 +34,7 @@ static void	exec_child(t_cmd *cmd, t_list *env_lst)
 	envp = stringify_env(env_lst);
 	if (envp)
 		execve(file_path, cmd->argv, envp);
-	perror(cmd->argv[0]);
-	exit(errno);
+	perror_and_exit(cmd->argv[0], errno);
 }
 
 static int	fork_fail(int pipev[CHILD_MAX - 1][2], size_t fail_at)
