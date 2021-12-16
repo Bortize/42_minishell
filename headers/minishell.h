@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 21:12:29 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 21:26:05 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	wait_children(size_t cmd_num, pid_t last_pid);
 int		create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count);
 int		configure_pipeline(int cmd_index, int cmd_count, int (*pipev)[2]);
 void	clean_pipes(int pipev[CHILD_MAX - 1][2], int size);
-void	set_exit_status(int	value);
+void	set_exit_status(int value);
 
 //Utils  (?)
 char	**build_str_arr(t_list *str_lst);
