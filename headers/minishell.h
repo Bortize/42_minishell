@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/15 17:45:05 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:20:53 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 # define READ_END 0
 # define WRITE_END 1
 
-pid_t	g_pidv[CHILD_MAX];
-int		g_interrupted;
-int		g_heredoc;
-int		g_child;
+//We allocate the last byte 0xFF to the program exit status.
+# define STS_CHILD 0x100
+# define STS_INTERRUPT 0x300
+
 int		g_status;
 
 typedef enum e_behavior
@@ -102,11 +102,12 @@ void	sig_handler(int signum);
 //Executor
 void	start_execution(t_list *cmd_lst, t_list **env_lst);
 char	*get_path(char *file, char *path_env);
-int		exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn);
+int		exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn,
+			pid_t *last_pid);
 int		redirect_input(t_list *in_lst, char *heredoc_file);
 int		redirect_output(t_list *out_lst);
 int		heredoc(t_list *cmd_lst);
-void	wait_children(size_t cmd_num);
+void	wait_children(size_t cmd_num, pid_t last_pid);
 int		create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count);
 int		configure_pipeline(int cmd_index, int cmd_count, int (*pipev)[2]);
 void	clean_pipes(int pipev[CHILD_MAX - 1][2], int size);

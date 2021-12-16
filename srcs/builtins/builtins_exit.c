@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:16:55 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/09 13:09:14 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:51:32 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	builtins_exit(char **argv)
 		if (argv[2] != NULL)
 		{
 			ft_putstr_fd("exit: too many arguments\n", 2);
-			if (g_child)
+			if (g_status & STS_CHILD)
 				exit(1);
 			return (1);
 		}

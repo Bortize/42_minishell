@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 22:25:32 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/14 22:28:51 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:06:42 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*get_tmp_filename(void)
 	return (filename);
 }
 
-static int	read_user_input(t_cmd *cmd, char *delimiter, void *has_next)
+static int	read_user_input(t_cmd *cmd, char *eof, void *has_next)
 {
 	char	*line;
 	int		fd;
@@ -54,17 +54,17 @@ static int	read_user_input(t_cmd *cmd, char *delimiter, void *has_next)
 			return (1);
 	}
 	line = readline("<< ");
-	while (!g_interrupted && line && ft_strcmp(line, delimiter) != 0)
+	while (!(g_status & STS_INTERRUPT) && line && ft_strcmp(line, eof) != 0)
 	{
 		ft_putendl_fd(line, fd);
 		free(line);
 		line = readline("<< ");
 	}
-	free(line);
 	if (!line)
 		ft_putstr_fd("HEREDOC: Reached EOF\n", 2);
+	free(line);
 	close(fd);
-	if (g_interrupted)
+	if (g_status & STS_INTERRUPT)
 		return (1);
 	return (0);
 }

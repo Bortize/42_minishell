@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/15 19:01:28 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:16:18 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	fork_fail(int pipev[CHILD_MAX - 1][2], size_t fail_at)
 **	Don't handle children unless failure.
 **	Return -1 on error, 0 otherwise.
 */
-int	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn)
+int	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn, pid_t *lst_pid)
 {
 	int		pipev[CHILD_MAX - 1][2];
 	size_t	i;
@@ -64,13 +64,13 @@ int	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn)
 	i = 0;
 	while (i < cmdn)
 	{
-		g_pidv[i] = fork();
-		if (g_pidv[i] == -1)
+		*lst_pid = fork();
+		if (*lst_pid == -1)
 		//Memory error somewhere, someone'll handle that.
 			return (fork_fail(pipev, i));
-		else if (g_pidv[i] == 0)
+		else if (*lst_pid == 0)
 		{
-			g_child = 1;
+			g_status |= STS_CHILD;
 			if (configure_pipeline(i, cmdn, pipev) == -1)
 				exit(errno);
 			exec_child(ft_lst_at(cmd_lst, i)->content, env_lst);

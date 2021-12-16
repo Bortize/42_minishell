@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/14 22:57:34 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:02:23 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ static void	initialize_minishell(void)
 	tty_attr.c_lflag &= ~ECHOCTL;
 	ioctl(STDIN_FILENO, TIOCSETA, &tty_attr);
 	set_msh_signals();
-	g_interrupted = 0;
 	g_status = 0;
-	g_child = 0;
 }
 
 static int	only_spaces(char *str)
@@ -77,14 +75,14 @@ static char	*wait_input(void)
 {
 	char	*line;
 
-	g_interrupted = 0;
+	g_status &= ~STS_INTERRUPT;
 	line = readline("minishell> ");
 	if (!line)
 		return (line);
-	while (g_interrupted || only_spaces(line))
+	while (g_status & STS_INTERRUPT || only_spaces(line))
 	{
-		if (g_interrupted)
-			g_interrupted = 0;
+		if (g_status & STS_INTERRUPT)
+			g_status &= ~STS_INTERRUPT;
 		free(line);
 		line = readline("minishell> ");
 		if (!line)
