@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/16 19:04:29 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 00:01:03 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,22 @@ static char	*env_node_to_str(t_env_var *envar)
 {
 	char	*tmp;
 	char	*ret;
+	char *aux;
+	char *ptr;
 
-	ret = ft_strdup(envar->key);
+	ptr = ft_strdup("declare -x ");
+	ret = ft_strjoin(ptr, envar->key);
 	if (!ret)
 		return (NULL);
-	tmp = ft_strjoin(ret, "=");
+	free(ptr);
+	tmp = ft_strjoin(ret, "=\"");
 	if (!tmp)
 		return (NULL);
 	free(ret);
-	ret = ft_strjoin(tmp, envar->value);
+	aux = ft_strjoin(tmp, envar->value);
 	free(tmp);
+	ret = ft_strjoin(aux, "\"");
+	free(aux);
 	return (ret);
 }
 
@@ -41,7 +47,9 @@ static char	*env_node_to_str(t_env_var *envar)
 ** key and the value of the environment.
 */
 
-int ft_strlen_matrix(char **str);
+int ft_strlen_matrix(char **str);// Añadir a la libft
+
+
 
 static char	**env_list_to_array(t_list *str_lst)
 {
@@ -55,29 +63,15 @@ static char	**env_list_to_array(t_list *str_lst)
 	i = 0;
 	while (str_lst)
 	{
-		str_arr[i] = env_node_to_str(str_lst->content);
+		str_arr[i] = env_node_to_str(str_lst->content);// Esta te devuelve la cadena de cada posicion en char *
 		str_lst = str_lst->next;
 		i++;
 	}
 	str_arr[i] = NULL;
+	//                                Aqui deberias de meter una funcion que te ponga comillas en cada cadena
 	return (str_arr);
 }
 
-/*
-** Prints the environment in the same way as the 'print_env' function
-** does, adding 'declare -x' in addition.
-
-
-static void	print_env_export(void *content)
-{
-	t_env_var	*env_item;
-
-	env_item = content;
-	write(1, "declare -x ", 11);
-	printf("%s=", env_item->key);
-	printf("%s\n", env_item->value);
-}
-*/
 
 static int	insert(t_list **env_lst, char **str_args)
 {
@@ -111,11 +105,7 @@ int	builtins_export(t_list **env_lst, char **str_args)
 	if (i < 2)
 	{
 		aux = env_list_to_array(*env_lst);
-//		printf("%zu\n", ft_strlen(*aux + 3));
-// ----------------- O R D E N A R ------------------------i
 		sort(aux);
-// --------------------------------------------------------
-//		ft_lstiter(*env_lst, print_env_export);
 		ft_free_arr((void **)aux);
 	}
 	else if (read_variable(str_args[1]) == 0)

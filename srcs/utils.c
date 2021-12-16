@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 18:57:17 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 00:01:52 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include "minishell.h"
 //TODO I'm adding this to the libft.
-
 
 /*
 ** This function takes the arguments stored in a "t_list *arg" of the t_cmd
@@ -107,29 +106,29 @@ int ft_strlen_matrix(char **str)
 	return (i);
 }
 
-int sort(char **arreglo)
+char **sort(char **str)
 {
 		int i;
 		int j;
 		char **sorted;
-		int d;
+		int len;
 
-		d = ft_strlen_matrix(arreglo);
-		sorted = malloc(sizeof(char *) * d + 1);
+		len = ft_strlen_matrix(str);
+		sorted = malloc(sizeof(char *) * len + 1);
 
 		i = 0;
-		while (i < d)
+		while (i < len)
 		{
-				sorted[i] = arreglo[i];
+				sorted[i] = str[i];
 				i++;
 		}
 		j = 0;
-		while (j < d)
+		while (j < len)
 		{
 				i = j + 1;
-				while (i < d)
+				while (i < len)
 				{
-						if (strcmp(sorted[j], sorted[i]) > 0)
+						if (ft_strcmp(sorted[j], sorted[i]) > 0)
 						{
 								char *temp = sorted[j];
 								sorted[j] = sorted[i];
@@ -140,12 +139,11 @@ int sort(char **arreglo)
 			j++;
 		}
 		i = 0;
-		while (i < d)
+		while (i < len)
 		{
 				printf("%s\n",sorted[i]);
 				i++;
 		}
-		// FREEEEEE
-//		ft_free_arr((void **) sorted);
-		return (0);
+		free(sorted);
+		return (sorted);
 	}
