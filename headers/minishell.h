@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/14 16:26:26 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/16 18:59:29 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,5 +127,6 @@ void	print_env(void *content);
 void	print_echo_str(char **str);
 int		builtins_export(t_list **env_lst, char **str_args);
 size_t	read_variable(char *text);
+int		sort(char **str);
 
 #endif

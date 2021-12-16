@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/14 17:30:59 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/16 19:05:02 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	main(int argc, char **argv, char **envp)
 	initialize_minishell();
 	env_lst = build_env_lst(envp);
 	update_shlvl(env_lst);
-	ft_lstiter(env_lst, print_env);
+//	ft_lstiter(env_lst, print_env);
 	line = wait_input();
 	while (line)
 	{
