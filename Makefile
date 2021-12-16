@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/16 14:12:17 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/16 15:46:18 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ vpath %.c srcs/signals
 vpath %.c srcs/parser
 vpath %.h headers
 vpath %.o $(ODIR)
+vpath %.o.dbg $(ODIR)
 
 NAME=minishell
 DBG_NAME=debug
@@ -103,7 +104,7 @@ TEST=$(filter minishell, $(OBJS))
 LDFLAGS=-Llibft -Lreadline/lib
 LDLIBS=-lreadline -ltermcap -lft
 
-.PHONY: all clean fclean re test relibs debug
+.PHONY: all clean fclean re test relibs
 
 all : $(NAME)
 
