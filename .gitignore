@@ -1,5 +1,8 @@
 #Program names.
 minishell
+debug
+
+objects/
 
 #Ctags
 tags
@@ -12,6 +15,7 @@ srcs/tags
 *.d
 
 # Object files
+*.o.dgb
 *.o
 *.ko
 *.obj
