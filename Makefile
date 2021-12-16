@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/15 22:10:31 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/16 14:12:17 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,16 +130,16 @@ test : $(TEST) syntax_tester.o libft/libft.a
 
 $(DBG_NAME) : $(DBG_OBJS) libft/libft.a
 	git submodule update --init
-	$(CC) $(LDFLAGS) -fsanitize=address $(LDLIBS) $(addprefix $(ODIR)/,$(OBJS)) -o $(DBG_NAME)
+	$(CC) $(LDFLAGS) -fsanitize=address $(LDLIBS) $(addprefix $(ODIR)/,$(DBG_OBJS)) -o $(DBG_NAME)
 
 clean :
-	@rm -rf $(ODIR) $(NAME).dbg
+	rm -rf $(ODIR) $(NAME).dbg
 
 relibs :
 	make re -C libft
 
 fclean : clean
-	@rm -rf $(NAME)
+	rm -rf $(NAME)
 
 re : fclean all
 
