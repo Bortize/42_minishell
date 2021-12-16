@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 21:26:05 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 21:54:34 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	sig_handler(int signum);
 //Executor
 void	start_execution(t_list *cmd_lst, t_list **env_lst);
 char	*get_path(char *file, char *path_env);
-int		exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn,
+void	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn,
 			pid_t *last_pid);
 void	redirect_input(t_list *in_lst, char *heredoc_file);
 void	redirect_output(t_list *out_lst);

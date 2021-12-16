@@ -6,39 +6,46 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:16:55 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/16 16:51:32 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 21:48:03 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	validate_num(char *text)
+{
+	char	*str_end;
+	int		num;
+
+	errno = 0;
+	num = (unsigned char)ft_strtoi(text, &str_end);
+	if (errno || *str_end)
+	{
+		ft_putstr_fd("exit: ", 2);
+		ft_putstr_fd(text, 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
+		num = 255;
+	}
+	return (num);
+}
+
 int	builtins_exit(char **argv)
 {
 	unsigned char	exit_sts;
-	char			*str_end;
 
-	ft_putstr_fd("exit\n", 2);
+	if (!(g_status & STS_CHILD))
+		ft_putstr_fd("exit\n", 2);
 	exit_sts = 0;
 	if (!argv || argv[1] == NULL)
-		exit(0);
-	else
+		exit_sts = 0;
+	else if (argv[2] != NULL)
 	{
-		errno = 0;
-		exit_sts = (unsigned char)ft_strtoi(argv[1], &str_end);
-		if (errno || *str_end)
-		{
-			ft_putstr_fd("exit: ", 2);
-			ft_putstr_fd(argv[1], 2);
-			ft_putstr_fd(": numeric argument required\n", 2);
-			exit(255);
-		}
-		if (argv[2] != NULL)
-		{
-			ft_putstr_fd("exit: too many arguments\n", 2);
-			if (g_status & STS_CHILD)
-				exit(1);
+		ft_putstr_fd("exit: too many arguments\n", 2);
+		if (!(g_status & STS_CHILD))
 			return (1);
-		}
-		exit(exit_sts);
+		exit_sts = 1;
 	}
+	else
+		exit_sts = (char)validate_num(argv[1]);
+	exit(exit_sts);
 }

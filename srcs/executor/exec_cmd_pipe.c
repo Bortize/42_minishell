@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 20:57:20 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 21:56:03 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	exec_child(t_cmd *cmd, t_list *env_lst)
 	if (!file_path)
 	{
 		ft_putstr_fd(cmd->argv[0], 2);
-		ft_putstr_fd(": command not found\n" , 2);
+		ft_putstr_fd(": command not found\n", 2);
 		exit(127);
 	}
 	envp = stringify_env(env_lst);
@@ -37,12 +37,19 @@ static void	exec_child(t_cmd *cmd, t_list *env_lst)
 	perror_and_exit(cmd->argv[0], errno);
 }
 
-static int	fork_fail(int pipev[CHILD_MAX - 1][2], size_t fail_at)
+static void	fatal_fork_fail(int pipev[CHILD_MAX - 1][2], size_t fail_at)
 {
+	int	error;
+
+	error = errno;
 	perror("FORK");
 	clean_pipes(pipev, fail_at);
-	//TODO Sigkill all children, kill them all.
-	return (-1);
+	while (fail_at > 0)
+	{
+		wait(NULL);
+		fail_at--;
+	}
+	exit(error);
 }
 
 /*
@@ -51,21 +58,21 @@ static int	fork_fail(int pipev[CHILD_MAX - 1][2], size_t fail_at)
 **	Don't handle children unless failure.
 **	Return -1 on error, 0 otherwise.
 */
-int	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn, pid_t *lst_pid)
+
+void	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn,
+			pid_t *lst_pid)
 {
 	int		pipev[CHILD_MAX - 1][2];
 	size_t	i;
 
 	if (create_pipes(pipev, cmdn) == -1)
-		//Memory error somewhere, someone'll handle that. TODO Just fatal-error it
-		return (-1);
+		perror_and_exit("FATAL:". errno);
 	i = 0;
 	while (i < cmdn)
 	{
 		*lst_pid = fork();
 		if (*lst_pid == -1)
-		//Memory error somewhere, someone'll handle that.
-			return (fork_fail(pipev, i));
+			fatal_fork_fail(pipev, i);
 		else if (*lst_pid == 0)
 		{
 			g_status |= STS_CHILD;
@@ -76,5 +83,4 @@ int	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn, pid_t *lst_pid)
 		i++;
 	}
 	clean_pipes(pipev, cmdn - 1);
-	return (0);
 }
