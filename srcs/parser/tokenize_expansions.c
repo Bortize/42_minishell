@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:40:52 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 15:43:16 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:28:12 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ static void	update_status(char *status, char ch_read)
 
 static char	*get_var_str(t_list *env, char *str)
 {
-	char		*var_key;
-	char		*var_val;
+	char			*var_key;
+	char			*var_val;
+	const size_t	var_len = read_variable(str + 1);
 
-	var_key = ft_substr(str + 1, 0, read_variable(str + 1));
+	if (var_len == 0)
+		return (ft_strdup("$"));
+	var_key = ft_substr(str + 1, 0, var_len);
 	if (!var_key)
 		return (NULL);
 	var_val = get_current_path(env, var_key);
