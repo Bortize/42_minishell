@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:40:52 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/15 18:09:56 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 11:48:23 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,19 @@ static void	update_status(char *status, char ch_read)
 
 static char	*get_var_str(t_list *env, char *str)
 {
-	t_env_var	*var_node;
 	char		*var_key;
+	char		*var_val;
 
 	var_key = ft_substr(str + 1, 0, read_variable(str + 1));//TODO (?)
 	if (!var_key)
 		return (NULL);
-	var_node = env_var_find(env, var_key);
+	var_val = get_current_path(env, var_key);
 	free(var_key);
-	if (!var_node || !var_node->value)
+	if (!var_val)
 		return (ft_strdup(""));
-	return (ft_strdup(var_node->value));
+	if (*(str + 1) == '?')
+		return (var_val);
+	return (ft_strdup(var_val));
 }
 
 static t_list	*add_tk_cln_fail(t_list **tk_lst, char *str)
