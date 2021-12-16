@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:40:52 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 11:48:23 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:43:16 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*get_var_str(t_list *env, char *str)
 	char		*var_key;
 	char		*var_val;
 
-	var_key = ft_substr(str + 1, 0, read_variable(str + 1));//TODO (?)
+	var_key = ft_substr(str + 1, 0, read_variable(str + 1));
 	if (!var_key)
 		return (NULL);
 	var_val = get_current_path(env, var_key);
