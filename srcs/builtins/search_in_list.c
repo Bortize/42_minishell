@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 20:56:37 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/12 23:06:42 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/16 11:06:27 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 ** @ content_env -> Node contents of the environment variable list
 ** @ lst_env -> environment variable list
 ** @ tmp ->
+** When asked for the var "?", it returns a free-able string.
 */
 
 char	*get_current_path(t_list *env_lst, char *str)
@@ -26,6 +27,8 @@ char	*get_current_path(t_list *env_lst, char *str)
 	t_list		*lst_env;
 	t_env_var	*tmp;
 
+	if (ft_strcmp(str, "?") == 0)
+		return (ft_itoa(g_status & 0xFF));
 	content_env.key = str;
 	content_env.value = NULL;
 	lst_env = ft_lst_find(env_lst, &content_env, env_var_cmp);
