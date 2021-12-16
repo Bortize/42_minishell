@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 22:03:20 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/15 21:35:20 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/16 15:56:44 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ int	string_validator_redir(char *line)
 	{
 		token_expected = 0;
 		if (*line == '\'' || *line == '\"')
-			line += count_until_repeat(line);
+			line += count_until_repeat(line) - 1;
 		else if (*line == '<' || *line == '>')
 		{
 			token_expected = 1;
 			if (*(line  + 1) == *line)
 				line++;
 		}
-		else
-			line++;
+		line++;
 		while (*line && ft_isspace(*line))
 			line++;
 	}
