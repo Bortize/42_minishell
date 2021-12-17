@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 13:57:36 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/17 00:01:52 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:09:43 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *))
 }
 
 /*
-** Release the Peoria a vector
+** Releases a matrix
 */
 
 void	ft_free_arr(void **ptr_arr)
@@ -96,9 +96,14 @@ t_list	*ft_lst_at(t_list *lst, size_t pos)
 	return (lst);
 }
 
-int ft_strlen_matrix(char **str)
+/*
+** Calculates the length of the size of a string array.
+** Returns the value of its length
+*/
+
+int	ft_strlen_matrix(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -106,44 +111,59 @@ int ft_strlen_matrix(char **str)
 	return (i);
 }
 
-char **sort(char **str)
+/*
+** This function is part of the sort function, its task is to
+** technically sort the strings and print them.
+*/
+
+void	sortandprint(char **str, int len, int i)
 {
-		int i;
-		int j;
-		char **sorted;
-		int len;
+	char	*temp;
+	int		j;
 
-		len = ft_strlen_matrix(str);
-		sorted = malloc(sizeof(char *) * len + 1);
-
-		i = 0;
+	j = 0;
+	while (j < len)
+	{
+		i = j + 1;
 		while (i < len)
 		{
-				sorted[i] = str[i];
-				i++;
+			if (ft_strcmp(str[j], str[i]) > 0)
+			{
+				temp = str[j];
+				str[j] = str[i];
+				str[i] = temp;
+			}
+			i++;
 		}
-		j = 0;
-		while (j < len)
-		{
-				i = j + 1;
-				while (i < len)
-				{
-						if (ft_strcmp(sorted[j], sorted[i]) > 0)
-						{
-								char *temp = sorted[j];
-								sorted[j] = sorted[i];
-								sorted[i] = temp;
-						}
-						i++;
-				}
-			j++;
-		}
-		i = 0;
-		while (i < len)
-		{
-				printf("%s\n",sorted[i]);
-				i++;
-		}
-		free(sorted);
-		return (sorted);
+		j++;
 	}
+	i = 0;
+	while (i < len)
+	{
+		printf("%s\n", str[i]);
+		i++;
+	}
+}
+
+/*
+** Sorts an array of strings based on the comparison of their ASCII values
+*/
+
+char	**sort(char **str)
+{
+	int		i;
+	char	**sorted;
+	int		len;
+
+	len = ft_strlen_matrix(str);
+	sorted = malloc(sizeof(char *) * len + 1);
+	i = 0;
+	while (i < len)
+	{
+		sorted[i] = str[i];
+		i++;
+	}
+	sortandprint(sorted, len, i);
+	free(sorted);
+	return (sorted);
+}

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/16 19:05:02 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:03:32 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static int	build_argvs(t_list *cmd_lst)
 	}
 	return (0);
 }
+
+/*
+** Removes spaces from the beginning and end of the collected line
+** and returns each word in a token list.
+*/
 
 static int	parse_line(char *line, t_list **cmd_lst, t_list *env_lst)
 {
@@ -70,6 +75,11 @@ static int	only_spaces(char *str)
 		str++;
 	return (*str == '\0');
 }
+
+/*
+** Prints the prompt and receives in a pointer *line
+** the line typed by the user
+*/
 
 static char	*wait_input(void)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/17 00:01:03 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:26:42 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ static char	*env_node_to_str(t_env_var *envar)
 ** key and the value of the environment.
 */
 
-int ft_strlen_matrix(char **str);// Añadir a la libft
-
-
-
 static char	**env_list_to_array(t_list *str_lst)
 {
 	const int	len = ft_lstsize(str_lst);
@@ -63,12 +59,11 @@ static char	**env_list_to_array(t_list *str_lst)
 	i = 0;
 	while (str_lst)
 	{
-		str_arr[i] = env_node_to_str(str_lst->content);// Esta te devuelve la cadena de cada posicion en char *
+		str_arr[i] = env_node_to_str(str_lst->content);
 		str_lst = str_lst->next;
 		i++;
 	}
 	str_arr[i] = NULL;
-	//                                Aqui deberias de meter una funcion que te ponga comillas en cada cadena
 	return (str_arr);
 }
 
@@ -94,7 +89,6 @@ static int	insert(t_list **env_lst, char **str_args)
 ** Check that the export command takes arguments. If so, it exports the
 ** variable passed to it. Otherwise, it only prints the environment.
 */
-
 
 int	builtins_export(t_list **env_lst, char **str_args)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 23:49:11 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:10:10 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,5 +128,6 @@ void	print_echo_str(char **str);
 int		builtins_export(t_list **env_lst, char **str_args);
 size_t	read_variable(char *text);
 char	**sort(char **str);
+int		ft_strlen_matrix(char **str);
 
 #endif
