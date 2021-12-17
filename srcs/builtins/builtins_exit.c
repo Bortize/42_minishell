@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 14:16:55 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/16 21:48:03 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:06:38 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ static int	validate_num(char *text)
 	return (num);
 }
 
-int	builtins_exit(char **argv)
+int	builtins_exit(char **argv, t_list **env_lst)
 {
 	unsigned char	exit_sts;
 
+	(void)env_lst;
 	if (!(g_status & STS_CHILD))
 		ft_putstr_fd("exit\n", 2);
 	exit_sts = 0;

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 15:19:39 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/13 18:54:06 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 23:03:07 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@
 ** Prints the directory where the prompt is located using the getcwd function
 */
 
-int	builtint_pwd(char *str)
+int	builtins_pwd(char **argv, t_list **env_lst)
 {
-	char	cwd[PATH_MAX];
+	char	*str;
 
-	if (str != NULL)
+	(void)argv;
+	(void)env_lst;
+	str = getcwd(NULL, -4987);
+	if (!str)
 	{
-		printf("%s\n", getcwd(cwd, 4096));
-		return (0);
+		perror("PWD");
+		return ((char)errno);
 	}
-	else
-		return (-1);
+	ft_putstr_fd(str, 1);
+	write(1, "\n", 1);
+	free(str);
+	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 21:23:14 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/15 17:43:49 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:08:20 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 
-int	builtins_unset(t_list **env_lst, char **argv)
+int	builtins_unset(char **argv, t_list **env_lst)
 {
 	t_env_var	ref;
 	int			status;

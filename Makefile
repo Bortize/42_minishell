@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/17 14:47:38 by bgomez-r         ###   ########.fr        #
+#    Updated: 2021/12/17 22:52:38 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRCS+= update_shlvl.c
 #Parser
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
+SRCS+= tokenize_expansions.c
 SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
@@ -43,7 +44,9 @@ SRCS+= count_until_repeat.c
 SRCS+= string_validator.c
 SRCS+= string_validator_pipes.c
 SRCS+= string_validator_quotes.c
+SRCS+= string_validator_redir.c
 SRCS+= read_variable.c
+SRCS+= expand_str.c
 
 #Signals
 SRCS+= sig_handler.c
@@ -57,6 +60,7 @@ SRCS+= redirect_output.c
 SRCS+= wait_children.c
 SRCS+= get_path.c
 SRCS+= pipes.c
+SRCS+= heredoc.c
 
 #Env
 SRCS+= env_var_new.c
@@ -70,7 +74,8 @@ SRCS+= stringify_var.c
 SRCS+= stringify_env.c
 
 #Builtins
-SRCS+= builtins.c
+SRCS+= get_builtin.c
+#SRCS+= builtins.c #TODO
 SRCS+= builtins_pwd.c
 SRCS+= builtins_env.c
 SRCS+= builtins_unset.c
@@ -83,14 +88,11 @@ SRCS+= print_echo_str.c #FIXME
 SRCS+= builtins_export.c
 SRCS+= search_in_list.c
 
-SRCS+= expand_str.c
+#Utils
 SRCS+= ft_lst_remove_if.c
 SRCS+= ft_strcat_lst.c
-SRCS+= heredoc.c
 SRCS+= perror_and_exit.c
 SRCS+= set_exit_status.c
-SRCS+= string_validator_redir.c
-SRCS+= tokenize_expansions.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe

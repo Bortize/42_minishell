@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/13 21:15:38 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:51:47 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,28 +87,26 @@ static void	back(t_list *env_lst, char *pwd, char *aux)
 ** Moves the prompt between directory levels
 */
 
-int	builtins_cd(char **arg, t_list *env_lst)
+int	builtins_cd(char **argv, t_list **env_lst)
 {
 	char	*pwd;
 	char	*aux;
 	int		i;
 
-	(void)(arg);// Creo que tendre que dejar arg como estaba
-	(void)(env_lst);
-	i = count_arguments(arg);
+	i = count_arguments(argv);
 	aux = NULL;
 	pwd = getcwd(NULL, 4096);
 	printf("Numero de argumentos %d\n", i);
 	if ((i == 1)
-		|| (ft_strcmp(arg[0], "cd") == 0 && ft_strcmp(arg[1], "--") == 0))
-		return (home(env_lst, pwd));
-	else if (ft_strcmp(arg[1], "..") == 0)
-		go_up(env_lst, pwd);
-	else if (ft_strcmp(arg[1], "-") == 0)
-		back(env_lst, pwd, aux);
+		|| (ft_strcmp(argv[0], "cd") == 0 && ft_strcmp(argv[1], "--") == 0))
+		return (home(*env_lst, pwd));
+	else if (ft_strcmp(argv[1], "..") == 0)
+		go_up(*env_lst, pwd);
+	else if (ft_strcmp(argv[1], "-") == 0)
+		back(*env_lst, pwd, aux);
 	else
 	{
-		if (chdir(arg[1]) == -1)
+		if (chdir(argv[1]) == -1)
 			perror("cd");
 	}
 	free(pwd);

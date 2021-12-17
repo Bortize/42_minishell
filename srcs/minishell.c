@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/16 17:02:23 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/17 22:18:54 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <sys/ioctl.h>
 #include <termios.h>
 
-static int	build_argvs(t_list *cmd_lst)
+static int	build_argvs(t_list *cmd_lst) //TODO void type and  perror&exit
 {
 	t_cmd	*cmd;
 
@@ -46,7 +46,7 @@ static int	parse_line(char *line, t_list **cmd_lst, t_list *env_lst)
 	split_in_cmds(trimmed, cmd_lst, env_lst);
 	ft_lstiter(*cmd_lst, print_cmd);
 	free(trimmed);
-	if (build_argvs(*cmd_lst) == -1)
+	if (build_argvs(*cmd_lst) == -1) //TODO
 		return (1);
 	return (0);
 }
