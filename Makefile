@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/16 21:15:55 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/17 14:47:38 by bgomez-r         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,29 +20,22 @@ vpath %.c srcs/signals
 vpath %.c srcs/parser
 vpath %.h headers
 vpath %.o $(ODIR)
-vpath %.o.dbg $(ODIR)
 
 NAME=minishell
-DBG_NAME=debug
 
 SRCS:=
 SRCS+= minishell.c
 SRCS+= utils.c
-SRCS+= ft_strcat_lst.c
-SRCS+= ft_lst_remove_if.c
 SRCS+= error.c
 SRCS+= print_cmd.c
 SRCS+= print_redir.c
 SRCS+= free_cmd.c
 SRCS+= free_redirect.c
 SRCS+= update_shlvl.c
-SRCS+= perror_and_exit.c
 
 #Parser
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
-SRCS+= tokenize_expansions.c
-SRCS+= expand_str.c
 SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
@@ -50,7 +43,6 @@ SRCS+= count_until_repeat.c
 SRCS+= string_validator.c
 SRCS+= string_validator_pipes.c
 SRCS+= string_validator_quotes.c
-SRCS+= string_validator_redir.c
 SRCS+= read_variable.c
 
 #Signals
@@ -60,13 +52,11 @@ SRCS+= set_msh_signals.c
 #Executor
 SRCS+= start_execution.c
 SRCS+= exec_cmd_pipe.c
-SRCS+= heredoc.c
 SRCS+= redirect_input.c
 SRCS+= redirect_output.c
 SRCS+= wait_children.c
 SRCS+= get_path.c
 SRCS+= pipes.c
-SRCS+= set_exit_status.c
 
 #Env
 SRCS+= env_var_new.c
@@ -93,13 +83,20 @@ SRCS+= print_echo_str.c #FIXME
 SRCS+= builtins_export.c
 SRCS+= search_in_list.c
 
+SRCS+= expand_str.c
+SRCS+= ft_lst_remove_if.c
+SRCS+= ft_strcat_lst.c
+SRCS+= heredoc.c
+SRCS+= perror_and_exit.c
+SRCS+= set_exit_status.c
+SRCS+= string_validator_redir.c
+SRCS+= tokenize_expansions.c
+
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
-CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -O2
-DBG_FLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g -fsanitize=address
+CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g -O2
 
 OBJS=$(SRCS:.c=.o)
-DBG_OBJS=$(SRCS:.c=.o.dbg)
 
 TEST=$(filter minishell, $(OBJS))
 
@@ -111,38 +108,26 @@ LDLIBS=-lreadline -ltermcap -lft
 all : $(NAME)
 
 libft/libft.a :
-	git submodule update --init
 	make -C libft
 
 $(NAME) : $(OBJS) libft/libft.a
-	git submodule update --init
 	$(CC) $(LDFLAGS) $(LDLIBS) $(addprefix $(ODIR)/,$(OBJS)) -o $@
-
-%.o.dbg : %.c minishell.h
-	mkdir -p $(ODIR)
-	$(CC) $(DBG_FLAGS) $< -c -o $(ODIR)/$@
-	ctags -a $<
 
 %.o : %.c minishell.h
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $< -c -o $(ODIR)/$@
-	ctags -a $<
 
 test : $(TEST) syntax_tester.o libft/libft.a
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(TEST) syntax_tester.o -o test
 
-$(DBG_NAME) : $(DBG_OBJS) libft/libft.a
-	git submodule update --init
-	$(CC) $(LDFLAGS) -fsanitize=address $(LDLIBS) $(addprefix $(ODIR)/,$(DBG_OBJS)) -o $(DBG_NAME)
-
 clean :
-	rm -rf $(ODIR) $(NAME).dbg
+	@rm -rf $(ODIR)
 
 relibs :
 	make re -C libft
 
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re : fclean all
 

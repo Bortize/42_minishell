@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 21:56:03 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:31:58 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn,
 	size_t	i;
 
 	if (create_pipes(pipev, cmdn) == -1)
-		perror_and_exit("FATAL:". errno);
+		perror_and_exit("FATAL:", errno);
 	i = 0;
 	while (i < cmdn)
 	{

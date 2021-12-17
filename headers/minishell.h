@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 21:54:34 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:41:27 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <limits.h>
 # include <errno.h>
+# include <sys/errno.h>
 
 # define READ_END 0
 # define WRITE_END 1
@@ -119,7 +120,7 @@ void	ft_free_arr(void **ptr_arr);
 t_list	*ft_lst_at(t_list *lst, size_t pos);
 t_list	*ft_lst_find(t_list *lst, void *data_ref, int (*cmp)(void *, void *));
 void	ft_lst_remove_if(t_list **lst, void *data_ref, int (*cmp)(),
-			void (*free_fun)(void *));
+		void (*free_fun)(void *));
 char	*ft_strcat_lst(t_list *str_lst);
 void	perror_and_exit(char *msg, int exit_status);
 
