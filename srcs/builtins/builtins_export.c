@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/17 18:26:42 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:17:46 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static char	*env_node_to_str(t_env_var *envar)
 {
 	char	*tmp;
 	char	*ret;
-	char *aux;
-	char *ptr;
+	char	*aux;
+	char	*ptr;
 
 	ptr = ft_strdup("declare -x ");
 	ret = ft_strjoin(ptr, envar->key);
@@ -49,10 +49,11 @@ static char	*env_node_to_str(t_env_var *envar)
 
 static char	**env_list_to_array(t_list *str_lst)
 {
-	const int	len = ft_lstsize(str_lst);
-	char			**str_arr;
-	int				i;
+	char	**str_arr;
+	int		i;
+	int		len;
 
+	len = ft_lstsize(str_lst);
 	str_arr = malloc(sizeof(char *) * (len + 1));
 	if (!str_arr)
 		return (str_arr);
@@ -66,7 +67,6 @@ static char	**env_list_to_array(t_list *str_lst)
 	str_arr[i] = NULL;
 	return (str_arr);
 }
-
 
 static int	insert(t_list **env_lst, char **str_args)
 {
@@ -92,11 +92,11 @@ static int	insert(t_list **env_lst, char **str_args)
 
 int	builtins_export(t_list **env_lst, char **str_args)
 {
-	int i;
-	char **aux;
+	int		i;
+	char	**aux;
 
 	i = 1;
-	if (i < 2)
+	if (i == 1)
 	{
 		aux = env_list_to_array(*env_lst);
 		sort(aux);
