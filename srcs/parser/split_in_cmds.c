@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 18:28:09 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/13 20:05:05 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:27:10 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst)
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	cmd_node = ft_lstnew(cmd);
 	if (!cmd || !cmd_node)
-		exit(1); //Exit handler to print errors //TODO NO-MEM
+		perror_and_exit("MEM:", errno);
 	tokenize_cmd(tmp, cmd, env_lst);
 	ft_lstadd_back(last_cmd, cmd_node);
 	free(tmp);

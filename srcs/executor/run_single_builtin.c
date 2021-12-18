@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 17:35:59 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 19:03:52 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:00:31 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	restore_io(int stdin_cpy, int stdout_cpy)
 {
 	if (dup2(stdin_cpy, STDIN_FILENO) == -1
-			|| dup2(stdout_cpy, STDOUT_FILENO) == -1)
+		|| dup2(stdout_cpy, STDOUT_FILENO) == -1)
 		perror_and_exit("DUP2:", errno);
 }
 
@@ -31,7 +31,7 @@ void	run_single_builtin(t_builtin_funcp builtin, t_cmd *cmd,
 	if (stdin_cpy == -1 || stdout_cpy == -1)
 		perror_and_exit("DUP:", errno);
 	if (redirect_input(cmd->lst_redir_in, cmd->heredoc_filename) == -1
-			|| redirect_output(cmd->lst_redir_out) == -1)
+		|| redirect_output(cmd->lst_redir_out) == -1)
 	{
 		restore_io(stdin_cpy, stdout_cpy);
 		set_exit_status(1);

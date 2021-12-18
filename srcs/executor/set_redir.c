@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:58:13 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 19:05:50 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:59:47 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ int	set_redir(t_behavior type, char *filename, int redir_dest)
 	}
 	return (fd);
 }
-

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 18:15:18 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:58:33 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static void	exec_child(t_cmd *cmd, t_list *env_lst)
 {
-	char	**envp;
-	char	*file_path;
-	int		builtin_return;
+	char			**envp;
+	char			*file_path;
+	int				builtin_return;
 	t_builtin_funcp	builtin;
 
 	if (redirect_input(cmd->lst_redir_in, cmd->heredoc_filename) == -1

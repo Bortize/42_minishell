@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 19:06:53 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:58:39 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ typedef struct s_env_var
 //Builtins
 t_builtin_funcp	get_builtin(char *str);
 void			print_error(char *str);
-//int				builtins(t_list **env_lst, char **str_args);
 //void			builtins_echo(char **argv);FIXME
 int				builtins_pwd(char **argv, t_list **env_lst);
 int				builtins_env(char **argv, t_list **env_lst);
