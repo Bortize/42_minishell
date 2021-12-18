@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/18 20:09:36 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/18 21:06:24 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,18 @@ static char	**env_list_to_array(t_list *str_lst)
 ** Inserts the value of the variable that is being exported.
 */
 
-static int	insert(t_list **env_lst, char **str_args)
+static int	insert(t_list **env_lst, char **argv)
 {
 	int	i;
 	int	len;
 
 	i = 1;
-	while (str_args[i])
+	while (argv[i])
 	{
-		len = read_variable(str_args[i]);
-		if (str_args[i][len] != '=')
-			return (-1);
-		env_var_add_str(str_args[i], env_lst);
+		len = read_variable(argv[i]);
+		if (argv[i][len] != '=')
+			return (1);
+		env_var_add_str(argv[i], env_lst);
 		i++;
 	}
 	return (0);
@@ -94,15 +94,15 @@ static int	insert(t_list **env_lst, char **str_args)
 ** variable passed to it. Otherwise, it only prints the environment.
 */
 
-int	builtins_export(t_list **env_lst, char **str_args)
+int	builtins_export(char **argv, t_list **env_lst)
 {
 	int		i;
 	char	**aux;
 
 	i = 1;
-	while (str_args[i])
+	while (argv[i])
 	{
-		printf("%s\n", str_args[i]);
+		printf("%s\n", argv[i]);
 		i++;
 	}
 	if (i < 2)
@@ -111,9 +111,9 @@ int	builtins_export(t_list **env_lst, char **str_args)
 		sort(aux);
 		ft_free_arr((void **)aux);
 	}
-	else if (read_variable(str_args[1]) == 0)
-		return (-1);
+	else if (read_variable(argv[1]) == 0)
+		return (1);
 	else
-		return (insert(env_lst, str_args));
+		return (insert(env_lst, argv));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 12:59:28 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/13 18:51:28 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:58:35 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,19 @@ static char	*join_args(char **str, int i)
 ** @ *aux_free_space -> Reference pointer to the second string after space
 */
 
-void	print_echo_str(char **str)
+int	builtins_echo(char **argv, t_list **env_lst)
 {
 	char	*aux;
 	int		i;
 
+	(void)env_lst;
 	i = 1;
-	if (strcmp(str[i], "-n") == 0)
-		remove_endline(str, &i);
-	aux = join_args(str, i);
+	if (strcmp(argv[i], "-n") == 0)
+		remove_endline(argv, &i);
+	aux = join_args(argv, i);
 	printf("%.*s", (int)ft_strlen(aux) - 1, aux);
 	if (i == 1)
 		printf("\n");
 	free(aux);
+	return (0);
 }

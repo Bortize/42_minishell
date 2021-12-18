@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 21:02:07 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/17 22:04:12 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:55:01 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ t_builtin_funcp	get_builtin(char *str)
 		return (builtins_env);
 	else if (ft_strcmp(str, "pwd") == 0)
 		return (builtins_pwd);
-	//else if (ft_strcmp(str, "echo") == 0) TODO, lol
-	//	return (builtins_echo);
+	else if (ft_strcmp(str, "echo") == 0)
+		return (builtins_echo);
 	else if (ft_strcmp(str, "cd") == 0)
 		return (builtins_cd);
-	//else if (ft_strcmp(str, "export") == 0) TODO, BTW
-	//	return (builtins_export);
+	else if (ft_strcmp(str, "export") == 0)
+		return (builtins_export);
 	else if (ft_strcmp(str, "unset") == 0)
 		return (builtins_unset);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 20:40:34 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 21:01:45 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ typedef struct s_env_var
 //Builtins
 t_builtin_funcp	get_builtin(char *str);
 void			print_error(char *str);
-//void			builtins_echo(char **argv);FIXME
+int				builtins_echo(char **argv, t_list **env_lst);
 int				builtins_pwd(char **argv, t_list **env_lst);
 int				builtins_env(char **argv, t_list **env_lst);
 int				builtins_exit(char **argv, t_list **env_lst);
 int				builtins_unset(char **argv, t_list **env_lst);
-//void			builtins_env_list(char **argv, char **env);  TODO remove(?)
 int				builtins_cd(char **arg, t_list **env_lst);
+int				builtins_export(char **str_args, t_list **env_lst);
 int				update_shlvl(t_list *env_lst);
 
 //Parser
@@ -154,7 +154,6 @@ char			**stringify_env(t_list *env);
 void			free_env_var(void *ptr);
 void			print_env(void *content);
 void			print_echo_str(char **str);
-int				builtins_export(t_list **env_lst, char **str_args);
 size_t			read_variable(char *text);
 
 #endif

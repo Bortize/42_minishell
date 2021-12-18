@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 21:45:51 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 19:17:59 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 21:57:28 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	start_execution(t_list *cmd_lst, t_list **env_lst)
 		return ;
 	}
 	builtin = NULL;
-	if (cmd_num == 1)
+	if (cmd_num == 1 && ((t_cmd *)cmd_lst->content)->argv)
 		builtin = get_builtin(((t_cmd *)cmd_lst->content)->argv[0]);
 	if (builtin)
 		run_single_builtin(builtin, cmd_lst->content, env_lst);
