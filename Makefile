@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/18 21:10:54 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/18 22:34:37 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,10 @@ vpath %.c srcs/signals
 vpath %.c srcs/parser
 vpath %.h headers
 vpath %.o $(ODIR)
+vpath %.o.dbg $(ODIR)
 
 NAME=minishell
+DBG_NAME=debug
 
 SRCS:=
 SRCS+= minishell.c
@@ -37,6 +39,7 @@ SRCS+= update_shlvl.c
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
 SRCS+= tokenize_expansions.c
+SRCS+= expand_str.c
 SRCS+= is_delimiter.c
 SRCS+= is_space.c
 SRCS+= count_spaces.c
@@ -97,9 +100,11 @@ SRCS+= set_exit_status.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
-CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g -O2
+CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -O2
+DBG_FLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g -fsanitize=address
 
 OBJS=$(SRCS:.c=.o)
+DBG_OBJS=$(SRCS:.c=.o.dbg)
 
 TEST=$(filter minishell, $(OBJS))
 
@@ -111,26 +116,38 @@ LDLIBS=-lreadline -ltermcap -lft
 all : $(NAME)
 
 libft/libft.a :
+	git submodule update --init
 	make -C libft
 
 $(NAME) : $(OBJS) libft/libft.a
+	git submodule update --init
 	$(CC) $(LDFLAGS) $(LDLIBS) $(addprefix $(ODIR)/,$(OBJS)) -o $@
+
+%.o.dbg : %.c minishell.h
+	mkdir -p $(ODIR)
+	$(CC) $(DBG_FLAGS) $< -c -o $(ODIR)/$@
+	ctags -a $<
 
 %.o : %.c minishell.h
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $< -c -o $(ODIR)/$@
+	ctags -a $<
 
 test : $(TEST) syntax_tester.o libft/libft.a
 	$(CC) $(CFLAGS) $(LDFLAGS) $(LDLIBS) $(TEST) syntax_tester.o -o test
 
+$(DBG_NAME) : $(DBG_OBJS) libft/libft.a
+	git submodule update --init
+	$(CC) $(LDFLAGS) -fsanitize=address $(LDLIBS) $(addprefix $(ODIR)/,$(DBG_OBJS)) -o $(DBG_NAME)
+
 clean :
-	@rm -rf $(ODIR)
+	rm -rf $(ODIR) $(NAME).dbg
 
 relibs :
 	make re -C libft
 
 fclean : clean
-	@rm -rf $(NAME)
+	rm -rf $(NAME)
 
 re : fclean all
 
