@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 19:58:39 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:40:34 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ t_list			*ft_lst_find(t_list *lst, void *data_ref,
 void			ft_lst_remove_if(t_list **lst, void *data_ref, int (*cmp)(),
 					void (*free_fun)(void *));
 char			*ft_strcat_lst(t_list *str_lst);
+char			**sort(char **str);
+int				ft_strlen_matrix(char **str);
 void			perror_and_exit(char *msg, int exit_status);
 
 //Environment

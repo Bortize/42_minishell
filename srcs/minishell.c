@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 18:30:38 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/17 22:18:54 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:41:55 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ static int	build_argvs(t_list *cmd_lst) //TODO void type and  perror&exit
 	}
 	return (0);
 }
+
+/*
+** Removes spaces from the beginning and end of the collected line
+** and returns each word in a token list.
+*/
 
 static int	parse_line(char *line, t_list **cmd_lst, t_list *env_lst)
 {
@@ -71,6 +76,11 @@ static int	only_spaces(char *str)
 	return (*str == '\0');
 }
 
+/*
+** Prints the prompt and receives in a pointer *line
+** the line typed by the user
+*/
+
 static char	*wait_input(void)
 {
 	char	*line;
@@ -102,7 +112,7 @@ int	main(int argc, char **argv, char **envp)
 	initialize_minishell();
 	env_lst = build_env_lst(envp);
 	update_shlvl(env_lst);
-	ft_lstiter(env_lst, print_env);
+//	ft_lstiter(env_lst, print_env);
 	line = wait_input();
 	while (line)
 	{

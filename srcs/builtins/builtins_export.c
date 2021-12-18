@@ -6,26 +6,71 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/12 22:43:29 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:09:36 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** Prints the environment in the same way as the 'print_env' function
-** does, adding 'declare -x' in addition.
+** Joins the key, the equals symbol and the value of
+** the 't_env_var' structure in the same string.
+** Returns a new string.
 */
 
-static void	print_env_export(void *content)
+static char	*env_node_to_str(t_env_var *envar)
 {
-	t_env_var	*env_item;
+	char	*tmp;
+	char	*ret;
+	char	*aux;
+	char	*ptr;
 
-	env_item = content;
-	write(1, "declare -x ", 11);
-	printf("%s=", env_item->key);
-	printf("%s\n", env_item->value);
+	ptr = ft_strdup("declare -x ");
+	ret = ft_strjoin(ptr, envar->key);
+	if (!ret)
+		return (NULL);
+	free(ptr);
+	tmp = ft_strjoin(ret, "=\"");
+	if (!tmp)
+		return (NULL);
+	free(ret);
+	aux = ft_strjoin(tmp, envar->value);
+	free(tmp);
+	ret = ft_strjoin(aux, "\"");
+	free(aux);
+	return (ret);
 }
+
+/*
+** Reserves memory for the entire array of 'char *' and assigns
+** to each position a string, which is the result of joining the
+** key and the value of the environment.
+*/
+
+static char	**env_list_to_array(t_list *str_lst)
+{
+	char	**str_arr;
+	int		i;
+	int		len;
+
+	len = ft_lstsize(str_lst);
+	str_arr = malloc(sizeof(char *) * (len + 1));
+	if (!str_arr)
+		return (str_arr);
+	i = 0;
+	while (str_lst)
+	{
+		str_arr[i] = env_node_to_str(str_lst->content);
+		str_lst = str_lst->next;
+		i++;
+	}
+	str_arr[i] = NULL;
+	return (str_arr);
+}
+
+/*
+** Inserts the value of the variable that is being exported.
+*/
 
 static int	insert(t_list **env_lst, char **str_args)
 {
@@ -46,14 +91,14 @@ static int	insert(t_list **env_lst, char **str_args)
 
 /*
 ** Check that the export command takes arguments. If so, it exports the
-** variable passed to it. Otherwise, it only prints the environment
+** variable passed to it. Otherwise, it only prints the environment.
 */
 
 int	builtins_export(t_list **env_lst, char **str_args)
 {
-	int	i;
+	int		i;
+	char	**aux;
 
-	(void)env_lst;
 	i = 1;
 	while (str_args[i])
 	{
@@ -61,7 +106,11 @@ int	builtins_export(t_list **env_lst, char **str_args)
 		i++;
 	}
 	if (i < 2)
-		ft_lstiter(*env_lst, print_env_export);
+	{
+		aux = env_list_to_array(*env_lst);
+		sort(aux);
+		ft_free_arr((void **)aux);
+	}
 	else if (read_variable(str_args[1]) == 0)
 		return (-1);
 	else
