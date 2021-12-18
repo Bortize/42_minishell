@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/17 22:52:38 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/18 19:03:02 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,9 @@ SRCS+= set_msh_signals.c
 
 #Executor
 SRCS+= start_execution.c
+SRCS+= run_single_builtin.c
 SRCS+= exec_cmd_pipe.c
+SRCS+= set_redir.c
 SRCS+= redirect_input.c
 SRCS+= redirect_output.c
 SRCS+= wait_children.c

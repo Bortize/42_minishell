@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/17 22:52:12 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:06:53 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,13 @@ void			sig_handler(int signum);
 //Executor
 void			start_execution(t_list *cmd_lst, t_list **env_lst);
 char			*get_path(char *file, char *path_env);
+void			run_single_builtin(t_builtin_funcp builtin, t_cmd *cmd,
+					t_list **env_lst);
 void			exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn,
 					pid_t *last_pid);
-void			redirect_input(t_list *in_lst, char *heredoc_file);
-void			redirect_output(t_list *out_lst);
+int				set_redir(t_behavior type, char *filename, int redir_dest);
+int				redirect_input(t_list *in_lst, char *heredoc_file);
+int				redirect_output(t_list *out_lst);
 int				heredoc(t_list *cmd_lst);
 void			wait_children(size_t cmd_num, pid_t last_pid);
 int				create_pipes(int pipev[CHILD_MAX - 1][2], size_t cmd_count);

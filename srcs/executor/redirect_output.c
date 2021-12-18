@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 14:01:53 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 20:58:11 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/18 19:02:42 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,22 @@
 **	Return either the opened FD, or -1 if something is wrong.
 */
 
-void	redirect_output(t_list *out_lst)
+int	redirect_output(t_list *out_lst)
 {
 	int			fd;
 	t_redirect	*redir_data;
 
 	fd = STDOUT_FILENO;
-	while (out_lst)
+	while (fd != -1 && out_lst)
 	{
 		redir_data = out_lst->content;
 		out_lst = out_lst->next;
 		close(fd);
 		fd = -1;
 		if (redir_data->type == redir_out_append)
-			fd = open(redir_data->text, O_WRONLY | O_CREAT | O_APPEND, 0666);
+			fd = set_redir(redir_data->type, redir_data->text, STDOUT_FILENO);
 		else if (redir_data->type == redir_out)
-			fd = open(redir_data->text, O_WRONLY | O_CREAT | O_TRUNC, 0666);
-		if (fd == -1 || dup2(fd, STDOUT_FILENO) == -1)
-			perror_and_exit(redir_data->text, errno);
+			fd = set_redir(redir_data->type, redir_data->text, STDOUT_FILENO);
 	}
+	return (fd);
 }
