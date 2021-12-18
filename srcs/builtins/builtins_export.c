@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/17 19:17:46 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/18 20:09:36 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ static char	**env_list_to_array(t_list *str_lst)
 	return (str_arr);
 }
 
+/*
+** Inserts the value of the variable that is being exported.
+*/
+
 static int	insert(t_list **env_lst, char **str_args)
 {
 	int	i;
@@ -96,7 +100,12 @@ int	builtins_export(t_list **env_lst, char **str_args)
 	char	**aux;
 
 	i = 1;
-	if (i == 1)
+	while (str_args[i])
+	{
+		printf("%s\n", str_args[i]);
+		i++;
+	}
+	if (i < 2)
 	{
 		aux = env_list_to_array(*env_lst);
 		sort(aux);
