@@ -6,32 +6,11 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/19 19:06:46 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:34:57 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** Counts the number of arguments that are passed
-*/
-
-static int	count_arguments(char **arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i])
-	{
-		i++;
-		if (i == 3)
-		{
-			printf("to many arguments \n");
-			return (-1);
-		}
-	}
-	return (i);
-}
 
 /*
 ** Controls the behavior when you want to place the prompt in the
@@ -90,9 +69,9 @@ static void	back(t_list *env_lst, char *pwd, char *aux)
 ** Moves to the directory passed as argument
 */
 
-static void cd(t_list *env_lst, char *pwd, char *aux)
+static void	cd(t_list *env_lst, char *pwd, char *aux)
 {
-	char *new_pwd;
+	char	*new_pwd;
 
 	set_key_value(env_lst, pwd, "OLDPWD");
 	if (chdir(aux) != 0)
@@ -110,25 +89,18 @@ int	builtins_cd(char **argv, t_list **env_lst)
 {
 	char	*pwd;
 	char	*aux;
-	int		i;
 
-	i = count_arguments(argv);
 	aux = NULL;
 	pwd = getcwd(NULL, 4096);
-	if ((i == 1)
+	if ((argv[1] == NULL)
 		|| (ft_strcmp(argv[0], "cd") == 0 && ft_strcmp(argv[1], "--") == 0))
 		return (home(*env_lst, pwd));
 	else if (ft_strcmp(argv[1], "..") == 0)
 		go_up(*env_lst, pwd);
 	else if (ft_strcmp(argv[1], "-") == 0)
 		back(*env_lst, pwd, aux);
-	else if (ft_strcmp(argv[0], "cd") == 0)
-		cd(*env_lst, pwd, argv[1]);
 	else
-	{
-		if (chdir(argv[1]) == -1)
-			perror("cd");
-	}
+		cd(*env_lst, pwd, argv[1]);
 	free(pwd);
 	return (0);
 }
