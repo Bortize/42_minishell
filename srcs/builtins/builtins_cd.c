@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/19 15:21:10 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:38:27 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,6 @@ static int	home(t_list *env_lst, char *pwd)
 }
 
 /*
-** Moves the prompt one level up
-*/
-
-static void	go_up(t_list *env_lst, char *pwd)
-{
-	set_key_value(env_lst, pwd, "OLDPWD");
-	if (chdir("..") != 0) // <<--------------------------------- NO COMPRUEBA ESTA PARTE
-		perror("caca\n");
-	free(pwd);
-	pwd = getcwd(NULL, 4096);
-	set_key_value(env_lst, pwd, "PWD");
-}
-
-/*
 ** Returns the prompt to the place it came from
 */
 
@@ -115,8 +101,6 @@ int	builtins_cd(char **argv, t_list **env_lst)
 		free(pwd);
 		return (home(*env_lst, pwd));
 	}
-	else if (ft_strcmp(argv[1], "..") == 0)
-		go_up(*env_lst, pwd);
 	else if (ft_strcmp(argv[1], "-") == 0)
 		back(*env_lst, pwd, aux);
 	else if (ft_strcmp(argv[0], "cd") == 0)
