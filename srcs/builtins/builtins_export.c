@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/19 15:53:41 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:56:51 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	sort_and_print(char **str)
 	i = 0;
 	while (i < len)
 	{
-		ft_putstr_fd(str[i], 1);
+		ft_putstr_fd(sorted[i], 1);
 		write(1, "\n", 1);
 		i++;
 	}
