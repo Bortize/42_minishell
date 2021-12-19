@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 15:40:52 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 16:28:12 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 18:20:33 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 #define SINGLEQ 0b01
 #define DOUBLEQ 0b10
+
+#define TOKEN_VAR_COND 0
+#define TOKEN_TEXT_COND 1
 
 //Called after reading a non-escaped quote or $.
 static void	update_status(char *status, char ch_read)
@@ -58,32 +61,39 @@ static char	*get_var_str(t_list *env, char *str)
 	return (ft_strdup(var_val));
 }
 
-static t_list	*add_tk_cln_fail(t_list **tk_lst, char *str)
+static void	add_tk(t_list **tk_lst, char *str)
 {
 	t_list	*aux_node;
 
 	aux_node = ft_lstnew(str);
 	if (!aux_node || !str)
-	{
-		perror("Memory unavailable.");
-		free(str);
-		free(aux_node);
-		ft_lstclear(tk_lst, free);
-		*tk_lst = NULL;
-		return (NULL);
-	}
+		perror_and_exit("Fatal:", errno);
 	ft_lstadd_back(tk_lst, aux_node);
-	return (*tk_lst);
+}
+
+//NORM forced me to do this.
+static void	update_iterator(char **line_ref, char **begin_ref, int condition)
+{
+	if (condition == TOKEN_TEXT_COND)
+	{
+		if (**line_ref && **line_ref != '$')
+			(*line_ref)++;
+		*begin_ref = *line_ref;
+	}
+	else if (condition == TOKEN_VAR_COND)
+	{
+		(*line_ref)++;
+		*line_ref += read_variable(*line_ref);
+		*begin_ref = *line_ref;
+	}
 }
 
 //A valid line is assumed to be had. The quotes correctly closed.
-t_list	*tokenize_expansions(char *line, t_list *env)
+void	tokenize_expansions(t_list **tk_lst, char *line, t_list *env)
 {
-	t_list	*tk_lst;
 	char	*substr_bgn;
 	char	status;
 
-	tk_lst = NULL;
 	status = 0;
 	substr_bgn = line;
 	while (*substr_bgn)
@@ -91,24 +101,17 @@ t_list	*tokenize_expansions(char *line, t_list *env)
 		update_status(&status, *line);
 		if (*line == '$' && !(status & SINGLEQ) && line == substr_bgn)
 		{
-			line++;
-			line += read_variable(line);
-			if (!add_tk_cln_fail(&tk_lst, get_var_str(env, substr_bgn)))
-				return (NULL);
-			substr_bgn = line;
+			add_tk(tk_lst, get_var_str(env, substr_bgn));
+			update_iterator(&line, &substr_bgn, TOKEN_VAR_COND);
 		}
 		else if (!*line || (*line == '$' && !(status & SINGLEQ))
-				|| (!(status & SINGLEQ) && *line == '\"')
-				|| (!(status & DOUBLEQ) && *line == '\''))
+			|| (!(status & SINGLEQ) && *line == '\"')
+			|| (!(status & DOUBLEQ) && *line == '\''))
 		{
-			if (!add_tk_cln_fail(&tk_lst, ft_strndup(substr_bgn, line - substr_bgn)))
-				return (NULL);
-			if (*line && *line != '$')
-				line++;
-			substr_bgn = line;
+			add_tk(tk_lst, ft_strndup(substr_bgn, line - substr_bgn));
+			update_iterator(&line, &substr_bgn, TOKEN_TEXT_COND);
 		}
 		else
 			++line;
 	}
-	return (tk_lst);
 }
