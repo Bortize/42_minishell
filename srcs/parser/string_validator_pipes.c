@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 19:05:41 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/19 20:24:23 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/19 21:10:43 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static void	check_pipe(char *line, int *pipe, int *text)
 		if (line[i] == '|')
 		{
 			*pipe = 1;
-			if (!text)
-				break ;
+			if (*text == 0)
+				return ;
 			*text = 0;
 		}
 		else if (line[i] != ' ')
@@ -40,7 +40,7 @@ int	string_validator_pipes(char *line)
 	text = 0;
 	pipe = 0;
 	check_pipe(line, &pipe, &text);
-	if (pipe && !text)
+	if (pipe && text == 0)
 	{
 		ft_putstr_fd("parse error near `|'\n", 2);
 		return (0);

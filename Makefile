@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/19 19:52:35 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/19 21:05:56 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,6 +134,7 @@ $(NAME) : $(OBJS) libft/libft.a
 	ctags -a $<
 
 %.o : %.c minishell.h
+	git submodule update --init
 	mkdir -p $(ODIR)
 	$(CC) $(CFLAGS) $< -c -o $(ODIR)/$@
 	ctags -a $<
