@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat_lst.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 21:35:58 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/11 22:00:09 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:42:48 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ char	*ft_strcat_lst(t_list *str_lst)
 	str = ft_strdup(str_lst->content);
 	while (str_lst->next)
 	{
-		ft_putstr_fd(str, 2);
-		ft_putstr_fd("\n", 2);
 		str_lst = str_lst->next;
 		if (!(str_lst->content))
 			return (str);

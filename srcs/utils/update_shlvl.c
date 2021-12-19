@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:22:18 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/17 18:51:39 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:24:54 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static char	*set(t_list *env_lst, char *str, char *search)
 	tmp = lst_env->content;
 	free(tmp->value);
 	tmp->value = ft_strdup(str);
-	printf("🍏 %s\n", tmp->value);
 	return (tmp->value);
 }
 
@@ -64,7 +63,6 @@ int	update_shlvl(t_list *env_lst)
 	int		p;
 	char	*c;
 
-	printf("🍉%s\n", get(env_lst, "SHLVL"));
 	c = get(env_lst, "SHLVL");
 	p = ft_atoi(c);
 	if (p < 1)

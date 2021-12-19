@@ -1,7 +1,0 @@
-HERE-DOC (<<)
-
-	As just another -redirect- the one that "happens" is
-	the last one, the defult behavior though is to read until
-	a given text is found, and it always happens, so the shell
-	will read unil the token in read from input and if it's not
-	the last one, will ignore said input, otherwise, redirect.

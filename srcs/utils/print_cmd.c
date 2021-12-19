@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/29 03:05:17 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/11/20 17:46:01 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:25:52 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdio.h>
 
 void	putendl_wrapper(void *str)
 {
@@ -28,10 +27,6 @@ void	put_str_arr(char **str_arr, int fd)
 		str_arr++;
 	}
 }
-
-//This is meant to be be a logging/debug function.
-//TODO Throw it to stderr and help us debug cleaner.
-//TODO Just use putstr or something along those lines.
 
 void	print_cmd(void *elem)
 {
