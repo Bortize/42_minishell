@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/19 15:53:56 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/19 19:52:35 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS:=
 SRCS+= minishell.c
 
 #Parser
+SRCS+= parse_line.c
 SRCS+= split_in_cmds.c
 SRCS+= tokenize_cmd.c
 SRCS+= tokenize_expansions.c

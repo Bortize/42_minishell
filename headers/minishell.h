@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/19 18:19:39 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:53:11 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int				builtins_cd(char **arg, t_list **env_lst);
 int				builtins_export(char **str_args, t_list **env_lst);
 
 //Parser
+int				parse_line(char *line, t_list **cmd_lst, t_list *env_lst);
 int				is_delimiter(char c);
 int				is_space(char c);
 size_t			count_spaces(char *line);
@@ -145,10 +146,8 @@ char			**env_lst_to_array(t_list *str_lst);
 t_list			*build_env_lst(char **env);
 t_env_var		*env_var_find(t_list *env_lst, char *key);
 int				update_shlvl(t_list *env_lst);
-//TODO Name
 char			*get_current_path(t_list *env_lst, char *str);
 char			*set_key_value(t_list *env_lst, char *str, char *search);
-//TODO ----
 char			*stringify_var(t_env_var *var);
 char			**stringify_env(t_list *env);
 void			free_env_var(void *ptr);
