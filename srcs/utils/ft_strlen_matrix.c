@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strlen_matrix.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/24 12:35:05 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/09/24 14:13:16 by bgomez-r         ###   ########.fr       */
+/*   Created: 2021/12/19 14:59:13 by vicmarti          #+#    #+#             */
+/*   Updated: 2021/12/19 15:00:29 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <minishell.h>
 
-void	print_error(char *str)
+/*
+** Calculates the length of the size of a string array.
+** Returns the value of its length
+*/
+
+size_t	ft_strlen_matrix(char **str)
 {
-	printf("Error\n %s", str);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

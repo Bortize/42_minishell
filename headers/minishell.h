@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 21:01:45 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:52:28 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define READ_END 0
 # define WRITE_END 1
 
-//We allocate the last byte 0xFF to the program exit status.
+//We allocate the last byte 0xFF for the program exit status.
 # define STS_CHILD 0x100
 # define STS_INTERRUPT 0x300
 
@@ -80,7 +80,6 @@ int				builtins_exit(char **argv, t_list **env_lst);
 int				builtins_unset(char **argv, t_list **env_lst);
 int				builtins_cd(char **arg, t_list **env_lst);
 int				builtins_export(char **str_args, t_list **env_lst);
-int				update_shlvl(t_list *env_lst);
 
 //Parser
 int				is_delimiter(char c);
@@ -123,7 +122,7 @@ int				configure_pipeline(int cmd_index, int cmd_count,
 void			clean_pipes(int pipev[CHILD_MAX - 1][2], int size);
 void			set_exit_status(int value);
 
-//Utils  (?)
+//Utils
 char			**build_str_arr(t_list *str_lst);
 void			ft_free_arr(void **ptr_arr);
 t_list			*ft_lst_at(t_list *lst, size_t pos);
@@ -132,8 +131,7 @@ t_list			*ft_lst_find(t_list *lst, void *data_ref,
 void			ft_lst_remove_if(t_list **lst, void *data_ref, int (*cmp)(),
 					void (*free_fun)(void *));
 char			*ft_strcat_lst(t_list *str_lst);
-char			**sort(char **str);
-int				ft_strlen_matrix(char **str);
+size_t			ft_strlen_matrix(char **str);
 void			perror_and_exit(char *msg, int exit_status);
 
 //Environment
@@ -143,8 +141,10 @@ void			env_var_add_str(char *line_env, t_list **list);
 void			env_var_new_value(t_env_var *node, char *new_val);
 void			env_var_delete(t_env_var *var);
 int				env_var_cmp(void *elem1, void *elem2);
+char			**env_lst_to_array(t_list *str_lst);
 t_list			*build_env_lst(char **env);
 t_env_var		*env_var_find(t_list *env_lst, char *key);
+int				update_shlvl(t_list *env_lst);
 //TODO Name
 char			*get_current_path(t_list *env_lst, char *str);
 char			*set_key_value(t_list *env_lst, char *str, char *search);

@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/18 22:38:01 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/19 15:53:56 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ vpath %.c srcs/environment
 vpath %.c srcs/executor
 vpath %.c srcs/signals
 vpath %.c srcs/parser
+vpath %.c srcs/utils
 vpath %.h headers
 vpath %.o $(ODIR)
 vpath %.o.dbg $(ODIR)
@@ -27,13 +28,6 @@ DBG_NAME=debug
 
 SRCS:=
 SRCS+= minishell.c
-SRCS+= utils.c
-SRCS+= error.c
-SRCS+= print_cmd.c
-SRCS+= print_redir.c
-SRCS+= free_cmd.c
-SRCS+= free_redirect.c
-SRCS+= update_shlvl.c
 
 #Parser
 SRCS+= split_in_cmds.c
@@ -76,6 +70,8 @@ SRCS+= env_var_cmp.c
 SRCS+= env_var_find.c
 SRCS+= stringify_var.c
 SRCS+= stringify_env.c
+SRCS+= update_shlvl.c
+SRCS+= env_lst_to_array.c
 
 #Builtins
 SRCS+= get_builtin.c
@@ -94,8 +90,17 @@ SRCS+= search_in_list.c
 #Utils
 SRCS+= ft_lst_remove_if.c
 SRCS+= ft_strcat_lst.c
+SRCS+= ft_free_arr.c
+SRCS+= ft_lst_at.c
+SRCS+= ft_lst_find.c
+SRCS+= ft_strlen_matrix.c
+SRCS+= build_str_arr.c
 SRCS+= perror_and_exit.c
 SRCS+= set_exit_status.c
+SRCS+= print_cmd.c
+SRCS+= print_redir.c
+SRCS+= free_cmd.c
+SRCS+= free_redirect.c
 
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
