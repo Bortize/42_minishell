@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/19 15:52:28 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 18:19:39 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ size_t			count_until_repeat(char *line);
 size_t			read_variable(char *text);
 void			split_in_cmds(char *line, t_list **last_cmd, t_list *env_lst);
 void			tokenize_cmd(char *cmd_txt, t_cmd *cmd_node, t_list *env_lst);
-t_list			*tokenize_expansions(char *line, t_list *env);
+void			tokenize_expansions(t_list **tk_lst, char *line, t_list *env);
 char			*expand_str(char *str, t_list *env_lst);
 void			free_cmd(void *elem);
 void			free_redirect(void *elem);

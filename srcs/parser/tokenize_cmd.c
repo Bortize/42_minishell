@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 18:04:35 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 20:37:03 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 17:12:28 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ static void	save_token(t_cmd *cmd_node, char *token, t_behavior token_type,
 	char	*expanded_token;
 
 	if (!token)
-		exit (1); //TODO Print FATAL no memory and exit;
+		perror_and_exit("Memory error", errno);
 	expanded_token = expand_str(token, env_lst);
 	free(token);
 	if (!expanded_token)
-		exit (1); //TODO Print FATAL no memory and exit;
+		perror_and_exit("Memory error", errno);
 	if (token_type == plain)
 	{
 		aux = ft_lstnew(expanded_token);
