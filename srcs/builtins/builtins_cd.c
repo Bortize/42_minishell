@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_cd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bgomez-r <bgomez-r@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/18 20:47:50 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:38:27 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,29 @@ static int	home(t_list *env_lst, char *pwd)
 }
 
 /*
-** Moves the prompt one level up
-*/
-
-static void	go_up(t_list *env_lst, char *pwd)
-{
-	set_key_value(env_lst, pwd, "OLDPWD");
-	chdir("..");
-	free(pwd);
-	pwd = getcwd(NULL, 4096);
-	set_key_value(env_lst, pwd, "PWD");
-}
-
-/*
 ** Returns the prompt to the place it came from
 */
 
 static void	back(t_list *env_lst, char *pwd, char *aux)
 {
+	printf("El valor de pwd es %s\n", pwd);
 	aux = ft_strdup(get_current_path(env_lst, "OLDPWD"));
+	printf("vamos a ver %s\n", aux);// < -------------------------------------
 	set_key_value(env_lst, pwd, "OLDPWD");
-	chdir(aux);
+	if (chdir(aux) != 0)
+		printf("mierda\n");
 	set_key_value(env_lst, aux, "PWD");
 	free(aux);
+}
+
+static void cd(t_list *env_lst, char *pwd, char *aux)
+{
+	set_key_value(env_lst, pwd, "OLDPWD");
+	if (chdir(aux) != 0)
+		perror("caca\n");
+	free(pwd);
+	pwd = getcwd(NULL, 4096);
+	set_key_value(env_lst, pwd, "PWD");
 }
 
 /*
@@ -101,10 +101,10 @@ int	builtins_cd(char **argv, t_list **env_lst)
 		free(pwd);
 		return (home(*env_lst, pwd));
 	}
-	else if (ft_strcmp(argv[1], "..") == 0)
-		go_up(*env_lst, pwd);
 	else if (ft_strcmp(argv[1], "-") == 0)
 		back(*env_lst, pwd, aux);
+	else if (ft_strcmp(argv[0], "cd") == 0)
+		cd(*env_lst, pwd, argv[1]);
 	else
 	{
 		if (chdir(argv[1]) == -1)

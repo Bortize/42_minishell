@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 20:56:37 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/16 11:06:27 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/19 15:22:46 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ char	*set_key_value(t_list *env_lst, char *str, char *search)
 	t_list		*lst_env;
 	t_env_var	*tmp;
 
+	if (!str)
+			return (NULL);
 	content_env.key = search;
 	content_env.value = NULL;
 	lst_env = ft_lst_find(env_lst, &content_env, env_var_cmp);
