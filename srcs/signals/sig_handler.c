@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:36:50 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/16 17:19:39 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:41:24 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ static void	sigint_handler(void)
 
 static void	sigquit_handler(void)
 {
-	rl_on_new_line();
-	rl_redisplay();
+	if (!(g_status & STS_HAS_CHILD))
+	{
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 void	sig_handler(int signum)

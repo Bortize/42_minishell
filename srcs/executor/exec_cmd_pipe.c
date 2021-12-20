@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 14:35:02 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/18 22:51:36 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:27:04 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,13 @@ void	exec_cmd_pipe(t_list *cmd_lst, t_list *env_lst, size_t cmdn,
 			fatal_fork_fail(pipev, i);
 		else if (*lst_pid == 0)
 		{
-			g_status |= STS_CHILD;
+			g_status |= STS_IS_CHILD;
 			if (configure_pipeline(i, cmdn, pipev) == -1)
 				exit(errno);
 			exec_child(ft_lst_at(cmd_lst, i)->content, env_lst);
 		}
+		else
+			g_status |= STS_HAS_CHILD;
 		i++;
 	}
 	clean_pipes(pipev, cmdn - 1);
