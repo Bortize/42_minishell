@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/20 18:08:50 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/20 19:58:47 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	insert(t_list **env_lst, char **argv)
 {
 	int	i;
 	int	len;
-	int status;
+	int	status;
 
 	status = 0;
 	i = 1;
