@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 00:03:26 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/19 19:56:51 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:08:50 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,25 @@ static int	insert(t_list **env_lst, char **argv)
 {
 	int	i;
 	int	len;
+	int status;
 
+	status = 0;
 	i = 1;
 	while (argv[i])
 	{
 		len = read_variable(argv[i]);
-		if (argv[i][len] != '=')
-			return (1);
-		env_var_add_str(argv[i], env_lst);
+		if (argv[i][len] != '=' || argv[i][0] == '?' || len <= 0)
+		{
+			ft_putstr_fd("unset: ", 2);
+			ft_putstr_fd(argv[i], 2);
+			ft_putstr_fd(" not a valid identifier\n", 2);
+			status = 1;
+		}
+		else
+			env_var_add_str(argv[i], env_lst);
 		i++;
 	}
-	return (0);
+	return (status);
 }
 
 /*
@@ -98,20 +106,14 @@ static int	insert(t_list **env_lst, char **argv)
 
 int	builtins_export(char **argv, t_list **env_lst)
 {
-	int		i;
 	char	**aux;
 
-	i = 1;
-	while (argv[i])
-		i++;
-	if (i < 2)
+	if (argv[1] == NULL)
 	{
 		aux = env_lst_to_array(*env_lst);
 		sort_and_print(aux);
 		ft_free_arr((void **)aux);
 	}
-	else if (read_variable(argv[1]) == 0)
-		return (1);
 	else
 		return (insert(env_lst, argv));
 	return (0);
