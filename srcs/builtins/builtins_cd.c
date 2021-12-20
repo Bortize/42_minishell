@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:40:52 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/20 16:44:20 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/20 21:08:04 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,25 @@
 ** 'HOME' and it does not exist or is not valid.
 */
 
-static int	home(t_list *env_lst, char *pwd)
+static int	home(t_list **env_lst, char *pwd)
 {
-	set_key_value(env_lst, pwd, "OLDPWD");
-	free(pwd);
-	if (!get_current_path(env_lst, "HOME"))
+	char	*home_path;
+
+	home_path = get_current_path(*env_lst, "HOME");
+	if (!home_path)
 	{
 		ft_putstr_fd("cd: HOME not set\n", 2);
+		free(pwd);
 		return (1);
 	}
-	if (chdir(get_current_path(env_lst, "HOME")) == -1)
+	if (chdir(home_path) == -1)
 	{
 		perror("cd");
+		free(pwd);
 		return (1);
 	}
-	set_key_value(env_lst, get_current_path(env_lst, "HOME"), "PWD");
+	env_var_add(env_lst, ft_strdup("OLDPWD"), pwd);
+	env_var_add(env_lst, ft_strdup("PWD"), ft_strdup(home_path));
 	return (0);
 }
 
@@ -39,20 +43,19 @@ static int	home(t_list *env_lst, char *pwd)
 ** Moves the prompt one level up
 */
 
-static int	go_up(t_list *env_lst, char *pwd)
+static int	go_up(t_list **env_lst, char *pwd)
 {
 	char	*new_pwd;
 
-	set_key_value(env_lst, pwd, "OLDPWD");
-	free(pwd);
 	if (chdir("..") != 0)
 	{
 		perror("cd");
+		free(pwd);
 		return (1);
 	}
 	new_pwd = getcwd(NULL, 4096);
-	set_key_value(env_lst, new_pwd, "PWD");
-	free(new_pwd);
+	env_var_add(env_lst, ft_strdup("OLDPWD"), pwd);
+	env_var_add(env_lst, ft_strdup("PWD"), new_pwd);
 	return (0);
 }
 
@@ -60,19 +63,19 @@ static int	go_up(t_list *env_lst, char *pwd)
 ** Returns the prompt to the place it came from
 */
 
-static int	back(t_list *env_lst, char *pwd, char *aux)
+static int	back(t_list **env_lst, char *pwd)
 {
-	aux = ft_strdup(get_current_path(env_lst, "OLDPWD"));
-	set_key_value(env_lst, pwd, "OLDPWD");
-	free(pwd);
-	if (chdir(aux) != 0)
+	char	*new_pwd;
+
+	new_pwd = ft_strdup(get_current_path(*env_lst, "OLDPWD"));
+	if (chdir(new_pwd) != 0)
 	{
 		perror("cd");
-		free(aux);
+		free(new_pwd);
 		return (1);
 	}
-	set_key_value(env_lst, aux, "PWD");
-	free(aux);
+	env_var_add(env_lst, ft_strdup("OLDPWD"), pwd);
+	env_var_add(env_lst, ft_strdup("PWD"), new_pwd);
 	return (0);
 }
 
@@ -80,20 +83,19 @@ static int	back(t_list *env_lst, char *pwd, char *aux)
 ** Moves to the directory passed as argument
 */
 
-static int	cd(t_list *env_lst, char *pwd, char *aux)
+static int	cd(t_list **env_lst, char *pwd, char *aux)
 {
 	char	*new_pwd;
 
-	set_key_value(env_lst, pwd, "OLDPWD");
-	free(pwd);
 	if (chdir(aux) != 0)
 	{
 		perror("cd");
+		free(pwd);
 		return (1);
 	}
 	new_pwd = getcwd(NULL, 4096);
-	set_key_value(env_lst, new_pwd, "PWD");
-	free(new_pwd);
+	env_var_add(env_lst, ft_strdup("OLDPWD"), pwd);
+	env_var_add(env_lst, ft_strdup("PWD"), new_pwd);
 	return (0);
 }
 
@@ -104,18 +106,16 @@ static int	cd(t_list *env_lst, char *pwd, char *aux)
 int	builtins_cd(char **argv, t_list **env_lst)
 {
 	char	*pwd;
-	char	*aux;
 
-	aux = NULL;
 	pwd = getcwd(NULL, 4096);
 	if ((argv[1] == NULL)
 		|| (ft_strcmp(argv[0], "cd") == 0 && ft_strcmp(argv[1], "--") == 0))
-		return (home(*env_lst, pwd));
+		return (home(env_lst, pwd));
 	else if (ft_strcmp(argv[1], "..") == 0)
-		return (go_up(*env_lst, pwd));
+		return (go_up(env_lst, pwd));
 	else if (ft_strcmp(argv[1], "-") == 0)
-		return (back(*env_lst, pwd, aux));
+		return (back(env_lst, pwd));
 	else
-		return (cd(*env_lst, pwd, argv[1]));
+		return (cd(env_lst, pwd, argv[1]));
 	return (42);
 }

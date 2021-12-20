@@ -6,7 +6,7 @@
 /*   By: vicmarti <vicmarti@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 18:09:25 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/08 21:28:35 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/20 20:48:14 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,13 @@ void	env_var_add(t_list **env_lst, char *key, char *value)
 	if (target)
 	{
 		free(key);
+		key = NULL;
 		env_var_new_value(target, value);
 		return ;
 	}
 	target = env_var_new(key, value);
 	node_aux = ft_lstnew(target);
 	if (!node_aux || !target)
-	{
-		perror("MINISHELL");
-		free(target);
-		free(node_aux);
-		free(value);
-		free(key);
-		return ;
-	}
+		perror_and_exit("FATAL", errno);
 	ft_lstadd_back(env_lst, node_aux);
 }

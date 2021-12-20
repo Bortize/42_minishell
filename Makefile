@@ -6,7 +6,7 @@
 #    By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/31 18:30:43 by bgomez-r          #+#    #+#              #
-#    Updated: 2021/12/19 21:05:56 by vicmarti         ###   ########.fr        #
+#    Updated: 2021/12/20 20:15:58 by vicmarti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ SRCS+= free_redirect.c
 CC=clang
 #-O2 or greater uses tail-call optimizations that should make recursion safe
 CFLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -O2
-DBG_FLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g -fsanitize=address
+DBG_FLAGS= -Wall -Werror -Wextra -I. -I./headers -I./readline/include -g3 -fsanitize=address
 
 OBJS=$(SRCS:.c=.o)
 DBG_OBJS=$(SRCS:.c=.o.dbg)
@@ -129,7 +129,7 @@ $(NAME) : $(OBJS) libft/libft.a
 	$(CC) $(LDFLAGS) $(LDLIBS) $(addprefix $(ODIR)/,$(OBJS)) -o $@
 
 %.o.dbg : %.c minishell.h
-	mkdir -p $(ODIR)
+	@mkdir -p $(ODIR)
 	$(CC) $(DBG_FLAGS) $< -c -o $(ODIR)/$@
 	ctags -a $<
 
