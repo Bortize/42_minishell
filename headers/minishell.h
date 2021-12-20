@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:56:06 by vicmarti          #+#    #+#             */
-/*   Updated: 2021/12/19 19:53:11 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/20 17:41:40 by vicmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@
 # define WRITE_END 1
 
 //We allocate the last byte 0xFF for the program exit status.
-# define STS_CHILD 0x100
-# define STS_INTERRUPT 0x300
+# define STS_IS_CHILD 0x100
+# define STS_HAS_CHILD 0x300
+# define STS_INTERRUPT 0x700
 
 //This indentation is to satisfy Norminette's fickle desires.
 //We should report that or open a github issue after we finish.
