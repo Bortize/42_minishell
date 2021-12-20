@@ -6,7 +6,7 @@
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 12:59:28 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/20 13:19:15 by bgomez-r         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:54:00 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 static void	remove_endline(char **str, int *i)
 {
 	(*i)++;
-	while (ft_strcmp(str[*i], "-n") == 0)
+	while (str[*i] && ft_strcmp(str[*i], "-n") == 0)
 		(*i)++;
 }
 
@@ -63,13 +63,8 @@ int	builtins_echo(char **argv, t_list **env_lst)
 	int		i;
 
 	(void)env_lst;
-	if (!argv[1])
-	{
-		write(1, "\n", 1);
-		return (1);
-	}
 	i = 1;
-	if (strcmp(argv[i], "-n") == 0)
+	if (argv[i] && strcmp(argv[i], "-n") == 0)
 		remove_endline(argv, &i);
 	aux = join_args(argv, i);
 	printf("%.*s", (int)ft_strlen(aux) - 1, aux);
