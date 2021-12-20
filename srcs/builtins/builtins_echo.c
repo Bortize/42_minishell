@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_echo_str.c                                   :+:      :+:    :+:   */
+/*   builtins_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bgomez-r <bgomez-r@student.42madrid.com>>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 12:59:28 by bgomez-r          #+#    #+#             */
-/*   Updated: 2021/12/18 20:58:35 by vicmarti         ###   ########.fr       */
+/*   Updated: 2021/12/20 13:19:15 by bgomez-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ int	builtins_echo(char **argv, t_list **env_lst)
 	int		i;
 
 	(void)env_lst;
+	if (!argv[1])
+	{
+		write(1, "\n", 1);
+		return (1);
+	}
 	i = 1;
 	if (strcmp(argv[i], "-n") == 0)
 		remove_endline(argv, &i);
